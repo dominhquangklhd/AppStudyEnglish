@@ -30,4 +30,15 @@ public class Word {
     public String toString() {
         return "English: " + wordTarget + "  -  Vietnamese: " + wordExplain;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o instanceof Word) {
+            return this.getWordTarget().equals(((Word) o).getWordTarget())
+                    && this.getWordExplain().equals(((Word) o).getWordExplain());
+        }
+        else {
+            return false;
+        }
+    }
 }

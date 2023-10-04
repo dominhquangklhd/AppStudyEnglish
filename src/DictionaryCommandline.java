@@ -1,7 +1,7 @@
 import java.io.IOException;
 
 public class DictionaryCommandline {
-    DictionaryManagement dictionaryManagement = new DictionaryManagement();
+    public DictionaryManagement dictionaryManagement = new DictionaryManagement();
 
     public void importFromFile() throws IOException {
         dictionaryManagement.insertFromFile();

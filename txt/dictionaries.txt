@@ -1,3 +1,4 @@
 explain	giai thich
 exercise	bai tap
-add	them
+hello	xin chao
+goodbye	tam biet

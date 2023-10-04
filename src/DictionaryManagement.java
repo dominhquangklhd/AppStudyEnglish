@@ -6,7 +6,7 @@ public class DictionaryManagement {
 
     public void insertFromCommandline() {
         Scanner in = new Scanner(System.in);
-        System.out.print("Enter the number of words you want to add: ");
+        System.out.print("Enter the number of words you want to insert: ");
         int n = in.nextInt();
         in.nextLine();
         while (n > 0) {
@@ -68,8 +68,9 @@ public class DictionaryManagement {
     public void addNewWord() throws IOException {
         System.out.print("Add new word!\n");
         try (Scanner sc = new Scanner(System.in)) {
-            System.out.println("Enter the number of word you need to add: ");
+            System.out.print("Enter the number of word you need to add: ");
             int n = sc.nextInt();
+            sc.nextLine();
             for (int i = 1; i <= n; i++) {
                 System.out.print("Enter a word you want to add\n" + "English: ");
                 String wordTarget = sc.nextLine();
@@ -82,13 +83,24 @@ public class DictionaryManagement {
         }
     }
 
-    public void updateWord() {
-
+    public void updateWord() throws IOException {
+        Scanner sc = new Scanner(System.in);
+        System.out.print("Enter your word you want to update: ");
+        String wordTarget = sc.nextLine();
+        System.out.print("New meaning: ");
+        String newMeaning = sc.nextLine();
+        for (Word word : dictionary.words) {
+            if (word.getWordTarget().equals(wordTarget)) {
+                word.setWordExplain(newMeaning);
+            }
+        }
+        dictionaryExportToFile();
+        sc.close();
     }
 
     public void deleteWord() throws IOException {
         Scanner sc = new Scanner(System.in);
-        System.out.println("Enter your word you want to remove\nEnglish: ");
+        System.out.print("Enter your word you want to remove\nEnglish: ");
         String wordTarget = sc.nextLine();
         System.out.print("Vietnamese: ");
         String wordExplain = sc.nextLine();
@@ -106,14 +118,19 @@ public class DictionaryManagement {
     public void dictionarySearcher() {
         Scanner sc = new Scanner(System.in);
         System.out.println("Dictionary searcher!");
-        System.out.println("Enter a word you want to search: ");
+        System.out.print("Enter a word you want to search: ");
         String word = sc.nextLine();
         int k = word.length();
+        boolean has = false;
         for (Word w : dictionary.words) {
-            String tmp = w.getWordTarget().substring(0, k - 1);
+            String tmp = w.getWordTarget().substring(0, k);
             if (tmp.equals(word)) {
+                has = true;
                 System.out.print(w.getWordTarget() + " ");
             }
+        }
+        if (!has) {
+            System.out.print("Not result");
         }
         System.out.println();
         sc.close();
@@ -134,6 +151,18 @@ public class DictionaryManagement {
         bufferedWriter.close();
     }
 
+    public void showAllWords() {
+        int i = 1;
+        System.out.println("No      |  English     |    Vietnamese");
+        for (Word w : dictionary.words) {
+            String wt = w.getWordTarget();
+            String we = w.getWordExplain();
+            System.out.printf("%-8d|  %-12s|    %s\n", i, wt, we);
+            i++;
+        }
+        System.out.println("...");
+    }
+
     public void dictionaryAdvanced() throws IOException {
         System.out.print("Welcome to My Application!\n" +
                 "[0] Exit\n" +
@@ -148,43 +177,27 @@ public class DictionaryManagement {
                 "[9] Export to file\n" +
                 "Your action: ");
         Scanner sc = new Scanner(System.in);
-        int n = sc.nextInt();
-        switch (n) {
-            case 0:
-                System.out.println("Exist!");
-                break;
-            case 1:
-                addNewWord();
-                break;
-            case 2:
-                deleteWord();
-                break;
-            case 3:
-                updateWord();
-                break;
-            case 4:
-                DictionaryCommandline dictionaryCommandline = new DictionaryCommandline();
-                dictionaryCommandline.showAllWords();
-                break;
-            case 5:
-                dictionaryLookup();
-                break;
-            case 6:
-                dictionarySearcher();
-                break;
-            case 7:
-                System.out.println("Time to train by a game!");
-                break;
-            case 8:
-                insertFromFile();
-                break;
-            case 9:
-                dictionaryExportToFile();
-                break;
-            default:
-                System.out.println("Action not supported");
-                break;
+        String s = sc.next();
+        try {
+            int n = Integer.parseInt(s);
+            switch (n) {
+                case 0 -> System.out.println("Exist!");
+                case 1 -> addNewWord();
+                case 2 -> deleteWord();
+                case 3 -> updateWord();
+                case 4 -> showAllWords();
+                case 5 -> dictionaryLookup();
+                case 6 -> dictionarySearcher();
+                case 7 -> System.out.println("Time to train by a game!");
+                case 8 -> insertFromFile();
+                case 9 -> dictionaryExportToFile();
+                default -> System.out.println("Action not supported");
+            }
+        } catch (NumberFormatException ex) {
+            System.out.println(ex.getMessage() + " is not supported");
+            System.exit(1);
         }
+
         sc.close();
     }
 }
