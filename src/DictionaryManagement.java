@@ -32,11 +32,8 @@ public class DictionaryManagement {
 
     public void insertFromFile() throws IOException {
         String filePath = "txt/dictionaries.txt";
-
-        try {
-            BufferedReader reader = new BufferedReader(new FileReader(filePath));
+        try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
             String line;
-
             while ((line = reader.readLine()) != null) {
                 String[] parts = line.split("\t");
                 //System.out.println(parts[0] + " " + parts[1]);
@@ -44,9 +41,10 @@ public class DictionaryManagement {
                 dictionary.words.add(newWord);
             }
 
-            reader.close();
+
         } catch (IOException e) {
-            e.printStackTrace();
+            System.out.println("ERROR: " + e.getMessage());
+            System.exit(1);
         }
     }
 
@@ -129,7 +127,8 @@ public class DictionaryManagement {
                 String res = w.getWordTarget() + "\t" + w.getWordExplain() + "\n";
                 bufferedWriter.append(res);
             } catch (IOException e) {
-                e.printStackTrace();
+                System.out.println("ERROR: " + e.getMessage());
+                System.exit(1);
             }
         }
         bufferedWriter.close();
