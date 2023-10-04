@@ -1,5 +1,11 @@
+import java.io.IOException;
+
 public class DictionaryCommandline {
     DictionaryManagement dictionaryManagement = new DictionaryManagement();
+
+    public void importFromFile() throws IOException {
+        dictionaryManagement.insertFromFile();
+    }
 
     public void showAllWords() {
         int i = 1;
