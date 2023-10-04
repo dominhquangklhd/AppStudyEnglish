@@ -67,10 +67,12 @@ public class DictionaryManagement {
 
     public void addNewWord() throws IOException {
         System.out.print("Add new word!\n");
-        try (Scanner sc = new Scanner(System.in)) {
-            System.out.print("Enter the number of word you need to add: ");
-            int n = sc.nextInt();
-            sc.nextLine();
+        Scanner sc = new Scanner(System.in);
+        System.out.print("Enter the number of word you need to add: ");
+        String s = sc.nextLine();
+
+        try {
+            int n = Integer.parseInt(s);
             for (int i = 1; i <= n; i++) {
                 System.out.print("Enter a word you want to add\n" + "English: ");
                 String wordTarget = sc.nextLine();
@@ -80,6 +82,9 @@ public class DictionaryManagement {
                 dictionary.words.add(word);
                 dictionaryExportToFile();
             }
+        } catch (NumberFormatException ex) {
+            System.out.println(ex.getMessage() + " is not supported!");
+            System.exit(1);
         }
     }
 
