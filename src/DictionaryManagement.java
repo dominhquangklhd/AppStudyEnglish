@@ -39,8 +39,7 @@ public class DictionaryManagement {
 
             while ((line = reader.readLine()) != null) {
                 String[] parts = line.split("\t");
-                System.out.println(parts[0] + " ");
-                System.out.println(parts[1]);
+                //System.out.println(parts[0] + " " + parts[1]);
                 Word newWord = new Word(parts[0], parts[1]);
                 dictionary.words.add(newWord);
             }
@@ -69,16 +68,20 @@ public class DictionaryManagement {
     }
 
     public void addNewWord() throws IOException {
-        Scanner sc = new Scanner(System.in);
-        System.out.println("Add a new word!\n");
-        System.out.print("Enter the word you want to add\n" + "English: ");
-        String wordTarget = sc.nextLine();
-        System.out.print("Vietnamese: ");
-        String wordExplain = sc.nextLine();
-        Word word = new Word(wordTarget, wordExplain);
-        dictionary.words.add(word);
-        dictionaryExportToFile();
-        sc.close();
+        System.out.print("Add new word!\n");
+        try (Scanner sc = new Scanner(System.in)) {
+            System.out.println("Enter the number of word you need to add: ");
+            int n = sc.nextInt();
+            for (int i = 1; i <= n; i++) {
+                System.out.print("Enter a word you want to add\n" + "English: ");
+                String wordTarget = sc.nextLine();
+                System.out.print("Vietnamese: ");
+                String wordExplain = sc.nextLine();
+                Word word = new Word(wordTarget, wordExplain);
+                dictionary.words.add(word);
+                dictionaryExportToFile();
+            }
+        }
     }
 
     public void updateWord() {
@@ -183,5 +186,6 @@ public class DictionaryManagement {
                 System.out.println("Action not supported");
                 break;
         }
+        sc.close();
     }
 }

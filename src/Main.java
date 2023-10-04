@@ -5,6 +5,6 @@ public class Main {
         DictionaryManagement tmp = new DictionaryManagement();
         tmp.createNewFile();
         tmp.insertFromFile();
-        //tmp.dictionaryAdvanced();
+
     }
 }
