@@ -13,6 +13,6 @@ public class Main {
         trie.insertWord(abcd);
         trie.insertWord(abc);
         trie.insertWord(abcde);
-        trie.search("ab");
+        trie.search("abc");
     }
 }

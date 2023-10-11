@@ -6,7 +6,7 @@ import java.util.List;
 
 public class Trie {
     private Node root = new Node();
-    private final int limit = 1;
+    private final int limit = 10;
     private static int numOfWord = 0;
 
     public Trie(){
