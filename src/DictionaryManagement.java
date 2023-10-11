@@ -126,22 +126,17 @@ public class DictionaryManagement {
         System.out.print("Enter a word you want to search: ");
         String word = sc.nextLine();
         int k = word.length();
-        boolean found = false;
-
+        boolean has = false;
         for (Word w : dictionary.words) {
-            if(w.getWordTarget().length() < k)
-                continue;
             String tmp = w.getWordTarget().substring(0, k);
             if (tmp.equals(word)) {
-                found = true;
+                has = true;
                 System.out.print(w.getWordTarget() + " ");
             }
         }
-
-        if (!found) {
+        if (!has) {
             System.out.print("Not result");
         }
-
         System.out.println();
         sc.close();
     }
