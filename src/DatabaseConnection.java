@@ -1,13 +1,16 @@
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
+
 
 public class DatabaseConnection {
     String url;
     String username;
     String password;
+    DictionaryCommandline cmdline = new DictionaryCommandline();
     Connection conn;
     Statement stmt;
     ResultSet set;
-    public Dictionary dictionary = new Dictionary();
 
     public void createConnection() {
         try {
@@ -32,7 +35,7 @@ public class DatabaseConnection {
                 String target = set.getString("word_target");
                 String explain = set.getString("word_explain");
                 Word newWord = new Word(target, explain);
-                dictionary.words.add(newWord);
+                cmdline.dictionaryManagement.dictionary.words.add(newWord);
             }
         } catch (Exception e) {
             System.out.println(e);
@@ -40,12 +43,12 @@ public class DatabaseConnection {
     }
 
     //Chua hoan thien
-    public void exportToDatabase() {
+    public void exportToDatabase(List<Word> newWords) {
         try {
             String sql = "INSERT INTO dictionary VALUES (?, ?)";
 
             PreparedStatement preparedStatement = conn.prepareStatement(sql);
-            for (Word w : dictionary.words) {
+            for (Word w : newWords) {
                 String value1 = w.getWordTarget();
                 String value2 = w.getWordExplain();
                 preparedStatement.setString(1, value1);
