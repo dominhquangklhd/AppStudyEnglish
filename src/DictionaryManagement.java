@@ -4,6 +4,9 @@ import java.util.Scanner;
 public class DictionaryManagement {
     public Dictionary dictionary = new Dictionary();
 
+    public DictionaryManagement() {
+
+    }
     public void insertFromCommandline() {
         Scanner in = new Scanner(System.in);
         System.out.print("Enter the number of words you want to insert: ");
@@ -80,6 +83,7 @@ public class DictionaryManagement {
                 String wordExplain = sc.nextLine();
                 Word word = new Word(wordTarget, wordExplain);
                 dictionary.words.add(word);
+
                 dictionaryExportToFile();
             }
         } catch (NumberFormatException ex) {
