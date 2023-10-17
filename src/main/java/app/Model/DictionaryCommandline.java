@@ -1,3 +1,5 @@
+package app.Model;
+
 import java.io.IOException;
 
 public class DictionaryCommandline {

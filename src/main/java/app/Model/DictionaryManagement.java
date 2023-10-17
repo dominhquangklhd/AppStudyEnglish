@@ -1,3 +1,5 @@
+package app.Model;
+
 import java.io.*;
 import java.util.Scanner;
 
@@ -126,7 +128,7 @@ public class DictionaryManagement {
 
     public void dictionarySearcher() {
         Scanner sc = new Scanner(System.in);
-        System.out.println("Dictionary searcher!");
+        System.out.println("app.app.Model.Dictionary searcher!");
         System.out.print("Enter a word you want to search: ");
         String word = sc.nextLine();
         int k = word.length();

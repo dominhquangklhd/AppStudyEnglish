@@ -1,3 +1,5 @@
+package app.Model;
+
 public class Word {
     private String wordTarget;
     private String wordExplain;
