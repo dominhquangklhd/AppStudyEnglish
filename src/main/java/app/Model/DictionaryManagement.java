@@ -1,13 +1,22 @@
 package app.Model;
 
 import java.io.*;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class DictionaryManagement {
+    public final int HistorySize = 16;
     public Dictionary dictionary = new Dictionary();
+    public List<Word> wordHistoryList = new ArrayList<>();
 
     public DictionaryManagement() {
-
+        Word w = new Word();
+        w.setWordTarget("_____");
+        w.setWordExplain("_____");
+        for (int i = 0; i < HistorySize; i++) {
+            wordHistoryList.add(w);
+        }
     }
     public void insertFromCommandline() {
         Scanner in = new Scanner(System.in);
@@ -68,6 +77,14 @@ public class DictionaryManagement {
         if (!has) {
             System.out.println("The word does not exist in this dictionary!");
         }
+    }
+
+    public void addWordtoHistory(Word word) {
+        Word tmp = new Word();
+        tmp.setWordExplain(word.getWordExplain());
+        tmp.setWordTarget(word.getWordTarget());
+        wordHistoryList.add(0, tmp);
+        wordHistoryList.remove(HistorySize);
     }
 
     public void addNewWord() throws IOException {

@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -8,7 +9,7 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="scenePane" prefHeight="700.0" prefWidth="1200.0" style="-fx-background-color: FFF8DC;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="app.Controller.SeachController">
+<AnchorPane fx:id="scenePane" prefHeight="700.0" prefWidth="1200.0" style="-fx-background-color: FFF8DC;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="app.Controller.SearchController">
    <children>
       <Button mnemonicParsing="false" opacity="0.0" prefHeight="700.0" prefWidth="1200.0" text="Button" />
       <AnchorPane layoutY="580.0" prefHeight="120.0" prefWidth="1200.0" style="-fx-background-color: EEEEEE;" />
@@ -17,50 +18,76 @@
             <Image url="@../Image/MenuIMG/search_but.png" />
          </image>
       </ImageView>
-      <ImageView id="intoTranslate" fitHeight="100.0" fitWidth="70.0" layoutX="510.0" layoutY="620.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView id="intoTranslate" fitHeight="100.0" fitWidth="70.0" layoutX="510.0" layoutY="620.0" pickOnBounds="true" preserveRatio="true" style="-fx-cursor: hand;">
          <image>
             <Image url="@../Image/MenuIMG/translate_but.png" />
          </image>
       </ImageView>
-      <ImageView id="intoGame" fitHeight="100.0" fitWidth="70.0" layoutX="580.0" layoutY="620.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView id="intoGame" fitHeight="100.0" fitWidth="70.0" layoutX="580.0" layoutY="620.0" pickOnBounds="true" preserveRatio="true" style="-fx-cursor: hand;">
          <image>
             <Image url="@../Image/MenuIMG/intoGame.png" />
          </image>
       </ImageView>
-      <ImageView id="intoSave" fitHeight="100.0" fitWidth="70.0" layoutX="650.0" layoutY="620.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView id="intoSave" fitHeight="100.0" fitWidth="70.0" layoutX="650.0" layoutY="620.0" pickOnBounds="true" preserveRatio="true" style="-fx-cursor: hand;">
          <image>
             <Image url="@../Image/MenuIMG/intoSave.png" />
          </image>
       </ImageView>
-      <ImageView id="intoHistory" fitHeight="100.0" fitWidth="70.0" layoutX="720.0" layoutY="620.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView id="intoHistory" fx:id="intoHistory" fitHeight="100.0" fitWidth="70.0" layoutX="720.0" layoutY="620.0" onMouseClicked="#intoHistory" pickOnBounds="true" preserveRatio="true" style="-fx-cursor: hand;">
          <image>
             <Image url="@../Image/MenuIMG/intoHistory.png" />
          </image>
       </ImageView>
       <Line endX="1200.0" layoutY="580.0" strokeWidth="3.0" />
-      <AnchorPane layoutY="100.0" prefHeight="480.0" prefWidth="600.0" />
-      <TextField id="SearchingBar" layoutX="50.0" layoutY="23.0" prefHeight="55.0" prefWidth="500.0" promptText="Search">
+      <AnchorPane id="scenePane1" fx:id="scenePane1" layoutY="100.0" prefHeight="480.0" prefWidth="600.0">
+         <Label id="wordTarget" fx:id="wordTarget" layoutX="20.0" layoutY="20.0">
+            <font>
+               <Font name="Arial Rounded MT Bold" size="24.0" />
+            </font>
+         </Label>
+         <Label id="wordExplain" fx:id="wordExplain" alignment="TOP_LEFT" layoutX="20.0" layoutY="80.0" prefHeight="350.0" prefWidth="560.0">
+            <font>
+               <Font name="Times New Roman" size="18.0" />
+            </font>
+         </Label>
+         <Line id="separateLine" endX="600.0" endY="480.0" startX="600.0" />
+      </AnchorPane>
+      <TextField id="SearchingBar" fx:id="SearchingBar" layoutX="50.0" layoutY="23.0" onKeyPressed="#intoWord" prefHeight="55.0" prefWidth="500.0" promptText="Search">
          <font>
             <Font name="Arial Rounded MT Bold" size="24.0" />
          </font>
       </TextField>
-      <ImageView id="home" fx:id="home" fitHeight="150.0" fitWidth="35.0" layoutX="1055.0" layoutY="18.0" onMouseClicked="#backHome" pickOnBounds="true" preserveRatio="true">
+      <ImageView id="home" fx:id="home" fitHeight="150.0" fitWidth="35.0" layoutX="1055.0" layoutY="18.0" onMouseClicked="#backHome" pickOnBounds="true" preserveRatio="true" style="-fx-cursor: hand;">
          <image>
             <Image url="@../Image/SearchIMG/home.png" />
          </image>
       </ImageView>
-      <ImageView id="Out" fx:id="out" fitHeight="150.0" fitWidth="35.0" layoutX="1138.0" layoutY="17.0" onMouseClicked="#intoOut" pickOnBounds="true" preserveRatio="true">
+      <ImageView id="Out" fx:id="out" fitHeight="150.0" fitWidth="35.0" layoutX="1138.0" layoutY="17.0" onMouseClicked="#intoOut" pickOnBounds="true" preserveRatio="true" style="-fx-cursor: hand;">
          <image>
             <Image url="@../Image/MenuIMG/out_but.png" />
          </image>
       </ImageView>
-      <ImageView id="guide" fitHeight="150.0" fitWidth="28.0" layoutX="1102.0" layoutY="21.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView id="guide" fitHeight="150.0" fitWidth="28.0" layoutX="1102.0" layoutY="21.0" pickOnBounds="true" preserveRatio="true" style="-fx-cursor: hand;">
          <image>
             <Image url="@../Image/MenuIMG/Guide.png" />
          </image>
       </ImageView>
-      <AnchorPane layoutX="600.0" layoutY="100.0" prefHeight="480.0" prefWidth="600.0" />
+      <AnchorPane id="scenePane2" fx:id="scenePane2" layoutX="600.0" layoutY="100.0" prefHeight="480.0" prefWidth="600.0" />
       <Line endX="1200.0" layoutY="100.0" />
-      <Line endX="600.0" endY="580.0" startX="600.0" startY="100.0" />
+      <ImageView id="WordNotFoundIMG" fx:id="WordNotFoundIMG" fitHeight="300.0" fitWidth="250.0" layoutX="200.0" layoutY="200.0" pickOnBounds="true" preserveRatio="true" visible="false">
+         <image>
+            <Image url="@../Image/SearchIMG/BellaCry.png" />
+         </image>
+      </ImageView>
+      <Label id="WordNotFoundNoti" fx:id="WordNotFoundNoti" layoutX="500.0" layoutY="250.0" prefHeight="100.0" prefWidth="500.0" text="Sorry, we don't have that word!" textFill="DARKCYAN" visible="false" wrapText="true">
+         <font>
+            <Font name="Gill Sans Ultra Bold" size="36.0" />
+         </font>
+      </Label>
+      <Label id="Advice" fx:id="Advice" layoutX="500.0" layoutY="350.0" text="Make sure that you typed correctly." visible="false">
+         <font>
+            <Font name="Times New Roman Italic" size="20.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>

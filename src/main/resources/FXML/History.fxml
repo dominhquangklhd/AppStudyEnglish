@@ -1,0 +1,278 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane fx:id="scenePane" prefHeight="700.0" prefWidth="1200.0" style="-fx-background-color: FFF8DC;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="app.Controller.HistoryController">
+    <children>
+        <Button mnemonicParsing="false" opacity="0.0" prefHeight="700.0" prefWidth="1200.0" text="Button" />
+        <AnchorPane layoutY="580.0" prefHeight="120.0" prefWidth="1200.0" style="-fx-background-color: EEEEEE;" />
+        <ImageView id="intoSearch" fx:id="intoSearch" fitHeight="150.0" fitWidth="70.0" layoutX="410.0" layoutY="620.0" onMouseClicked="#intoSearch" pickOnBounds="true" preserveRatio="true" style="-fx-cursor: hand;">
+            <image>
+                <Image url="@../Image/MenuIMG/search_but.png" />
+            </image>
+        </ImageView>
+        <ImageView id="intoTranslate" fitHeight="100.0" fitWidth="70.0" layoutX="480.0" layoutY="620.0" pickOnBounds="true" preserveRatio="true" style="-fx-cursor: hand;">
+            <image>
+                <Image url="@../Image/MenuIMG/translate_but.png" />
+            </image>
+        </ImageView>
+        <ImageView id="intoGame" fitHeight="100.0" fitWidth="70.0" layoutX="550.0" layoutY="620.0" pickOnBounds="true" preserveRatio="true" style="-fx-cursor: hand;">
+            <image>
+                <Image url="@../Image/MenuIMG/intoGame.png" />
+            </image>
+        </ImageView>
+        <ImageView id="intoSave" fitHeight="100.0" fitWidth="70.0" layoutX="620.0" layoutY="620.0" pickOnBounds="true" preserveRatio="true" style="-fx-cursor: hand;">
+            <image>
+                <Image url="@../Image/MenuIMG/intoSave.png" />
+            </image>
+        </ImageView>
+        <ImageView id="intoHistory" fx:id="intoHistory" fitHeight="100.0" fitWidth="100.0" layoutX="690.0" layoutY="590.0" pickOnBounds="true" preserveRatio="true" style="-fx-cursor: hand;">
+            <image>
+                <Image url="@../Image/MenuIMG/intoHistory.png" />
+            </image>
+        </ImageView>
+        <Line endX="1200.0" layoutY="580.0" strokeWidth="3.0" />
+        <TextField id="SearchingBar" fx:id="SearchingBar" layoutX="50.0" layoutY="23.0" onKeyPressed="#intoWord" prefHeight="55.0" prefWidth="500.0" promptText="Search">
+            <font>
+                <Font name="Arial Rounded MT Bold" size="24.0" />
+            </font>
+        </TextField>
+        <ImageView id="home" fx:id="home" fitHeight="150.0" fitWidth="35.0" layoutX="1055.0" layoutY="18.0" onMouseClicked="#backHome" pickOnBounds="true" preserveRatio="true" style="-fx-cursor: hand;">
+            <image>
+                <Image url="@../Image/SearchIMG/home.png" />
+            </image>
+        </ImageView>
+        <ImageView id="Out" fx:id="out" fitHeight="150.0" fitWidth="35.0" layoutX="1138.0" layoutY="17.0" onMouseClicked="#intoOut" pickOnBounds="true" preserveRatio="true" style="-fx-cursor: hand;">
+            <image>
+                <Image url="@../Image/MenuIMG/out_but.png" />
+            </image>
+        </ImageView>
+        <ImageView id="guide" fitHeight="150.0" fitWidth="28.0" layoutX="1102.0" layoutY="21.0" pickOnBounds="true" preserveRatio="true" style="-fx-cursor: hand;">
+            <image>
+                <Image url="@../Image/MenuIMG/Guide.png" />
+            </image>
+        </ImageView>
+        <Line endX="1200.0" layoutY="100.0" />
+      <AnchorPane layoutX="40.0" layoutY="230.0" prefHeight="300.0" prefWidth="250.0" style="-fx-background-color: F2BED1;">
+         <children>
+            <Label fx:id="label_1" onMouseClicked="#reSearchWord" prefHeight="75.0" prefWidth="250.0" style="-fx-cursor: hand;" text="Label">
+               <font>
+                  <Font name="Arial Rounded MT Bold" size="22.0" />
+               </font>
+               <graphic>
+                  <ImageView fitHeight="150.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../Image/HistoryIMG/Planet_Blue.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Label>
+            <Label fx:id="label_2" layoutY="75.0" onMouseClicked="#reSearchWord" prefHeight="75.0" prefWidth="250.0" style="-fx-cursor: hand;" text="Label">
+               <font>
+                  <Font name="Arial Rounded MT Bold" size="22.0" />
+               </font>
+               <graphic>
+                  <ImageView fitHeight="150.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../Image/HistoryIMG/Planet_Blue.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Label>
+            <Label fx:id="label_3" layoutY="150.0" onMouseClicked="#reSearchWord" prefHeight="75.0" prefWidth="250.0" style="-fx-cursor: hand;" text="Label">
+               <font>
+                  <Font name="Arial Rounded MT Bold" size="22.0" />
+               </font>
+               <graphic>
+                  <ImageView fitHeight="150.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../Image/HistoryIMG/Planet_Blue.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Label>
+            <Label fx:id="label_4" layoutY="225.0" onMouseClicked="#reSearchWord" prefHeight="75.0" prefWidth="250.0" style="-fx-cursor: hand;" text="Label">
+               <font>
+                  <Font name="Arial Rounded MT Bold" size="22.0" />
+               </font>
+               <graphic>
+                  <ImageView fitHeight="150.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../Image/HistoryIMG/Planet_Blue.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Label>
+         </children>
+      </AnchorPane>
+      <AnchorPane layoutX="330.0" layoutY="230.0" prefHeight="300.0" prefWidth="250.0" style="-fx-background-color: FDCEDF;">
+         <children>
+            <Label fx:id="label_5" onMouseClicked="#reSearchWord" prefHeight="75.0" prefWidth="250.0" style="-fx-cursor: hand;" text="Label">
+               <font>
+                  <Font name="Arial Rounded MT Bold" size="22.0" />
+               </font>
+               <graphic>
+                  <ImageView fitHeight="150.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../Image/HistoryIMG/Planet_Green.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Label>
+            <Label fx:id="label_6" layoutY="75.0" onMouseClicked="#reSearchWord" prefHeight="75.0" prefWidth="250.0" style="-fx-cursor: hand;" text="Label">
+               <font>
+                  <Font name="Arial Rounded MT Bold" size="22.0" />
+               </font>
+               <graphic>
+                  <ImageView fitHeight="150.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../Image/HistoryIMG/Planet_Green.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Label>
+            <Label fx:id="label_7" layoutY="150.0" onMouseClicked="#reSearchWord" prefHeight="75.0" prefWidth="250.0" style="-fx-cursor: hand;" text="Label">
+               <font>
+                  <Font name="Arial Rounded MT Bold" size="22.0" />
+               </font>
+               <graphic>
+                  <ImageView fitHeight="150.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../Image/HistoryIMG/Planet_Green.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Label>
+            <Label fx:id="label_8" layoutY="225.0" onMouseClicked="#reSearchWord" prefHeight="75.0" prefWidth="250.0" style="-fx-cursor: hand;" text="Label">
+               <font>
+                  <Font name="Arial Rounded MT Bold" size="22.0" />
+               </font>
+               <graphic>
+                  <ImageView fitHeight="150.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../Image/HistoryIMG/Planet_Green.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Label>
+         </children>
+      </AnchorPane>
+      <AnchorPane layoutX="620.0" layoutY="230.0" prefHeight="300.0" prefWidth="250.0" style="-fx-background-color: F8E8EE;">
+         <children>
+            <Label fx:id="label_9" prefHeight="75.0" prefWidth="250.0" style="-fx-cursor: hand;" text="Label">
+               <font>
+                  <Font name="Arial Rounded MT Bold" size="22.0" />
+               </font>
+               <graphic>
+                  <ImageView fitHeight="150.0" fitWidth="50.0" onMouseClicked="#reSearchWord" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../Image/HistoryIMG/Planet_Red.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Label>
+            <Label fx:id="label_10" layoutY="75.0" onMouseClicked="#reSearchWord" prefHeight="75.0" prefWidth="250.0" style="-fx-cursor: hand;" text="Label">
+               <font>
+                  <Font name="Arial Rounded MT Bold" size="22.0" />
+               </font>
+               <graphic>
+                  <ImageView fitHeight="150.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../Image/HistoryIMG/Planet_Red.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Label>
+            <Label fx:id="label_11" layoutY="150.0" onMouseClicked="#reSearchWord" prefHeight="75.0" prefWidth="250.0" style="-fx-cursor: hand;" text="Label">
+               <font>
+                  <Font name="Arial Rounded MT Bold" size="22.0" />
+               </font>
+               <graphic>
+                  <ImageView fitHeight="150.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../Image/HistoryIMG/Planet_Red.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Label>
+            <Label fx:id="label_12" layoutY="225.0" onMouseClicked="#reSearchWord" prefHeight="75.0" prefWidth="250.0" style="-fx-cursor: hand;" text="Label">
+               <font>
+                  <Font name="Arial Rounded MT Bold" size="22.0" />
+               </font>
+               <graphic>
+                  <ImageView fitHeight="150.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../Image/HistoryIMG/Planet_Red.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Label>
+         </children>
+      </AnchorPane>
+      <AnchorPane layoutX="910.0" layoutY="230.0" prefHeight="300.0" prefWidth="250.0" style="-fx-background-color: F9F5F6;">
+         <children>
+            <Label fx:id="label_13" prefHeight="75.0" prefWidth="250.0" style="-fx-cursor: hand;" text="Label">
+               <font>
+                  <Font name="Arial Rounded MT Bold" size="22.0" />
+               </font>
+               <graphic>
+                  <ImageView fitHeight="150.0" fitWidth="50.0" onMouseClicked="#reSearchWord" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../Image/HistoryIMG/Planet_Purple.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Label>
+            <Label fx:id="label_14" layoutY="75.0" onMouseClicked="#reSearchWord" prefHeight="75.0" prefWidth="250.0" style="-fx-cursor: hand;" text="Label">
+               <font>
+                  <Font name="Arial Rounded MT Bold" size="22.0" />
+               </font>
+               <graphic>
+                  <ImageView fitHeight="150.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../Image/HistoryIMG/Planet_Purple.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Label>
+            <Label fx:id="label_15" layoutY="150.0" onMouseClicked="#reSearchWord" prefHeight="75.0" prefWidth="250.0" style="-fx-cursor: hand;" text="Label">
+               <font>
+                  <Font name="Arial Rounded MT Bold" size="22.0" />
+               </font>
+               <graphic>
+                  <ImageView fitHeight="150.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../Image/HistoryIMG/Planet_Purple.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Label>
+            <Label fx:id="label_16" layoutY="225.0" onMouseClicked="#reSearchWord" prefHeight="75.0" prefWidth="250.0" style="-fx-cursor: hand;" text="Label">
+               <font>
+                  <Font name="Arial Rounded MT Bold" size="22.0" />
+               </font>
+               <graphic>
+                  <ImageView fitHeight="150.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../Image/HistoryIMG/Planet_Purple.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Label>
+         </children>
+      </AnchorPane>
+      <Text fill="#618264" layoutY="180.0" strokeType="OUTSIDE" strokeWidth="0.0" text="HISTORY SEARCH" textAlignment="CENTER" wrappingWidth="1200.0">
+         <font>
+            <Font name="Gill Sans Ultra Bold" size="36.0" />
+         </font>
+      </Text>
+    </children>
+</AnchorPane>

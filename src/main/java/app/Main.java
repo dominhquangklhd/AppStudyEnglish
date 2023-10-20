@@ -1,15 +1,24 @@
 package app;
 
+import app.Model.DictionaryManagement;
+import app.Model.Word;
 import javafx.application.Application;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import javafx.fxml.FXMLLoader;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Main extends Application {
+    public static DictionaryManagement dictionaryManagement = new DictionaryManagement();
+
     @Override
     public void start(Stage stage) {
         try {
+            dictionaryManagement.insertFromFile();
+
             Parent root = FXMLLoader.load(getClass().getResource("/FXML/Menu.fxml"));
             Scene scene = new Scene(root);
 
@@ -20,6 +29,7 @@ public class Main extends Application {
             stage.show();
         } catch (Exception e) {
             e.printStackTrace();
+            System.out.println(e.getMessage());
         }
     }
 }
