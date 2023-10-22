@@ -112,7 +112,7 @@ public class SearchController implements Initializable {
     }
 
     //Supporting methods
-    public void StartSearching() {
+    /*public void StartSearching() {
         boolean has = false;
         for (Word w : Main.dictionaryManagement.dictionary.words) {
             if (w.getWordTarget().equals(wordTarget.getText())) {
@@ -126,13 +126,20 @@ public class SearchController implements Initializable {
         if (!has) {
             CryIfCannotFindWord();
         }
-    }
+    }*/
 
-    /*public void searchInDB() {
+    public void StartSearching() {
         DatabaseConnection databaseConnection = new DatabaseConnection();
         databaseConnection.createConnection();
-        databaseConnection.findWordInDatabase();
-    }*/
+        String explainWord = databaseConnection.findWordInDatabase(wordTarget.getText());
+        if (explainWord.isEmpty()) {
+            CryIfCannotFindWord();
+        } else {
+            wordExplain.setText(explainWord);
+            Main.dictionaryManagement.addWordtoHistory(word);
+            WordFoundSet();
+        }
+    }
 
     public void CryIfCannotFindWord() {
         scenePane1.setVisible(false);
