@@ -2,6 +2,7 @@ module app {
     requires javafx.controls;
     requires javafx.fxml;
     requires javafx.graphics;
+    requires java.sql;
 
     //opens com.example.test.Controller to javafx.fxml;
     //exports com.example.test.Model;

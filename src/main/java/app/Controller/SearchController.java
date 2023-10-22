@@ -20,6 +20,7 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+import app.DB_Connection.*;
 
 public class SearchController implements Initializable {
     //FXML
@@ -126,6 +127,12 @@ public class SearchController implements Initializable {
             CryIfCannotFindWord();
         }
     }
+
+    /*public void searchInDB() {
+        DatabaseConnection databaseConnection = new DatabaseConnection();
+        databaseConnection.createConnection();
+        databaseConnection.findWordInDatabase();
+    }*/
 
     public void CryIfCannotFindWord() {
         scenePane1.setVisible(false);

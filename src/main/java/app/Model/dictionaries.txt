@@ -1,0 +1,5 @@
+explain	giai thich
+exercise	bai tap
+hello	xin chao
+goodbye	tam biet
+add	them

@@ -5,10 +5,6 @@ import java.io.IOException;
 public class DictionaryCommandline {
     public DictionaryManagement dictionaryManagement = new DictionaryManagement();
 
-    public DictionaryCommandline() {
-
-    }
-
     public void importFromFile() throws IOException {
         dictionaryManagement.insertFromFile();
     }
