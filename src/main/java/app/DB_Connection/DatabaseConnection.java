@@ -71,7 +71,8 @@ public class DatabaseConnection {
         }
     }
 
-    public void findWordInDatabase(String word) {
+    public String findWordInDatabase(String word) {
+        String res = "";
         try {
             String sql = "SELECT * FROM av WHERE word = ?";
             preparedStatement = connection.prepareStatement(sql);
@@ -81,18 +82,21 @@ public class DatabaseConnection {
 
             if (resultSet.next()) {
                 String pronounce = resultSet.getString("pronounce");
-                System.out.println(pronounce);
+                if (!pronounce.isEmpty()) {
+                    res += "/" + pronounce + "/" + "\n";
+                }
                 String des = resultSet.getString("description");
-                System.out.println(des);
+                res += des + "\n";
             }
 
             while (resultSet.next()) {
                 String des = resultSet.getString("des");
-                System.out.println(des);
+                res += des + "\n";
             }
         } catch (SQLException ex) {
             System.out.println("Can not find this word!");
         }
+        return res;
     }
 
     public void insertIntoTrie() {
