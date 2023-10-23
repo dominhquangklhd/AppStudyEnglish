@@ -1,12 +1,24 @@
 package app.Model;
 
+import java.util.LinkedList;
+import java.util.List;
+
 public class Trie {
     private Node root = new Node();
     private final int limit = 10;
     private static int numOfWord = 0;
+    private List<String> wordsBySearching = new LinkedList<>();
 
     public Trie(){
 
+    }
+
+    public void resetWordList () {
+        wordsBySearching.clear();
+    }
+
+    public List<String> getWordsBySearching() {
+        return wordsBySearching;
     }
 
     public void insertWord(String word) {
@@ -27,7 +39,7 @@ public class Trie {
     public void recursiveTrie(Node cur, String word) {
         if (numOfWord < limit) {
             if (cur.isEnd) {
-                System.out.println(word);
+                wordsBySearching.add(word);
                 numOfWord++;
             }
             for (int i = 0; i < Node.SizeNode; i++) {
