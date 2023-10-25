@@ -1,45 +1,38 @@
 package app;
 
-import app.Controller.SaveController;
 import app.DB_Connection.DatabaseConnection;
 import app.Model.DictionaryManagement;
-import app.Model.*;
+import app.Model.Trie;
+import app.Model.Word;
 import javafx.application.Application;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import javafx.fxml.FXMLLoader;
-import javafx.stage.StageStyle;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.net.URL;
-import java.util.ResourceBundle;
 
 public class Main extends Application {
     public static DictionaryManagement dictionaryManagement = new DictionaryManagement();
-
     public static final Trie trie = new Trie();
-
-    public static DatabaseConnection databaseConnection = new DatabaseConnection();
-
-    public static SaveController SaveStage = new SaveController();
+    public static final DatabaseConnection databaseConnection = new DatabaseConnection();
 
     @Override
     public void start(Stage stage) {
+
         try {
-            dictionaryManagement.insertFromFile();
             databaseConnection.createConnection();
-            databaseConnection.setSavedWord();
             databaseConnection.insertIntoTrie();
+
+            dictionaryManagement.insertFromFile();
 
             Parent root = FXMLLoader.load(getClass().getResource("/FXML/Menu.fxml"));
             Scene scene = new Scene(root);
 
             stage.setWidth(1200);
-            stage.setHeight(700);
+            stage.setHeight(735);
             stage.setResizable(false);
-            stage.initStyle(StageStyle.TRANSPARENT);
             stage.setScene (scene);
             stage.show();
         } catch (Exception e) {

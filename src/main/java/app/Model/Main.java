@@ -8,9 +8,14 @@ public class Main {
         dictionaryCommandline.importFromFile();
         dictionaryCommandline.dictionaryManagement.dictionaryAdvanced();*/
 
-        DatabaseConnection databaseConnection = new DatabaseConnection();
-        databaseConnection.createConnection();
-        databaseConnection.findWordInDatabase("abutilon");
-        databaseConnection.DatabaseClose();
+        Trie test = new Trie();
+        test.insertWord("hello");
+        test.insertWord("abc");
+        test.insertWord("bcs");
+        test.insertWord("school");
+        test.search("h");
+        for (String s : test.getWordsBySearching()) {
+            System.out.println(s);
+        }
     }
 }

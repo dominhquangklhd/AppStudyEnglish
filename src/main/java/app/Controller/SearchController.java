@@ -1,6 +1,7 @@
 package app.Controller;
 
 import app.Main;
+import app.Model.Trie;
 import app.Model.Word;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -10,11 +11,11 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.InputMethodEvent;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
@@ -23,14 +24,13 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
+import java.sql.SQLException;
 import java.util.List;
 import java.util.ResourceBundle;
 import app.DB_Connection.*;
 
 public class SearchController implements Initializable {
     //FXML
-    @FXML
-    public ImageView minimize;
     @FXML
     public ImageView home;
     @FXML
@@ -56,19 +56,7 @@ public class SearchController implements Initializable {
     @FXML
     public Label Advice;
     @FXML
-    public ImageView UNsavedIcon;
-    @FXML
-    public ImageView savedIcon;
-    @FXML
-    public ImageView intoSave;
-    @FXML
-    public Label GoSearchLabel;
-    @FXML
-    public ImageView GoSearchPic;
-    @FXML
-    public ListView wordList;
-    @FXML
-    public Button paneButton;
+    private ListView<String> wordList;
 
     //Nor
     private Word word = new Word();
@@ -106,28 +94,8 @@ public class SearchController implements Initializable {
         stage.show();
     }
 
-    public void saveOrUnsaved () throws IOException {
-        if (Main.databaseConnection.isSaved(wordTarget.getText())) {
-            UNsavedIcon.setVisible(true);
-            savedIcon.setVisible(false);
-            Main.dictionaryManagement.wordSavedList.remove(wordTarget.getText());
-            Main.databaseConnection.setUnSave(wordTarget.getText());
-
-            Main.dictionaryManagement.decreaseSavePage();
-        } else {
-            UNsavedIcon.setVisible(false);
-            savedIcon.setVisible(true);
-            Main.dictionaryManagement.wordSavedList.add(0,wordTarget.getText());
-            Main.databaseConnection.setSave(wordTarget.getText());
-
-            Main.dictionaryManagement.increaseSavePage();
-        }
-    }
-
-    public void intoWord(KeyEvent event) throws IOException {
+    public void intoWord(KeyEvent eventKey) throws IOException {
         ObservableList<String> items = FXCollections.observableArrayList();
-
-        //lập ra danh sách các từ gợi ý mỗi khi từ trên SearchingBar(TestField) thay đổi.
         SearchingBar.textProperty().addListener((observable, oldValue, newValue) -> {
             wordList.getItems().clear();
             Main.trie.resetWordList();
@@ -141,20 +109,32 @@ public class SearchController implements Initializable {
             wordList.setItems(items);
         });
 
-        // lập ra sự kiện khi mình click chuột vào worldList(ListView).
-        wordList.setOnMouseClicked(MouseEvent -> {
-            String selectedWord = (String) wordList.getSelectionModel().getSelectedItem();
+        wordList.setOnMouseClicked(event -> {
+            String selectedWord = wordList.getSelectionModel().getSelectedItem();
             if (selectedWord != null) {
                 SearchingBar.setText(selectedWord);
             }
-
-            //wordList.setVisible(false);
         });
+        /*SearchingBar.textProperty().addListener((observable, oldValue, newValue) -> {
+            wordList.getItems().clear();
 
-        if (event.getCode() == KeyCode.ENTER) {
-            wordTarget.setText(SearchingBar.getText());
-            GoSearchLabel.setVisible(false);
-            GoSearchPic.setVisible(false);
+            SearchingBar.setText(newValue);
+            try {
+                Main.databaseConnection.filterWord(SearchingBar.getText());
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
+
+            items.addAll(Main.databaseConnection.getWordBySearch());
+            wordList.setItems(items);
+            System.out.println(1);
+        });*/
+
+        if (eventKey.getCode() == KeyCode.ENTER) {
+            word.setWordTarget(SearchingBar.getText());
+            wordTarget.setText(word.getWordTarget());
+
+            wordList.setVisible(false);
 
             StartSearching();
         }
@@ -170,24 +150,6 @@ public class SearchController implements Initializable {
         scene = new Scene(root);
         stage.setScene (scene);
         stage.show();
-    }
-
-    public void intoSave(MouseEvent event) throws IOException {
-        Main.dictionaryManagement.recentSavePage = 1;
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/FXML/Save.fxml"));
-        Parent root = loader.load();
-        ((SaveController) loader.getController()).StartSave();
-
-        //Switch scene to HistoryScene
-        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        scene = new Scene(root);
-        stage.setScene (scene);
-        stage.show();
-    }
-
-    public void minimizeStage(MouseEvent event) {
-        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        stage.setIconified(true);
     }
 
     public void intoOut() {
@@ -218,14 +180,7 @@ public class SearchController implements Initializable {
             CryIfCannotFindWord();
         } else {
             wordExplain.setText(explainWord);
-            Main.dictionaryManagement.addWordtoHistory(wordTarget.getText());
-            if (Main.databaseConnection.isSaved(wordTarget.getText())) {
-                savedIcon.setVisible(true);
-                UNsavedIcon.setVisible(false);
-            } else {
-                savedIcon.setVisible(false);
-                UNsavedIcon.setVisible(true);
-            }
+            Main.dictionaryManagement.addWordtoHistory(word);
             WordFoundSet();
         }
     }
@@ -245,23 +200,8 @@ public class SearchController implements Initializable {
         WordNotFoundNoti.setVisible(false);
         Advice.setVisible(false);
     }
-
-    public void GoSearch() {
-        scenePane1.setVisible(false);
-        scenePane2.setVisible(false);
-        GoSearchLabel.setVisible(true);
-        GoSearchPic.setVisible(true);
-        WordNotFoundIMG.setVisible(false);
-        WordNotFoundNoti.setVisible(false);
-        Advice.setVisible(false);
-    }
-
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         //Nothing
-    }
-
-    public void outSearch() {
-        wordList.setVisible(false);
     }
 }
