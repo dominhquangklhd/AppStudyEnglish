@@ -1,10 +1,12 @@
 package app.DB_Connection;
 
+import app.Main;
 import app.Model.*;
 
 import java.sql.*;
-import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
+
 
 
 public class DatabaseConnection {
@@ -15,7 +17,16 @@ public class DatabaseConnection {
     Connection connection;
     PreparedStatement preparedStatement;
     ResultSet resultSet;
-    Trie trie;
+
+    private List<String> wordBySearch = new LinkedList<>();
+
+    public List<String> getWordBySearch() {
+        return wordBySearch;
+    }
+
+    public void resetWordBySearch() {
+        wordBySearch.clear();
+    }
 
     public void createConnection() {
         try {
@@ -71,6 +82,21 @@ public class DatabaseConnection {
         }
     }
 
+    public void filterWord(String searchString) throws SQLException {
+        String sql = "SELECT * FROM av WHERE word LIKE ?";
+        preparedStatement = connection.prepareStatement(sql);
+        preparedStatement.setString(1, searchString + "%");
+
+        resultSet = preparedStatement.executeQuery();
+
+        wordBySearch.clear();
+
+        while (resultSet.next()) {
+            String result = resultSet.getString("word");
+            wordBySearch.add(result);
+        }
+    }
+
     public String findWordInDatabase(String word) {
         String res = "";
         try {
@@ -108,8 +134,9 @@ public class DatabaseConnection {
 
             while (resultSet.next()) {
                 String value = resultSet.getString("word");
-                trie.insertWord(value);
+                Main.trie.insertWord(value);
             }
+
         } catch (SQLException ex) {
             System.out.println("Can not insert into trie!");
         }

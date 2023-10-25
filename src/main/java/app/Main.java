@@ -1,6 +1,8 @@
 package app;
 
+import app.DB_Connection.DatabaseConnection;
 import app.Model.DictionaryManagement;
+import app.Model.Trie;
 import app.Model.Word;
 import javafx.application.Application;
 import javafx.scene.Parent;
@@ -13,10 +15,16 @@ import java.util.List;
 
 public class Main extends Application {
     public static DictionaryManagement dictionaryManagement = new DictionaryManagement();
+    public static final Trie trie = new Trie();
+    public static final DatabaseConnection databaseConnection = new DatabaseConnection();
 
     @Override
     public void start(Stage stage) {
+
         try {
+            databaseConnection.createConnection();
+            databaseConnection.insertIntoTrie();
+
             dictionaryManagement.insertFromFile();
 
             Parent root = FXMLLoader.load(getClass().getResource("/FXML/Menu.fxml"));

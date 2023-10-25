@@ -1,7 +1,10 @@
 package app.Controller;
 
 import app.Main;
+import app.Model.Trie;
 import app.Model.Word;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -12,6 +15,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.InputMethodEvent;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
@@ -20,6 +24,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
+import java.sql.SQLException;
 import java.util.List;
 import java.util.ResourceBundle;
 import app.DB_Connection.*;
@@ -50,6 +55,8 @@ public class SearchController implements Initializable {
     public ImageView intoHistory;
     @FXML
     public Label Advice;
+    @FXML
+    private ListView<String> wordList;
 
     //Nor
     private Word word = new Word();
@@ -87,10 +94,47 @@ public class SearchController implements Initializable {
         stage.show();
     }
 
-    public void intoWord(KeyEvent event) throws IOException {
-        if (event.getCode() == KeyCode.ENTER) {
+    public void intoWord(KeyEvent eventKey) throws IOException {
+        ObservableList<String> items = FXCollections.observableArrayList();
+        SearchingBar.textProperty().addListener((observable, oldValue, newValue) -> {
+            wordList.getItems().clear();
+            Main.trie.resetWordList();
+
+            SearchingBar.setText(newValue);
+            Main.trie.search(SearchingBar.getText());
+
+            wordList.setVisible(!Main.trie.getWordsBySearching().isEmpty());
+
+            items.addAll(Main.trie.getWordsBySearching());
+            wordList.setItems(items);
+        });
+
+        wordList.setOnMouseClicked(event -> {
+            String selectedWord = wordList.getSelectionModel().getSelectedItem();
+            if (selectedWord != null) {
+                SearchingBar.setText(selectedWord);
+            }
+        });
+        /*SearchingBar.textProperty().addListener((observable, oldValue, newValue) -> {
+            wordList.getItems().clear();
+
+            SearchingBar.setText(newValue);
+            try {
+                Main.databaseConnection.filterWord(SearchingBar.getText());
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
+
+            items.addAll(Main.databaseConnection.getWordBySearch());
+            wordList.setItems(items);
+            System.out.println(1);
+        });*/
+
+        if (eventKey.getCode() == KeyCode.ENTER) {
             word.setWordTarget(SearchingBar.getText());
             wordTarget.setText(word.getWordTarget());
+
+            wordList.setVisible(false);
 
             StartSearching();
         }
@@ -131,9 +175,7 @@ public class SearchController implements Initializable {
     }*/
 
     public void StartSearching() {
-        DatabaseConnection databaseConnection = new DatabaseConnection();
-        databaseConnection.createConnection();
-        String explainWord = databaseConnection.findWordInDatabase(wordTarget.getText());
+        String explainWord = Main.databaseConnection.findWordInDatabase(wordTarget.getText());
         if (explainWord.isEmpty()) {
             CryIfCannotFindWord();
         } else {
