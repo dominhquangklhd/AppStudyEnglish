@@ -1,11 +1,15 @@
 package app.Model;
 
+import app.DB_Connection.DatabaseConnection;
+
 import java.io.*;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
 public class DictionaryManagement {
+    public static boolean exit = false;
     public final int HistorySize = 16;
     public Dictionary dictionary = new Dictionary();
     public List<Word> wordHistoryList = new ArrayList<>();
@@ -139,10 +143,6 @@ public class DictionaryManagement {
         sc.close();
     }
 
-    public void removeDuplicates() {
-
-    }
-
     public void dictionarySearcher() {
         Scanner sc = new Scanner(System.in);
         System.out.println("app.app.Model.Dictionary searcher!");
@@ -184,6 +184,57 @@ public class DictionaryManagement {
         bufferedWriter.close();
     }
 
+    public void gameMultipleChoice() throws SQLException {
+        int num = 1;
+        int mark = 0;
+        String question;
+        String A;
+        String B;
+        String C;
+        String D;
+        String answer;
+
+        DatabaseConnection gameConnection = new DatabaseConnection();
+        gameConnection.createConnection();
+        gameConnection.gameDataBaseMultipleChoice();
+
+        Scanner sc = new Scanner(System.in);
+
+        System.out.println("Choose A, B, C or D which is the answer you think right!\n"
+                    + "Press Enter if you are ready!");
+        sc.nextLine();
+
+        for (List<String> ex : gameConnection.getListDB_MC()) {
+            question = ex.get(0);
+            A = ex.get(1);
+            B = ex.get(2);
+            C = ex.get(3);
+            D = ex.get(4);
+            answer = ex.get(5);
+
+            System.out.println(num + "." + question);
+            System.out.println("[A] " + A);
+            System.out.println("[B] " + B);
+            System.out.println("[C] " + C);
+            System.out.println("[D] " + D);
+
+            System.out.print("Your answer is: ");
+            String tmp = sc.next();
+            String yourAns = tmp.toLowerCase();
+
+            if (yourAns.equals(answer)) {
+                System.out.println("---CORRECT---");
+                mark += 10;
+            } else {
+                System.out.println("---WRONG---");
+            }
+            System.out.println();
+            num++;
+        }
+
+        System.out.println("Total mark: " + mark + "\n");
+    }
+
     public void showAllWords() {
         int i = 1;
         System.out.println("No      |  English     |    Vietnamese");
@@ -214,23 +265,22 @@ public class DictionaryManagement {
         try {
             int n = Integer.parseInt(s);
             switch (n) {
-                case 0 -> System.out.println("Exist!");
+                case 0 -> {System.out.println("Exit!"); exit = true;}
                 case 1 -> addNewWord();
                 case 2 -> deleteWord();
                 case 3 -> updateWord();
                 case 4 -> showAllWords();
                 case 5 -> dictionaryLookup();
                 case 6 -> dictionarySearcher();
-                case 7 -> System.out.println("Time to train by a game!");
+                case 7 -> gameMultipleChoice();
                 case 8 -> insertFromFile();
                 case 9 -> dictionaryExportToFile();
-                default -> System.out.println("Action not supported");
+                default -> System.out.println("Action not supported!\n");
             }
         } catch (NumberFormatException ex) {
-            System.out.println(ex.getMessage() + " is not supported");
-            System.exit(1);
+            System.out.println(ex.getMessage() + " is not supported!\n");
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
         }
-
-        sc.close();
     }
 }
