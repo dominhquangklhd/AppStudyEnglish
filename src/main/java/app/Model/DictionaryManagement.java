@@ -1,24 +1,23 @@
 package app.Model;
 
-import app.Main;
+import app.DB_Connection.DatabaseConnection;
 
 import java.io.*;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
 public class DictionaryManagement {
+    public static boolean exit = false;
     public final int HistorySize = 16;
     public Dictionary dictionary = new Dictionary();
-    public List<String> wordHistoryList = new ArrayList<>();
-    public List<String> wordSavedList = new ArrayList<>();
-
-    public int recentSavePage = 1;
-
-    public int number_of_page = 0;
+    public List<Word> wordHistoryList = new ArrayList<>();
 
     public DictionaryManagement() {
-        String w = "_____";
+        Word w = new Word();
+        w.setWordTarget("_____");
+        w.setWordExplain("_____");
         for (int i = 0; i < HistorySize; i++) {
             wordHistoryList.add(w);
         }
@@ -84,21 +83,12 @@ public class DictionaryManagement {
         }
     }
 
-    public void addWordtoHistory(String w) {
-        wordHistoryList.add(0, w);
+    public void addWordtoHistory(Word word) {
+        Word tmp = new Word();
+        tmp.setWordExplain(word.getWordExplain());
+        tmp.setWordTarget(word.getWordTarget());
+        wordHistoryList.add(0, tmp);
         wordHistoryList.remove(HistorySize);
-    }
-
-    public void increaseSavePage() {
-        if ((wordSavedList.size() % 16) == 1) {
-            number_of_page++;
-        }
-    }
-
-    public void decreaseSavePage() {
-        if ((wordSavedList.size() % 16) == 0) {
-            number_of_page--;
-        }
     }
 
     public void addNewWord() throws IOException {
@@ -153,27 +143,28 @@ public class DictionaryManagement {
         sc.close();
     }
 
-    public void removeDuplicates() {
-
-    }
-
     public void dictionarySearcher() {
         Scanner sc = new Scanner(System.in);
         System.out.println("app.app.Model.Dictionary searcher!");
         System.out.print("Enter a word you want to search: ");
         String word = sc.nextLine();
         int k = word.length();
-        boolean has = false;
+        boolean found = false;
+
         for (Word w : dictionary.words) {
+            if(w.getWordTarget().length() < k)
+                continue;
             String tmp = w.getWordTarget().substring(0, k);
             if (tmp.equals(word)) {
-                has = true;
+                found = true;
                 System.out.print(w.getWordTarget() + " ");
             }
         }
-        if (!has) {
+
+        if (!found) {
             System.out.print("Not result");
         }
+
         System.out.println();
         sc.close();
     }
@@ -191,6 +182,57 @@ public class DictionaryManagement {
             }
         }
         bufferedWriter.close();
+    }
+
+    public void gameMultipleChoice() throws SQLException {
+        int num = 1;
+        int mark = 0;
+        String question;
+        String A;
+        String B;
+        String C;
+        String D;
+        String answer;
+
+        DatabaseConnection gameConnection = new DatabaseConnection();
+        gameConnection.createConnection();
+        gameConnection.gameDataBaseMultipleChoice();
+
+        Scanner sc = new Scanner(System.in);
+
+        System.out.println("Choose A, B, C or D which is the answer you think right!\n"
+                    + "Press Enter if you are ready!");
+        sc.nextLine();
+
+        for (List<String> ex : gameConnection.getListDB_MC()) {
+            question = ex.get(0);
+            A = ex.get(1);
+            B = ex.get(2);
+            C = ex.get(3);
+            D = ex.get(4);
+            answer = ex.get(5);
+
+            System.out.println(num + "." + question);
+            System.out.println("[A] " + A);
+            System.out.println("[B] " + B);
+            System.out.println("[C] " + C);
+            System.out.println("[D] " + D);
+
+            System.out.print("Your answer is: ");
+            String tmp = sc.next();
+            String yourAns = tmp.toLowerCase();
+
+            if (yourAns.equals(answer)) {
+                System.out.println("---CORRECT---");
+                mark += 10;
+            } else {
+                System.out.println("---WRONG---");
+            }
+            System.out.println();
+            num++;
+        }
+
+        System.out.println("Total mark: " + mark + "\n");
     }
 
     public void showAllWords() {
@@ -223,23 +265,22 @@ public class DictionaryManagement {
         try {
             int n = Integer.parseInt(s);
             switch (n) {
-                case 0 -> System.out.println("Exist!");
+                case 0 -> {System.out.println("Exit!"); exit = true;}
                 case 1 -> addNewWord();
                 case 2 -> deleteWord();
                 case 3 -> updateWord();
                 case 4 -> showAllWords();
                 case 5 -> dictionaryLookup();
                 case 6 -> dictionarySearcher();
-                case 7 -> System.out.println("Time to train by a game!");
+                case 7 -> gameMultipleChoice();
                 case 8 -> insertFromFile();
                 case 9 -> dictionaryExportToFile();
-                default -> System.out.println("Action not supported");
+                default -> System.out.println("Action not supported!\n");
             }
         } catch (NumberFormatException ex) {
-            System.out.println(ex.getMessage() + " is not supported");
-            System.exit(1);
+            System.out.println(ex.getMessage() + " is not supported!\n");
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
         }
-
-        sc.close();
     }
 }
