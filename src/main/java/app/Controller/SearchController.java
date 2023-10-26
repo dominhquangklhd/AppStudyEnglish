@@ -1,7 +1,6 @@
 package app.Controller;
 
 import app.Main;
-import app.Model.Trie;
 import app.Model.Word;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -15,7 +14,6 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.InputMethodEvent;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
@@ -24,10 +22,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
-import java.sql.SQLException;
-import java.util.List;
 import java.util.ResourceBundle;
-import app.DB_Connection.*;
 
 public class SearchController implements Initializable {
     //FXML
@@ -94,8 +89,10 @@ public class SearchController implements Initializable {
         stage.show();
     }
 
-    public void intoWord(KeyEvent eventKey) throws IOException {
+    public void intoWord(KeyEvent eventKey) {
         ObservableList<String> items = FXCollections.observableArrayList();
+
+        //lập ra danh sách các từ gợi ý mỗi khi từ trên SearchingBar(TestField) thay đổi.
         SearchingBar.textProperty().addListener((observable, oldValue, newValue) -> {
             wordList.getItems().clear();
             Main.trie.resetWordList();
@@ -109,26 +106,20 @@ public class SearchController implements Initializable {
             wordList.setItems(items);
         });
 
+        // lập ra sự kiện khi mình click chuột vào worldList(ListView).
         wordList.setOnMouseClicked(event -> {
             String selectedWord = wordList.getSelectionModel().getSelectedItem();
             if (selectedWord != null) {
                 SearchingBar.setText(selectedWord);
             }
+
+            word.setWordTarget(SearchingBar.getText());
+            wordTarget.setText(word.getWordTarget());
+
+            wordList.setVisible(false);
+
+            StartSearching();
         });
-        /*SearchingBar.textProperty().addListener((observable, oldValue, newValue) -> {
-            wordList.getItems().clear();
-
-            SearchingBar.setText(newValue);
-            try {
-                Main.databaseConnection.filterWord(SearchingBar.getText());
-            } catch (SQLException e) {
-                throw new RuntimeException(e);
-            }
-
-            items.addAll(Main.databaseConnection.getWordBySearch());
-            wordList.setItems(items);
-            System.out.println(1);
-        });*/
 
         if (eventKey.getCode() == KeyCode.ENTER) {
             word.setWordTarget(SearchingBar.getText());
@@ -158,21 +149,6 @@ public class SearchController implements Initializable {
     }
 
     //Supporting methods
-    /*public void StartSearching() {
-        boolean has = false;
-        for (Word w : Main.dictionaryManagement.dictionary.words) {
-            if (w.getWordTarget().equals(wordTarget.getText())) {
-                word.setWordExplain("In Vietnamese: " + w.getWordExplain());
-                wordExplain.setText(word.getWordExplain());
-                has = true;
-                Main.dictionaryManagement.addWordtoHistory(word);
-                WordFoundSet();
-            }
-        }
-        if (!has) {
-            CryIfCannotFindWord();
-        }
-    }*/
 
     public void StartSearching() {
         String explainWord = Main.databaseConnection.findWordInDatabase(wordTarget.getText());

@@ -114,11 +114,6 @@ public class DatabaseConnection {
                 String des = resultSet.getString("description");
                 res += des + "\n";
             }
-
-            while (resultSet.next()) {
-                String des = resultSet.getString("des");
-                res += des + "\n";
-            }
         } catch (SQLException ex) {
             System.out.println("Can not find this word!");
         }
