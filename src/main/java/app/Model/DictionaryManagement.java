@@ -1,5 +1,7 @@
 package app.Model;
 
+import app.Main;
+
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -8,12 +10,15 @@ import java.util.Scanner;
 public class DictionaryManagement {
     public final int HistorySize = 16;
     public Dictionary dictionary = new Dictionary();
-    public List<Word> wordHistoryList = new ArrayList<>();
+    public List<String> wordHistoryList = new ArrayList<>();
+    public List<String> wordSavedList = new ArrayList<>();
+
+    public int recentSavePage = 1;
+
+    public int number_of_page = 0;
 
     public DictionaryManagement() {
-        Word w = new Word();
-        w.setWordTarget("_____");
-        w.setWordExplain("_____");
+        String w = "_____";
         for (int i = 0; i < HistorySize; i++) {
             wordHistoryList.add(w);
         }
@@ -79,12 +84,21 @@ public class DictionaryManagement {
         }
     }
 
-    public void addWordtoHistory(Word word) {
-        Word tmp = new Word();
-        tmp.setWordExplain(word.getWordExplain());
-        tmp.setWordTarget(word.getWordTarget());
-        wordHistoryList.add(0, tmp);
+    public void addWordtoHistory(String w) {
+        wordHistoryList.add(0, w);
         wordHistoryList.remove(HistorySize);
+    }
+
+    public void increaseSavePage() {
+        if ((wordSavedList.size() % 16) == 1) {
+            number_of_page++;
+        }
+    }
+
+    public void decreaseSavePage() {
+        if ((wordSavedList.size() % 16) == 0) {
+            number_of_page--;
+        }
     }
 
     public void addNewWord() throws IOException {

@@ -3,6 +3,7 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -10,8 +11,8 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane fx:id="scenePane" prefHeight="700.0" prefWidth="1200.0" style="-fx-background-color: FFF8DC;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="app.Controller.MenuController">
-   <Button layoutY="-5.0" minHeight="2.0" minWidth="13.0" mnemonicParsing="false" onKeyPressed="#intoWord" opacity="0.0" prefHeight="710.0" prefWidth="1200.0" text="Button" />
+<AnchorPane fx:id="scenePane" onMouseClicked="#outSearch" prefHeight="700.0" prefWidth="1200.0" style="-fx-background-color: FFF8DC;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="app.Controller.MenuController">
+   <Button fx:id="paneButton" layoutY="-5.0" minHeight="2.0" minWidth="13.0" mnemonicParsing="false" onMouseClicked="#outSearch" opacity="0.0" prefHeight="710.0" prefWidth="1200.0" text="Button" />
    <ImageView id="Out" fx:id="Out" fitHeight="35.0" fitWidth="35.0" layoutX="1138.0" layoutY="17.0" onMouseClicked="#intoOut" pickOnBounds="true" preserveRatio="true" style="-fx-cursor: hand;">
       <Image url="@../Image/MenuIMG/out_but.png" />
    </ImageView>
@@ -80,6 +81,15 @@
    <ImageView fitHeight="89.0" fitWidth="78.0" layoutX="1052.0" layoutY="167.0" pickOnBounds="true" preserveRatio="true" rotate="77.0">
       <image>
          <Image url="@../Image/MenuIMG/heart.png" />
+      </image>
+   </ImageView>
+   <ListView fx:id="wordList" editable="true" fixedCellSize="0.0" layoutX="350.0" layoutY="345.0" prefHeight="250.0" prefWidth="500.0" visible="false">
+      <cursor>
+         <Cursor fx:constant="HAND" />
+      </cursor></ListView>
+   <ImageView fx:id="minimize" fitHeight="150.0" fitWidth="30.0" layoutX="1060.0" layoutY="21.0" onMouseClicked="#minimizeStage" pickOnBounds="true" preserveRatio="true" style="-fx-cursor: hand;">
+      <image>
+         <Image url="@../../../../../Java/test/JavaFX_test/test/src/main/resources/Image/MenuIMG/minimize.png" />
       </image>
    </ImageView>
 </AnchorPane>
