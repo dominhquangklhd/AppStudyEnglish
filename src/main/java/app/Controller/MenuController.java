@@ -1,6 +1,7 @@
 package app.Controller;
 
 import app.Main;
+import app.Model.Trie;
 import app.Model.Word;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
