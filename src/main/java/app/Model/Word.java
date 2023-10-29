@@ -3,6 +3,7 @@ package app.Model;
 public class Word {
     private String wordTarget;
     private String wordExplain;
+    private boolean Saved = false;
 
     public Word() {
     }
@@ -26,6 +27,14 @@ public class Word {
 
     public void setWordExplain(String s) {
         this.wordExplain = s;
+    }
+
+    public void setSaved(boolean b) {
+        this.Saved = b;
+    }
+
+    public boolean isSaved() {
+        return Saved;
     }
 
     @Override

@@ -1,7 +1,6 @@
 package app.Controller;
 
 import app.Main;
-import app.Model.DictionaryManagement;
 import app.Model.Word;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -26,14 +25,22 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class HistoryController implements Initializable {
+public class SaveController implements Initializable {
     //FXML
-    @FXML
-    public ListView wordList;
     @FXML
     public ImageView minimize;
     @FXML
     public AnchorPane scenePane;
+    @FXML
+    public TextField SearchingBar;
+    @FXML
+    public ImageView intoHistory;
+    @FXML
+    public ImageView home;
+    @FXML
+    public ImageView out;
+    @FXML
+    public ImageView intoSearch;
     @FXML
     public Label label_1;
     @FXML
@@ -67,38 +74,32 @@ public class HistoryController implements Initializable {
     @FXML
     public Label label_16;
     @FXML
-    public ImageView intoHistory;
+    public ImageView prePage;
     @FXML
-    public TextField SearchingBar;
+    public ImageView nextPage;
     @FXML
-    public ImageView home;
-    @FXML
-    public ImageView out;
-    @FXML
-    public ImageView intoSearch;
-    @FXML
-    public ImageView intoSave;
+    public ListView wordList;
     @FXML
     public Button paneButton;
 
     //Nor
+    int recentPage = 1;
+    int number_of_page = 0;
 
     //Present
     private Stage stage;
     private Scene scene;
     private Parent root;
 
-    //Content Handlers
-    public void intoSearch(MouseEvent event) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/FXML/Search.fxml"));
-        Parent root = loader.load();
-        ((SearchController) loader.getController()).GoSearch();
+    //Content Handler
+    public void toNextPage() {
+        Main.dictionaryManagement.recentSavePage++;
+        StartSave();
+    }
 
-        //Switch scene to SearchScene
-        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        scene = new Scene(root);
-        stage.setScene (scene);
-        stage.show();
+    public void toPreviousPage() {
+        Main.dictionaryManagement.recentSavePage--;
+        StartSave();
     }
 
     public void intoWord(KeyEvent event) throws IOException {
@@ -142,12 +143,24 @@ public class HistoryController implements Initializable {
         }
     }
 
+    public void intoSearch(MouseEvent event) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/FXML/Search.fxml"));
+        Parent root = loader.load();
+        ((SearchController) loader.getController()).GoSearch();
+
+        //Switch scene to SearchScene
+        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        scene = new Scene(root);
+        stage.setScene (scene);
+        stage.show();
+    }
+
     public void reSearchWord(MouseEvent event) throws  IOException {
         Label tmp = (Label) event.getSource();
         String w = "";
-        for (int i = 0; i < Main.dictionaryManagement.HistorySize; i++) {
-            if (tmp.getText().equals(Main.dictionaryManagement.wordHistoryList.get(i))) {
-                w = Main.dictionaryManagement.wordHistoryList.get(i);
+        for (int i = 0; i < Main.dictionaryManagement.wordSavedList.size(); i++) {
+            if (tmp.getText().equals(Main.dictionaryManagement.wordSavedList.get(i))) {
+                w = Main.dictionaryManagement.wordSavedList.get(i);
                 break;
             }
         }
@@ -156,6 +169,7 @@ public class HistoryController implements Initializable {
         Parent root = loader.load();
         if (w.equals("_____")) {
             ((SearchController) loader.getController()).CryIfCannotFindWord();
+            System.out.println(0);
         } else {
             ((SearchController) loader.getController()).getWordTarget().setText(w);
             ((SearchController) loader.getController()).StartSearching();
@@ -168,11 +182,10 @@ public class HistoryController implements Initializable {
         stage.show();
     }
 
-    public void intoSave(MouseEvent event) throws IOException {
-        Main.dictionaryManagement.recentSavePage = 1;
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/FXML/Save.fxml"));
+    public void intoHistory(MouseEvent event) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/FXML/History.fxml"));
         Parent root = loader.load();
-        ((SaveController) loader.getController()).StartSave();
+        ((HistoryController) loader.getController()).StartHistory();
 
         //Switch scene to HistoryScene
         stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
@@ -180,7 +193,7 @@ public class HistoryController implements Initializable {
         stage.setScene (scene);
         stage.show();
     }
-
+    
     public void backHome(MouseEvent event) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("/FXML/Menu.fxml"));
         stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
@@ -200,14 +213,35 @@ public class HistoryController implements Initializable {
     }
 
     //Supporting methods
-    @Override
-    public void initialize(URL url, ResourceBundle resourceBundle) {
-        //Nothing
-    }
-
-    public void StartHistory() {
-        for (int i = 0; i < Main.dictionaryManagement.HistorySize; i++) {
-            label(i).setText(Main.dictionaryManagement.wordHistoryList.get(i));
+    public void StartSave() {
+        number_of_page = Main.dictionaryManagement.number_of_page;
+        recentPage = Main.dictionaryManagement.recentSavePage;
+        if (number_of_page <= 1) {
+            nextPage.setVisible(false);
+        } else {
+            if (recentPage == 1) {
+                prePage.setVisible(false);
+                nextPage.setVisible(true);
+            } else if (recentPage > 1 && recentPage < number_of_page) {
+                prePage.setVisible(true);
+                nextPage.setVisible(true);
+            } else {
+                prePage.setVisible(true);
+                nextPage.setVisible(false);
+            }
+        }
+        int start = 16*(recentPage - 1);
+        int remainLabel = 0;
+        for (int i = start; i < Main.dictionaryManagement.wordSavedList.size(); i++) {
+            if (i >= start + 16) {
+                break;
+            } else {
+                label(i % 16).setText(Main.dictionaryManagement.wordSavedList.get(i));
+                remainLabel = i % 16;
+            }
+        }
+        for (int i = remainLabel + 1; i < 16; i++) {
+            label(i).setText("_____");
         }
     }
 
@@ -230,6 +264,11 @@ public class HistoryController implements Initializable {
             case 14 -> label_15;
             default -> label_16;
         };
+    }
+
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        //Nothing
     }
 
     public void outSearch() {
