@@ -1,13 +1,13 @@
 package app.DB_Connection;
 
-import app.Main;
 import app.Model.*;
+import app.Main;
 
 import java.sql.*;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
-
 
 
 public class DatabaseConnection {
@@ -19,6 +19,7 @@ public class DatabaseConnection {
     Connection connection;
     PreparedStatement preparedStatement;
     ResultSet resultSet;
+    Trie trie;
 
     private List<String> wordBySearch = new LinkedList<>();
 
@@ -36,6 +37,8 @@ public class DatabaseConnection {
         wordBySearch.clear();
     }
 
+
+
     public void createConnection() {
         try {
             // mn chỉnh theo db sql của mn.
@@ -43,6 +46,10 @@ public class DatabaseConnection {
             /*url = "jdbc:mysql://localhost:3306/dictionary_manager?autoReconnect=true&useSSL=false";
             username = "root";
             password = "Boquoctrung10012004";*/
+
+            /*url = "jdbc:mysql://localhost:3306/appEnglish";
+            username = "root";
+            password = "Minhquanadc@1";*/
 
             url = "jdbc:mysql://localhost:3306/dict_database";
             username = "root";
@@ -90,19 +97,50 @@ public class DatabaseConnection {
         }
     }
 
-    public void filterWord(String searchString) throws SQLException {
-        String sql = "SELECT * FROM av WHERE word LIKE ?";
-        preparedStatement = connection.prepareStatement(sql);
-        preparedStatement.setString(1, searchString + "%");
+    public void setSave(String word) {
+        try {
+            String sql = "UPDATE av SET isSaved = true WHERE word = ?";
+            preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setString(1, word);
 
-        resultSet = preparedStatement.executeQuery();
-
-        wordBySearch.clear();
-
-        while (resultSet.next()) {
-            String result = resultSet.getString("word");
-            wordBySearch.add(result);
+            preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println("Cannot saved this word");
+            System.out.println(e.getMessage());
         }
+    }
+
+    public void setUnSave(String word) {
+        try {
+            String sql = "UPDATE av SET isSaved = false WHERE word = ?";
+            preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setString(1, word);
+
+            preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println("Cannot unsaved this word");
+        }
+    }
+
+    public boolean isSaved(String word) {
+        try {
+            String sql = "SELECT isSaved FROM av WHERE word = ?";
+            preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setString(1, word);
+
+            resultSet = preparedStatement.executeQuery();
+
+            if (resultSet.next()) {
+                if (resultSet.getString("isSaved").equals("0")) {
+                    return false;
+                } else {
+                    return true;
+                }
+            }
+        } catch (SQLException ex) {
+            System.out.println("Can not check this word!");
+        }
+        return false;
     }
 
     public String findWordInDatabase(String word) {
@@ -124,8 +162,27 @@ public class DatabaseConnection {
             }
         } catch (SQLException ex) {
             System.out.println("Can not find this word!");
+            System.out.println(ex.getMessage());
         }
         return res;
+    }
+
+    public void setSavedWord() {
+        try {
+            String sql = "SELECT * FROM av WHERE isSaved = true";
+            preparedStatement = connection.prepareStatement(sql);
+
+            resultSet = preparedStatement.executeQuery();
+
+            while (resultSet.next()) {
+                String word = resultSet.getString("word");
+                Main.dictionaryManagement.wordSavedList.add(word);
+            }
+
+            Main.dictionaryManagement.number_of_page = Main.dictionaryManagement.wordSavedList.size()/16 + 1;
+        } catch (SQLException ex) {
+            System.out.println("Can not create Saved list!");
+        }
     }
 
     public void insertIntoTrie() {
@@ -164,6 +221,7 @@ public class DatabaseConnection {
             listDB_MC.add(tmp);
         }
     }
+
 
     public void DatabaseClose() {
         try {

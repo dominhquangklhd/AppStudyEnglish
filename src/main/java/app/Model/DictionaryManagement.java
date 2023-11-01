@@ -1,6 +1,7 @@
 package app.Model;
 
 import app.DB_Connection.DatabaseConnection;
+import app.Main;
 
 import java.io.*;
 import java.sql.SQLException;
@@ -12,12 +13,15 @@ public class DictionaryManagement {
     public static boolean exit = false;
     public final int HistorySize = 16;
     public Dictionary dictionary = new Dictionary();
-    public List<Word> wordHistoryList = new ArrayList<>();
+    public List<String> wordHistoryList = new ArrayList<>();
+    public List<String> wordSavedList = new ArrayList<>();
+
+    public int recentSavePage = 1;
+
+    public int number_of_page = 0;
 
     public DictionaryManagement() {
-        Word w = new Word();
-        w.setWordTarget("_____");
-        w.setWordExplain("_____");
+        String w = "_____";
         for (int i = 0; i < HistorySize; i++) {
             wordHistoryList.add(w);
         }
@@ -83,12 +87,72 @@ public class DictionaryManagement {
         }
     }
 
-    public void addWordtoHistory(Word word) {
-        Word tmp = new Word();
-        tmp.setWordExplain(word.getWordExplain());
-        tmp.setWordTarget(word.getWordTarget());
-        wordHistoryList.add(0, tmp);
+    public void gameMultipleChoice() throws SQLException {
+        int num = 1;
+        int mark = 0;
+        String question;
+        String A;
+        String B;
+        String C;
+        String D;
+        String answer;
+
+        DatabaseConnection gameConnection = new DatabaseConnection();
+        gameConnection.createConnection();
+        gameConnection.gameDataBaseMultipleChoice();
+
+        Scanner sc = new Scanner(System.in);
+
+        System.out.println("Choose A, B, C or D which is the answer you think right!\n"
+                + "Press Enter if you are ready!");
+        sc.nextLine();
+
+        for (List<String> ex : gameConnection.getListDB_MC()) {
+            question = ex.get(0);
+            A = ex.get(1);
+            B = ex.get(2);
+            C = ex.get(3);
+            D = ex.get(4);
+            answer = ex.get(5);
+
+            System.out.println(num + "." + question);
+            System.out.println("[A] " + A);
+            System.out.println("[B] " + B);
+            System.out.println("[C] " + C);
+            System.out.println("[D] " + D);
+
+            System.out.print("Your answer is: ");
+            String tmp = sc.next();
+            String yourAns = tmp.toLowerCase();
+
+            if (yourAns.equals(answer)) {
+                System.out.println("---CORRECT---");
+                mark += 10;
+            } else {
+                System.out.println("---WRONG---");
+            }
+            System.out.println();
+            num++;
+        }
+
+        System.out.println("Total mark: " + mark + "\n");
+    }
+
+    public void addWordtoHistory(String w) {
+        wordHistoryList.add(0, w);
         wordHistoryList.remove(HistorySize);
+    }
+
+    public void increaseSavePage() {
+        if ((wordSavedList.size() % 16) == 1) {
+            number_of_page++;
+        }
+    }
+
+    public void decreaseSavePage() {
+        if ((wordSavedList.size() % 16) == 0) {
+            number_of_page--;
+        }
     }
 
     public void addNewWord() throws IOException {
@@ -143,6 +207,10 @@ public class DictionaryManagement {
         sc.close();
     }
 
+    public void removeDuplicates() {
+
+    }
+
     public void dictionarySearcher() {
         Scanner sc = new Scanner(System.in);
         System.out.println("app.app.Model.Dictionary searcher!");
@@ -182,57 +250,6 @@ public class DictionaryManagement {
             }
         }
         bufferedWriter.close();
-    }
-
-    public void gameMultipleChoice() throws SQLException {
-        int num = 1;
-        int mark = 0;
-        String question;
-        String A;
-        String B;
-        String C;
-        String D;
-        String answer;
-
-        DatabaseConnection gameConnection = new DatabaseConnection();
-        gameConnection.createConnection();
-        gameConnection.gameDataBaseMultipleChoice();
-
-        Scanner sc = new Scanner(System.in);
-
-        System.out.println("Choose A, B, C or D which is the answer you think right!\n"
-                    + "Press Enter if you are ready!");
-        sc.nextLine();
-
-        for (List<String> ex : gameConnection.getListDB_MC()) {
-            question = ex.get(0);
-            A = ex.get(1);
-            B = ex.get(2);
-            C = ex.get(3);
-            D = ex.get(4);
-            answer = ex.get(5);
-
-            System.out.println(num + "." + question);
-            System.out.println("[A] " + A);
-            System.out.println("[B] " + B);
-            System.out.println("[C] " + C);
-            System.out.println("[D] " + D);
-
-            System.out.print("Your answer is: ");
-            String tmp = sc.next();
-            String yourAns = tmp.toLowerCase();
-
-            if (yourAns.equals(answer)) {
-                System.out.println("---CORRECT---");
-                mark += 10;
-            } else {
-                System.out.println("---WRONG---");
-            }
-            System.out.println();
-            num++;
-        }
-
-        System.out.println("Total mark: " + mark + "\n");
     }
 
     public void showAllWords() {
