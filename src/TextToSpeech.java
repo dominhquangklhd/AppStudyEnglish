@@ -8,9 +8,16 @@ import javazoom.jl.player.Player;
 import java.util.Scanner;
 
 public class TextToSpeech {
-    static boolean isEnglish = false;
+    static boolean isEnglish = true;
 
-    public static void playVoice(String text) {
+    /**
+     * Speak the text in Vietnamese or English.
+     *
+     * @param text text The text to speak
+     * @param isEnglish whether the text is English or not
+     */
+
+    public static void playVoice(String text, boolean isEnglish) {
         try {
             String lang;
 
@@ -23,6 +30,7 @@ public class TextToSpeech {
             String api = "http://api.voicerss.org/?key=802ae04d7bab4141af14e5465b231bba"
                     + "&hl=" + lang
                     + "&c=MP3"
+                    + "&f=48khz_16bit_mono"
                     + "&src=" + text.replace(" ", "-");
 
             URL url = new URL(api);
@@ -38,8 +46,7 @@ public class TextToSpeech {
     }
 
     public static void main(String[] args) {
-        Scanner scan = new Scanner(System.in);
-        String text = scan.nextLine();
-        playVoice(text);
+        String text = "I love you so much";
+        playVoice(text, true);
     }
 }
