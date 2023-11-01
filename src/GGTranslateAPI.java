@@ -8,26 +8,21 @@ import java.net.URLEncoder;
 import java.util.Scanner;
 
 public class GGTranslateAPI {
-    public static void CreateTranslator() throws IOException {
 
-        Scanner scan = new Scanner(System.in);
-
-        System.out.println("Nhập vào văn bản muốn xử lí:");
-        String text = scan.nextLine();
-        System.out.println("Nhập vào ngôn ngữ của văn bản muốn xử lí:");
-        String lang1 = scan.nextLine();
-        System.out.println("Nhập vào ngôn ngữ muốn dịch sang:");
-        String lang2 = scan.nextLine();
-
-        System.out.println("Văn bản được dịch thành: " + translate(lang1, lang2, text));
-
-    }
+    static boolean isEnglish = false;
 
     public static String translate(String lang1, String lang2, String text) throws IOException {
-        String api = "https://script.google.com/macros/s/AKfycbyIiW5R7AElT4UMDPcZ6KPzWEfrT9z5YDt907aplU6YPn-wytciCKQhfV42WQadIU59/exec" +
-                "?q=" + URLEncoder.encode(text, "UTF-8") +
-                "&target=" + lang2 +
-                "&source=" + lang1;
+
+        if (isEnglish == true) {
+            lang1 = "en";
+        } else {
+            lang2 = "vi";
+        }
+
+        String api = "https://script.google.com/macros/s/AKfycbyIiW5R7AElT4UMDPcZ6KPzWEfrT9z5YDt907aplU6YPn-wytciCKQhfV42WQadIU59/exec" + "?q="
+                + URLEncoder.encode(text, "UTF-8")
+                + "&target=" + lang2
+                + "&source=" + lang1;
 
         URL url = new URL(api);
         HttpURLConnection connection = (HttpURLConnection) url.openConnection();

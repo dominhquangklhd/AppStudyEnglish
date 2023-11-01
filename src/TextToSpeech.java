@@ -14,15 +14,17 @@ public class TextToSpeech {
         try {
             String lang;
 
-            if(isEnglish == true) {
+            if (isEnglish == true) {
                 lang = "en-us";
             } else {
                 lang = "vi-vn";
             }
 
-            String api = "http://api.voicerss.org/?key=802ae04d7bab4141af14e5465b231bba&hl="
-                    + lang + "&c=MP3&src=";
-            api += text;
+            String api = "http://api.voicerss.org/?key=802ae04d7bab4141af14e5465b231bba"
+                    + "&hl=" + lang
+                    + "&c=MP3"
+                    + "&src=" + text.replace(" ", "-");
+
             URL url = new URL(api);
             HttpURLConnection connection = (HttpURLConnection) url.openConnection();
             connection.setRequestMethod("GET");
@@ -38,7 +40,6 @@ public class TextToSpeech {
     public static void main(String[] args) {
         Scanner scan = new Scanner(System.in);
         String text = scan.nextLine();
-        text = text.replace(" ", "-");
         playVoice(text);
     }
 }
