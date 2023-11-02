@@ -5,10 +5,13 @@ import app.Main;
 
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.LinkedList;
 import java.util.List;
 
 
 public class DatabaseConnection {
+    private final int NumOfQuestionMC = 10;
     String url;
     String username;
     String password;
@@ -19,6 +22,22 @@ public class DatabaseConnection {
     Trie trie;
 
     public boolean englishWord = true;
+
+    private List<String> wordBySearch = new LinkedList<>();
+
+    private List<List<String>> listDB_MC = new LinkedList<>();
+
+    public List<String> getWordBySearch() {
+        return wordBySearch;
+    }
+
+    public List<List<String>> getListDB_MC() {
+        return listDB_MC;
+    }
+
+    public void resetWordBySearch() {
+        wordBySearch.clear();
+    }
 
     public void createConnection() {
         try {
@@ -178,6 +197,27 @@ public class DatabaseConnection {
             System.out.println("Can not insert into trie!");
         }
     }
+
+    public void gameDataBaseMultipleChoice() throws SQLException {
+        String sql = "SELECT * FROM abcdquestion ORDER BY RAND() LIMIT ?";
+        preparedStatement = connection.prepareStatement(sql);
+        preparedStatement.setInt(1, NumOfQuestionMC);
+
+        resultSet = preparedStatement.executeQuery();
+
+        while (resultSet.next()) {
+            String question = resultSet.getString("question");
+            String A = resultSet.getString("A");
+            String B = resultSet.getString("B");
+            String C = resultSet.getString("C");
+            String D = resultSet.getString("D");
+            String answer = resultSet.getString("answer");
+            List<String> tmp = Arrays.asList(question, A, B, C, D, answer);;
+
+            listDB_MC.add(tmp);
+        }
+    }
+
 
     public void DatabaseClose() {
         try {
