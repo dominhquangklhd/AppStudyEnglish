@@ -1,5 +1,6 @@
 package app.Controller;
 
+import app.API.GGTranslateAPI;
 import app.Main;
 import app.Model.Trie;
 import app.Model.Word;
@@ -71,8 +72,15 @@ public class MenuController implements Initializable {
         stage.show();
     }
 
-    public void intoTranslate() {
-        System.out.println("Translate");
+    public void intoTranslate(MouseEvent event) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/FXML/Translate.fxml"));
+        Parent root = loader.load();
+
+        //Switch scene to HistoryScene
+        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        scene = new Scene(root);
+        stage.setScene (scene);
+        stage.show();
     }
 
     public void intoGame() {
@@ -151,6 +159,7 @@ public class MenuController implements Initializable {
         });
 
         if (event.getCode() == KeyCode.ENTER) {
+            wordList.setVisible(false);
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/FXML/Search.fxml"));
             Parent root = loader.load();
             ((SearchController) loader.getController()).getWordTarget().setText(SearchingBar.getText());

@@ -1,5 +1,6 @@
 package app.Controller;
 
+import app.API.TextToSpeech;
 import app.Main;
 import app.Model.Word;
 import javafx.collections.FXCollections;
@@ -69,6 +70,12 @@ public class SearchController implements Initializable {
     public ListView wordList;
     @FXML
     public Button paneButton;
+    @FXML
+    public ImageView intoGame;
+    @FXML
+    public ImageView intoTranslate;
+    @FXML
+    public ImageView speaker;
 
     //Nor
     private Word word = new Word();
@@ -97,6 +104,10 @@ public class SearchController implements Initializable {
     }
 
     //Action handlers
+    public void speakWord() {
+        TextToSpeech.SpeakEnglish = Main.databaseConnection.englishWord;
+        TextToSpeech.playVoice(wordTarget.getText());
+    }
 
     public void backHome(MouseEvent event) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("/FXML/Menu.fxml"));
@@ -152,6 +163,7 @@ public class SearchController implements Initializable {
         });
 
         if (event.getCode() == KeyCode.ENTER) {
+            wordList.setVisible(false);
             wordTarget.setText(SearchingBar.getText());
             GoSearchLabel.setVisible(false);
             GoSearchPic.setVisible(false);
@@ -164,6 +176,17 @@ public class SearchController implements Initializable {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/FXML/History.fxml"));
         Parent root = loader.load();
         ((HistoryController) loader.getController()).StartHistory();
+
+        //Switch scene to HistoryScene
+        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        scene = new Scene(root);
+        stage.setScene (scene);
+        stage.show();
+    }
+
+    public void intoTranslate(MouseEvent event) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/FXML/Translate.fxml"));
+        Parent root = loader.load();
 
         //Switch scene to HistoryScene
         stage = (Stage) ((Node) event.getSource()).getScene().getWindow();

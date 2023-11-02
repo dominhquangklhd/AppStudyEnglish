@@ -18,6 +18,8 @@ public class DatabaseConnection {
     ResultSet resultSet;
     Trie trie;
 
+    public boolean englishWord = true;
+
     public void createConnection() {
         try {
             // mn chỉnh theo db sql của mn.

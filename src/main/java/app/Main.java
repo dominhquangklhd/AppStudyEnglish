@@ -1,5 +1,6 @@
 package app;
 
+import app.API.GGTranslateAPI;
 import app.Controller.SaveController;
 import app.DB_Connection.DatabaseConnection;
 import app.Model.DictionaryManagement;
@@ -24,6 +25,8 @@ public class Main extends Application {
     public static DatabaseConnection databaseConnection = new DatabaseConnection();
 
     public static SaveController SaveStage = new SaveController();
+
+    public static GGTranslateAPI TranslateAPI = new GGTranslateAPI();
 
     @Override
     public void start(Stage stage) {
