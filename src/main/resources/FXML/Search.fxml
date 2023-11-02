@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ListView?>
@@ -10,26 +11,26 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="scenePane" prefHeight="700.0" prefWidth="1200.0" style="-fx-background-color: FFF8DC;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="app.Controller.SearchController">
+<AnchorPane fx:id="scenePane" onMouseClicked="#outSearch" prefHeight="700.0" prefWidth="1200.0" style="-fx-background-color: FFF8DC;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="app.Controller.SearchController">
    <children>
-      <Button mnemonicParsing="false" opacity="0.0" prefHeight="700.0" prefWidth="1200.0" text="Button" />
+      <Button fx:id="paneButton" mnemonicParsing="false" onMouseClicked="#outSearch" opacity="0.0" prefHeight="700.0" prefWidth="1200.0" text="Button" />
       <AnchorPane layoutY="580.0" prefHeight="120.0" prefWidth="1200.0" style="-fx-background-color: EEEEEE;" />
       <ImageView id="intoSearch" fitHeight="150.0" fitWidth="100.0" layoutX="410.0" layoutY="590.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../Image/MenuIMG/search_but.png" />
          </image>
       </ImageView>
-      <ImageView id="intoTranslate" fitHeight="100.0" fitWidth="70.0" layoutX="510.0" layoutY="620.0" pickOnBounds="true" preserveRatio="true" style="-fx-cursor: hand;">
+      <ImageView id="intoTranslate" fx:id="intoTranslate" fitHeight="100.0" fitWidth="70.0" layoutX="510.0" layoutY="620.0" onMouseClicked="#intoTranslate" pickOnBounds="true" preserveRatio="true" style="-fx-cursor: hand;">
          <image>
             <Image url="@../Image/MenuIMG/translate_but.png" />
          </image>
       </ImageView>
-      <ImageView id="intoGame" fitHeight="100.0" fitWidth="70.0" layoutX="580.0" layoutY="620.0" pickOnBounds="true" preserveRatio="true" style="-fx-cursor: hand;">
+      <ImageView id="intoGame" fx:id="intoGame" fitHeight="100.0" fitWidth="70.0" layoutX="580.0" layoutY="620.0" pickOnBounds="true" preserveRatio="true" style="-fx-cursor: hand;">
          <image>
             <Image url="@../Image/MenuIMG/intoGame.png" />
          </image>
       </ImageView>
-      <ImageView id="intoSave" fitHeight="100.0" fitWidth="70.0" layoutX="650.0" layoutY="620.0" pickOnBounds="true" preserveRatio="true" style="-fx-cursor: hand;">
+      <ImageView id="intoSave" fx:id="intoSave" fitHeight="100.0" fitWidth="70.0" layoutX="650.0" layoutY="620.0" onMouseClicked="#intoSave" pickOnBounds="true" preserveRatio="true" style="-fx-cursor: hand;">
          <image>
             <Image url="@../Image/MenuIMG/intoSave.png" />
          </image>
@@ -52,7 +53,21 @@
             </font>
          </Label>
          <Line id="separateLine" endX="600.0" endY="480.0" startX="600.0" />
-         <ListView fx:id="wordList" layoutX="51.0" layoutY="-20.0" prefHeight="200.0" prefWidth="200.0" visible="false" />
+         <ImageView fx:id="UNsavedIcon" fitHeight="30.0" fitWidth="30.0" layoutX="550.0" layoutY="20.0" onMouseClicked="#saveOrUnsaved" pickOnBounds="true" preserveRatio="true" style="-fx-cursor: hand;">
+            <image>
+               <Image url="@../Image/SearchIMG/UnSave.png" />
+            </image>
+         </ImageView>
+         <ImageView fx:id="savedIcon" fitHeight="30.0" fitWidth="30.0" layoutX="550.0" layoutY="20.0" onMouseClicked="#saveOrUnsaved" pickOnBounds="true" preserveRatio="true" style="-fx-cursor: hand;" visible="false">
+            <image>
+               <Image url="@../Image/SearchIMG/Saved.png" />
+            </image>
+         </ImageView>
+         <ImageView fx:id="speaker" fitHeight="150.0" fitWidth="50.0" layoutX="494.0" layoutY="9.0" onMouseClicked="#speakWord" pickOnBounds="true" preserveRatio="true" style="-fx-cursor: hand;">
+            <image>
+               <Image url="@../Image/TranslateIMG/Speaker_Icon.png" />
+            </image>
+         </ImageView>
       </AnchorPane>
       <TextField id="SearchingBar" fx:id="SearchingBar" layoutX="50.0" layoutY="23.0" onKeyPressed="#intoWord" prefHeight="55.0" prefWidth="500.0" promptText="Search">
          <font>
@@ -91,5 +106,24 @@
             <Font name="Times New Roman Italic" size="20.0" />
          </font>
       </Label>
+      <Label fx:id="GoSearchLabel" layoutX="265.0" layoutY="300.0" prefWidth="400.0" text="LET'S SEARCH!!!" textFill="#ff8080" visible="false">
+         <font>
+            <Font name="Gill Sans Ultra Bold" size="39.0" />
+         </font>
+      </Label>
+      <ImageView fx:id="GoSearchPic" fitHeight="300.0" fitWidth="300.0" layoutX="635.0" layoutY="180.0" pickOnBounds="true" preserveRatio="true" visible="false">
+         <image>
+            <Image url="@../Image/SearchIMG/GoSearch.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="minimize" fitHeight="150.0" fitWidth="30.0" layoutX="1010.0" layoutY="21.0" onMouseClicked="#minimizeStage" pickOnBounds="true" preserveRatio="true" style="-fx-cursor: hand;">
+         <image>
+            <Image url="@../../../../../Java/test/JavaFX_test/test/src/main/resources/Image/MenuIMG/minimize.png" />
+         </image>
+      </ImageView>
+      <ListView fx:id="wordList" editable="true" fixedCellSize="0.0" layoutX="50.0" layoutY="78.0" prefHeight="250.0" prefWidth="500.0" visible="false">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor></ListView>
    </children>
 </AnchorPane>

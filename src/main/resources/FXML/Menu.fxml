@@ -83,7 +83,7 @@
          <Image url="@../Image/MenuIMG/heart.png" />
       </image>
    </ImageView>
-   <ListView fx:id="wordList" editable="true" fixedCellSize="0.0" layoutX="350.0" layoutY="345.0" prefHeight="250.0" prefWidth="500.0" visible="false">
+   <ListView fx:id="wordList" editable="true" fixedCellSize="0.0" layoutX="350.0" layoutY="345.0" prefHeight="250.0" prefWidth="500.0" style="-fx-background-color: ECE3CE;" visible="false">
       <cursor>
          <Cursor fx:constant="HAND" />
       </cursor></ListView>

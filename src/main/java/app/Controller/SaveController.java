@@ -81,6 +81,10 @@ public class SaveController implements Initializable {
     public ListView wordList;
     @FXML
     public Button paneButton;
+    @FXML
+    public ImageView intoTranslate;
+    @FXML
+    public ImageView intoGame;
 
     //Nor
     int recentPage = 1;
@@ -130,6 +134,7 @@ public class SaveController implements Initializable {
         });
 
         if (event.getCode() == KeyCode.ENTER) {
+            wordList.setVisible(false);
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/FXML/Search.fxml"));
             Parent root = loader.load();
             ((SearchController) loader.getController()).getWordTarget().setText(SearchingBar.getText());
@@ -186,6 +191,17 @@ public class SaveController implements Initializable {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/FXML/History.fxml"));
         Parent root = loader.load();
         ((HistoryController) loader.getController()).StartHistory();
+
+        //Switch scene to HistoryScene
+        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        scene = new Scene(root);
+        stage.setScene (scene);
+        stage.show();
+    }
+
+    public void intoTranslate(MouseEvent event) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/FXML/Translate.fxml"));
+        Parent root = loader.load();
 
         //Switch scene to HistoryScene
         stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
