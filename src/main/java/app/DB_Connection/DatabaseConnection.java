@@ -47,9 +47,13 @@ public class DatabaseConnection {
             username = "root";
             password = "Boquoctrung10012004";*/
 
-            url = "jdbc:mysql://localhost:3306/appEnglish";
+            /*url = "jdbc:mysql://localhost:3306/appEnglish";
             username = "root";
-            password = "Minhquanadc@1";
+            password = "Minhquanadc@1";*/
+
+            url = "jdbc:mysql://localhost:3306/dict_database";
+            username = "root";
+            password = "Q25012004kl#";
 
             connection = DriverManager.getConnection(url, username, password);
 
