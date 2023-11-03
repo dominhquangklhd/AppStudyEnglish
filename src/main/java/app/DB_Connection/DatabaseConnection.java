@@ -21,6 +21,8 @@ public class DatabaseConnection {
     ResultSet resultSet;
     Trie trie;
 
+    public boolean englishWord = true;
+
     private List<String> wordBySearch = new LinkedList<>();
 
     private List<List<String>> listDB_MC = new LinkedList<>();
@@ -37,8 +39,6 @@ public class DatabaseConnection {
         wordBySearch.clear();
     }
 
-
-
     public void createConnection() {
         try {
             // mn chỉnh theo db sql của mn.
@@ -47,13 +47,9 @@ public class DatabaseConnection {
             username = "root";
             password = "Boquoctrung10012004";*/
 
-            /*url = "jdbc:mysql://localhost:3306/appEnglish";
+            url = "jdbc:mysql://localhost:3306/appEnglish";
             username = "root";
-            password = "Minhquanadc@1";*/
-
-            url = "jdbc:mysql://localhost:3306/dict_database";
-            username = "root";
-            password = "Q25012004kl#";
+            password = "Minhquanadc@1";
 
             connection = DriverManager.getConnection(url, username, password);
 

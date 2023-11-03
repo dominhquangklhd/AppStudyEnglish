@@ -87,8 +87,6 @@ public class Trie {
             }
             if (found) {
                 recursiveTrie(cur, wordLC);
-            } else {
-                System.out.println("Dont have any words!");
             }
         }
     }

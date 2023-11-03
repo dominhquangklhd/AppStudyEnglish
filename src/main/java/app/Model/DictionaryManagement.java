@@ -8,6 +8,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+import java.sql.SQLException;
 
 public class DictionaryManagement {
     public static boolean exit = false;

@@ -3,6 +3,8 @@ module app {
     requires javafx.fxml;
     requires javafx.graphics;
     requires java.sql;
+    requires jlayer;
+    requires java.desktop;
 
     //opens com.example.test.Controller to javafx.fxml;
     //exports com.example.test.Model;

@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane fx:id="scenePane" onMouseClicked="#outSearch" prefHeight="700.0" prefWidth="1200.0" style="-fx-background-color: FFF8DC;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="app.Controller.TranslateController">
+    <children>
+        <Button fx:id="paneButton" mnemonicParsing="false" onMouseClicked="#outSearch" opacity="0.0" prefHeight="700.0" prefWidth="1200.0" text="Button" />
+        <AnchorPane layoutY="580.0" prefHeight="120.0" prefWidth="1200.0" style="-fx-background-color: EEEEEE;" />
+        <ImageView id="intoSearch" fx:id="intoSearch" fitHeight="150.0" fitWidth="70.0" layoutX="410.0" layoutY="620.0" onMouseClicked="#intoSearch" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@../Image/MenuIMG/search_but.png" />
+            </image>
+        </ImageView>
+        <ImageView id="intoTranslate" fitHeight="100.0" fitWidth="100.0" layoutX="480.0" layoutY="590.0" pickOnBounds="true" preserveRatio="true" style="-fx-cursor: hand;">
+            <image>
+                <Image url="@../Image/MenuIMG/translate_but.png" />
+            </image>
+        </ImageView>
+        <ImageView id="intoGame" fitHeight="100.0" fitWidth="70.0" layoutX="580.0" layoutY="620.0" pickOnBounds="true" preserveRatio="true" style="-fx-cursor: hand;">
+            <image>
+                <Image url="@../Image/MenuIMG/intoGame.png" />
+            </image>
+        </ImageView>
+        <ImageView id="intoSave" fx:id="intoSave" fitHeight="100.0" fitWidth="70.0" layoutX="650.0" layoutY="620.0" onMouseClicked="#intoSave" pickOnBounds="true" preserveRatio="true" style="-fx-cursor: hand;">
+            <image>
+                <Image url="@../Image/MenuIMG/intoSave.png" />
+            </image>
+        </ImageView>
+        <ImageView id="intoHistory" fx:id="intoHistory" fitHeight="100.0" fitWidth="70.0" layoutX="720.0" layoutY="620.0" onMouseClicked="#intoHistory" pickOnBounds="true" preserveRatio="true" style="-fx-cursor: hand;">
+            <image>
+                <Image url="@../Image/MenuIMG/intoHistory.png" />
+            </image>
+        </ImageView>
+        <Line endX="1200.0" layoutY="580.0" strokeWidth="3.0" />
+        <TextField id="SearchingBar" fx:id="SearchingBar" layoutX="50.0" layoutY="23.0" onKeyPressed="#intoWord" prefHeight="55.0" prefWidth="500.0" promptText="Search">
+            <font>
+                <Font name="Arial Rounded MT Bold" size="24.0" />
+            </font>
+        </TextField>
+      <ImageView fitHeight="157.0" fitWidth="157.0" layoutX="-2.0" layoutY="405.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../Image/TranslateIMG/cuteStk.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="70.0" fitWidth="65.0" layoutX="35.0" layoutY="125.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../Image/TranslateIMG/sun.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="70.0" fitWidth="65.0" layoutX="1106.0" layoutY="138.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../Image/TranslateIMG/Star.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="70.0" fitWidth="65.0" layoutX="468.0" layoutY="203.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../Image/TranslateIMG/son.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="70.0" fitWidth="65.0" layoutX="1106.0" layoutY="425.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../Image/TranslateIMG/rabbit.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="70.0" fitWidth="65.0" layoutX="1023.0" layoutY="178.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../Image/TranslateIMG/tree.png" />
+         </image>
+      </ImageView>
+        <ImageView id="home" fx:id="home" fitHeight="150.0" fitWidth="35.0" layoutX="1055.0" layoutY="18.0" onMouseClicked="#backHome" pickOnBounds="true" preserveRatio="true" style="-fx-cursor: hand;">
+            <image>
+                <Image url="@../Image/SearchIMG/home.png" />
+            </image>
+        </ImageView>
+        <ImageView id="Out" fx:id="out" fitHeight="150.0" fitWidth="35.0" layoutX="1138.0" layoutY="17.0" onMouseClicked="#intoOut" pickOnBounds="true" preserveRatio="true" style="-fx-cursor: hand;">
+            <image>
+                <Image url="@../Image/MenuIMG/out_but.png" />
+            </image>
+        </ImageView>
+        <ImageView id="guide" fitHeight="150.0" fitWidth="28.0" layoutX="1102.0" layoutY="21.0" pickOnBounds="true" preserveRatio="true" style="-fx-cursor: hand;">
+            <image>
+                <Image url="@../Image/MenuIMG/Guide.png" />
+            </image>
+        </ImageView>
+        <Line endX="1200.0" layoutY="100.0" />
+        <ImageView fx:id="minimize" fitHeight="150.0" fitWidth="30.0" layoutX="1010.0" layoutY="21.0" onMouseClicked="#minimizeStage" pickOnBounds="true" preserveRatio="true" style="-fx-cursor: hand;">
+            <image>
+                <Image url="@../../../../../Java/test/JavaFX_test/test/src/main/resources/Image/MenuIMG/minimize.png" />
+            </image>
+        </ImageView>
+      <TextArea fx:id="textBar" layoutX="100.0" layoutY="240.0" onKeyPressed="#countWord" prefHeight="250.0" prefWidth="400.0" promptText="Enter the text to be translated!" wrapText="true">
+         <font>
+            <Font name="Times New Roman Bold" size="24.0" />
+         </font>
+         <opaqueInsets>
+            <Insets left="10.0" top="10.0" />
+         </opaqueInsets>
+      </TextArea>
+      <Label fx:id="EnLeft" alignment="CENTER" contentDisplay="CENTER" layoutX="100.0" layoutY="170.0" prefHeight="40.0" prefWidth="400.0" text="English" textAlignment="CENTER">
+         <font>
+            <Font name="iCiel Nabila" size="24.0" />
+         </font>
+      </Label>
+      <Label fx:id="ViRight" alignment="CENTER" contentDisplay="CENTER" layoutX="700.0" layoutY="170.0" prefHeight="40.0" prefWidth="400.0" text="Vietnamese" textAlignment="CENTER">
+         <font>
+            <Font name="iCiel Nabila" size="24.0" />
+         </font>
+      </Label>
+      <ImageView fx:id="switchButton" fitHeight="55.0" fitWidth="50.0" layoutX="575.0" layoutY="170.0" onMouseClicked="#switchLanguage" pickOnBounds="true" preserveRatio="true" style="-fx-cursor: hand;">
+         <image>
+            <Image url="@../Image/TranslateIMG/switch.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="translateButton" fitHeight="80.0" fitWidth="90.0" layoutX="561.0" layoutY="325.0" onMouseClicked="#translate" pickOnBounds="true" preserveRatio="true" style="-fx-cursor: hand;">
+         <image>
+            <Image url="@../Image/TranslateIMG/Translate.png" />
+         </image>
+      </ImageView>
+      <Label fx:id="EnRight" alignment="CENTER" contentDisplay="CENTER" layoutX="700.0" layoutY="170.0" prefHeight="40.0" prefWidth="400.0" text="English" textAlignment="CENTER" visible="false">
+         <font>
+            <Font name="iCiel Nabila" size="24.0" />
+         </font>
+      </Label>
+      <Label fx:id="ViLeft" alignment="CENTER" contentDisplay="CENTER" layoutX="100.0" layoutY="170.0" prefHeight="40.0" prefWidth="400.0" text="Vietnamese" textAlignment="CENTER" visible="false">
+         <font>
+            <Font name="iCiel Nabila" size="24.0" />
+         </font>
+      </Label>
+        <ListView fx:id="wordList" editable="true" fixedCellSize="0.0" layoutX="50.0" layoutY="78.0" prefHeight="250.0" prefWidth="500.0" visible="false">
+            <cursor>
+                <Cursor fx:constant="HAND" />
+            </cursor></ListView>
+      <TextArea fx:id="translationBar" layoutX="700.0" layoutY="240.0" onKeyTyped="#doNothing" prefHeight="250.0" prefWidth="400.0" promptText="Translation" wrapText="true">
+         <font>
+            <Font name="Times New Roman Bold" size="24.0" />
+         </font>
+         <opaqueInsets>
+            <Insets left="10.0" top="10.0" />
+         </opaqueInsets>
+      </TextArea>
+      <ImageView fx:id="textSpeaker" fitHeight="150.0" fitWidth="40.0" layoutX="460.0" layoutY="490.0" onMouseClicked="#speakText" pickOnBounds="true" preserveRatio="true" style="-fx-cursor: hand;">
+         <image>
+            <Image url="@../Image/TranslateIMG/Speaker_Icon.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="translationSpeaker" fitHeight="150.0" fitWidth="40.0" layoutX="1060.0" layoutY="490.0" onMouseClicked="#speakTranslation" pickOnBounds="true" preserveRatio="true" style="-fx-cursor: hand;">
+         <image>
+            <Image url="@../Image/TranslateIMG/Speaker_Icon.png" />
+         </image>
+      </ImageView>
+      <Label fx:id="countWord" layoutX="100.0" layoutY="493.0" prefHeight="30.0" prefWidth="200.0" style="-fx-cursor: hand;" text="0/2000">
+         <font>
+            <Font name="Arial Rounded MT Bold" size="18.0" />
+         </font>
+      </Label>
+      <Label fx:id="copyTranslation" layoutX="700.0" layoutY="493.0" onMouseClicked="#copyTranslation" prefHeight="30.0" style="-fx-cursor: hand;" text="Copy">
+         <font>
+            <Font name="Arial Rounded MT Bold" size="18.0" />
+         </font>
+         <graphic>
+            <ImageView fitHeight="150.0" fitWidth="15.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../Image/TranslateIMG/copy.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Label>
+    </children>
+</AnchorPane>

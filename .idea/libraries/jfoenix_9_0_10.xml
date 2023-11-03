@@ -1,7 +1,7 @@
 <component name="libraryTable">
-  <library name="jlayer-1.0.1">
+  <library name="jfoenix-9.0.10">
     <CLASSES>
-      <root url="jar://$PROJECT_DIR$/../../Java/javazoom/jlayer-1.0.1.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../../Java/jfoenix/jfoenix-9.0.10.jar!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES />
