@@ -101,6 +101,8 @@ public class MenuController implements Initializable {
     }
 
     public void intoHistory(MouseEvent event) throws IOException {
+        Main.dictionaryManagement.recentHistoryPage = 1;
+
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/FXML/History.fxml"));
         Parent root = loader.load();
         ((HistoryController) loader.getController()).StartHistory();
@@ -178,7 +180,8 @@ public class MenuController implements Initializable {
         stage.setIconified(true);
     }
 
-    public void intoOut() {
+    public void intoOut() throws IOException {
+        Main.dictionaryManagement.historyExportToFile();
         stage = (Stage) scenePane.getScene().getWindow();
         stage.close();
     }

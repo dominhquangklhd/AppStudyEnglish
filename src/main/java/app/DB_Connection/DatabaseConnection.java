@@ -175,7 +175,7 @@ public class DatabaseConnection {
                 Main.dictionaryManagement.wordSavedList.add(word);
             }
 
-            Main.dictionaryManagement.number_of_page = Main.dictionaryManagement.wordSavedList.size()/16 + 1;
+            Main.dictionaryManagement.number_of_Savedpage = Main.dictionaryManagement.wordSavedList.size()/16 + 1;
         } catch (SQLException ex) {
             System.out.println("Can not create Saved list!");
         }

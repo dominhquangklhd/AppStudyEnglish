@@ -174,7 +174,6 @@ public class SaveController implements Initializable {
         Parent root = loader.load();
         if (w.equals("_____")) {
             ((SearchController) loader.getController()).CryIfCannotFindWord();
-            System.out.println(0);
         } else {
             ((SearchController) loader.getController()).getWordTarget().setText(w);
             ((SearchController) loader.getController()).StartSearching();
@@ -188,6 +187,8 @@ public class SaveController implements Initializable {
     }
 
     public void intoHistory(MouseEvent event) throws IOException {
+        Main.dictionaryManagement.recentHistoryPage = 1;
+
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/FXML/History.fxml"));
         Parent root = loader.load();
         ((HistoryController) loader.getController()).StartHistory();
@@ -223,14 +224,15 @@ public class SaveController implements Initializable {
         stage.setIconified(true);
     }
 
-    public void intoOut() {
+    public void intoOut() throws IOException {
+        Main.dictionaryManagement.historyExportToFile();
         stage = (Stage) scenePane.getScene().getWindow();
         stage.close();
     }
 
     //Supporting methods
     public void StartSave() {
-        number_of_page = Main.dictionaryManagement.number_of_page;
+        number_of_page = Main.dictionaryManagement.number_of_Savedpage;
         recentPage = Main.dictionaryManagement.recentSavePage;
         if (number_of_page <= 1) {
             nextPage.setVisible(false);
