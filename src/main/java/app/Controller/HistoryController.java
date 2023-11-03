@@ -67,6 +67,38 @@ public class HistoryController implements Initializable {
     @FXML
     public Label label_16;
     @FXML
+    public ImageView delete1;
+    @FXML
+    public ImageView delete2;
+    @FXML
+    public ImageView delete3;
+    @FXML
+    public ImageView delete4;
+    @FXML
+    public ImageView delete5;
+    @FXML
+    public ImageView delete6;
+    @FXML
+    public ImageView delete7;
+    @FXML
+    public ImageView delete8;
+    @FXML
+    public ImageView delete9;
+    @FXML
+    public ImageView delete10;
+    @FXML
+    public ImageView delete11;
+    @FXML
+    public ImageView delete12;
+    @FXML
+    public ImageView delete13;
+    @FXML
+    public ImageView delete14;
+    @FXML
+    public ImageView delete15;
+    @FXML
+    public ImageView delete16;
+    @FXML
     public ImageView intoHistory;
     @FXML
     public TextField SearchingBar;
@@ -84,8 +116,14 @@ public class HistoryController implements Initializable {
     public ImageView intoGame;
     @FXML
     public ImageView intoTranslate;
+    @FXML
+    public ImageView nextPage;
+    @FXML
+    public ImageView prePage;
 
     //Nor
+    private int number_of_page = 0;
+    private  int recentPage = 1;
 
     //Present
     private Stage stage;
@@ -158,10 +196,27 @@ public class HistoryController implements Initializable {
         }
     }
 
+    public void toNextPage() {
+        Main.dictionaryManagement.recentHistoryPage++;
+        StartHistory();
+    }
+
+    public void toPreviousPage() {
+        Main.dictionaryManagement.recentHistoryPage--;
+        StartHistory();
+    }
+
+    public void delete(MouseEvent event) {
+        int i = getLabeldelete((ImageView) event.getSource());
+        Main.dictionaryManagement.wordHistoryList.remove(label(i-1).getText());
+        Main.dictionaryManagement.decreaseHistoryPage();
+        StartHistory();
+    }
+
     public void reSearchWord(MouseEvent event) throws  IOException {
         Label tmp = (Label) event.getSource();
         String w = "";
-        for (int i = 0; i < Main.dictionaryManagement.HistorySize; i++) {
+        for (int i = 0; i < Main.dictionaryManagement.wordHistoryList.size(); i++) {
             if (tmp.getText().equals(Main.dictionaryManagement.wordHistoryList.get(i))) {
                 w = Main.dictionaryManagement.wordHistoryList.get(i);
                 break;
@@ -210,7 +265,8 @@ public class HistoryController implements Initializable {
         stage.setIconified(true);
     }
 
-    public void intoOut() {
+    public void intoOut() throws IOException {
+        Main.dictionaryManagement.historyExportToFile();
         stage = (Stage) scenePane.getScene().getWindow();
         stage.close();
     }
@@ -222,8 +278,38 @@ public class HistoryController implements Initializable {
     }
 
     public void StartHistory() {
-        for (int i = 0; i < Main.dictionaryManagement.HistorySize; i++) {
-            label(i).setText(Main.dictionaryManagement.wordHistoryList.get(i));
+        if (Main.dictionaryManagement.recentHistoryPage > Main.dictionaryManagement.number_of_Historypage
+            && Main.dictionaryManagement.number_of_Historypage != 0) {
+            Main.dictionaryManagement.recentHistoryPage = Main.dictionaryManagement.number_of_Historypage;
+        }
+        number_of_page = Main.dictionaryManagement.number_of_Historypage;
+        recentPage = Main.dictionaryManagement.recentHistoryPage;
+        if (number_of_page <= 1) {
+            nextPage.setVisible(false);
+        } else {
+            if (recentPage == 1) {
+                prePage.setVisible(false);
+                nextPage.setVisible(true);
+            } else if (recentPage > 1 && recentPage < number_of_page) {
+                prePage.setVisible(true);
+                nextPage.setVisible(true);
+            } else {
+                prePage.setVisible(true);
+                nextPage.setVisible(false);
+            }
+        }
+        int start = 16*(recentPage - 1);
+        int remainLabel = -1;
+        for (int i = start; i < Main.dictionaryManagement.wordHistoryList.size(); i++) {
+            if (i >= start + 16) {
+                break;
+            } else {
+                label(i % 16).setText(Main.dictionaryManagement.wordHistoryList.get(i));
+                remainLabel = i % 16;
+            }
+        }
+        for (int i = remainLabel + 1; i < 16; i++) {
+            label(i).setText("_____");
         }
     }
 
@@ -246,6 +332,25 @@ public class HistoryController implements Initializable {
             case 14 -> label_15;
             default -> label_16;
         };
+    }
+
+    public int getLabeldelete(ImageView source) {
+        if (source == delete1) return 1;
+        else if (source == delete2) return 2;
+        else if (source == delete3) return 3;
+        else if (source == delete4) return 4;
+        else if (source == delete5) return 5;
+        else if (source == delete6) return 6;
+        else if (source == delete7) return 7;
+        else if (source == delete8) return 8;
+        else if (source == delete9) return 9;
+        else if (source == delete10) return 10;
+        else if (source == delete11) return 11;
+        else if (source == delete12) return 12;
+        else if (source == delete13) return 13;
+        else if (source == delete14) return 14;
+        else if (source == delete15) return 15;
+        else return 16;
     }
 
     public void outSearch() {

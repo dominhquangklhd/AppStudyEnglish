@@ -11,20 +11,18 @@ import java.util.Scanner;
 
 public class DictionaryManagement {
     public static boolean exit = false;
-    public final int HistorySize = 16;
+    public final int HistorySize = 240;
     public Dictionary dictionary = new Dictionary();
     public List<String> wordHistoryList = new ArrayList<>();
     public List<String> wordSavedList = new ArrayList<>();
 
     public int recentSavePage = 1;
+    public int number_of_Savedpage = 0;
 
-    public int number_of_page = 0;
+    public int recentHistoryPage = 1;
+    public int number_of_Historypage = 0;
 
     public DictionaryManagement() {
-        String w = "_____";
-        for (int i = 0; i < HistorySize; i++) {
-            wordHistoryList.add(w);
-        }
     }
     public void insertFromCommandline() {
         Scanner in = new Scanner(System.in);
@@ -68,6 +66,32 @@ public class DictionaryManagement {
             System.out.println("ERROR: " + e.getMessage());
             System.exit(1);
         }
+    }
+
+    public void insertHistoryFromFile() throws IOException {
+        String filePath = "txt/history.txt";
+        try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
+            String line;
+            while ((line = reader.readLine()) != null) {
+                wordHistoryList.add(line);
+            }
+            number_of_Historypage = wordHistoryList.size()/16 + 1;
+        } catch (IOException e) {
+            System.out.println("ERROR: " + e.getMessage());
+        }
+    }
+
+    public void historyExportToFile() throws IOException {
+        File path = new File("txt/history.txt");
+        BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(path));
+        for (String w : wordHistoryList) {
+            try {
+                bufferedWriter.append(w + "\n");
+            } catch (IOException e) {
+                System.out.println("ERROR: " + e.getMessage());
+            }
+        }
+        bufferedWriter.close();
     }
 
 
@@ -140,18 +164,31 @@ public class DictionaryManagement {
 
     public void addWordtoHistory(String w) {
         wordHistoryList.add(0, w);
-        wordHistoryList.remove(HistorySize);
+        if (wordHistoryList.size() >= HistorySize) {
+            wordHistoryList.remove(HistorySize);
+        }
+    }
+
+    public void increaseHistoryPage() {
+        if ((wordHistoryList.size() % 16) == 1) {
+            number_of_Historypage++;
+        }
+    }
+    public void decreaseHistoryPage() {
+        if ((wordHistoryList.size() % 16) == 0) {
+            number_of_Historypage--;
+        }
     }
 
     public void increaseSavePage() {
         if ((wordSavedList.size() % 16) == 1) {
-            number_of_page++;
+            number_of_Savedpage++;
         }
     }
 
     public void decreaseSavePage() {
         if ((wordSavedList.size() % 16) == 0) {
-            number_of_page--;
+            number_of_Savedpage--;
         }
     }
 

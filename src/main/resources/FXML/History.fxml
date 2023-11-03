@@ -113,6 +113,26 @@
                         </ImageView>
                     </graphic>
                 </Label>
+            <ImageView fx:id="delete1" fitHeight="150.0" fitWidth="20.0" layoutX="210.0" layoutY="27.5" onMouseClicked="#delete" pickOnBounds="true" preserveRatio="true" style="-fx-cursor: hand;">
+               <image>
+                  <Image url="@../Image/HistoryIMG/delete.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="delete2" fitHeight="150.0" fitWidth="20.0" layoutX="210.0" layoutY="102.5" onMouseClicked="#delete" pickOnBounds="true" preserveRatio="true" style="-fx-cursor: hand;">
+               <image>
+                  <Image url="@../Image/HistoryIMG/delete.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="delete3" fitHeight="150.0" fitWidth="20.0" layoutX="210.0" layoutY="177.5" onMouseClicked="#delete" pickOnBounds="true" preserveRatio="true" style="-fx-cursor: hand;">
+               <image>
+                  <Image url="@../Image/HistoryIMG/delete.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="delete4" fitHeight="150.0" fitWidth="20.0" layoutX="210.0" layoutY="252.5" onMouseClicked="#delete" pickOnBounds="true" preserveRatio="true" style="-fx-cursor: hand;">
+               <image>
+                  <Image url="@../Image/HistoryIMG/delete.png" />
+               </image>
+            </ImageView>
             </children>
         </AnchorPane>
         <AnchorPane layoutX="330.0" layoutY="230.0" prefHeight="300.0" prefWidth="250.0" style="-fx-background-color: FDCEDF;">
@@ -165,6 +185,26 @@
                         </ImageView>
                     </graphic>
                 </Label>
+            <ImageView fx:id="delete5" fitHeight="150.0" fitWidth="20.0" layoutX="210.0" layoutY="27.7" onMouseClicked="#delete" pickOnBounds="true" preserveRatio="true" style="-fx-cursor: hand;">
+               <image>
+                  <Image url="@../Image/HistoryIMG/delete.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="delete6" fitHeight="150.0" fitWidth="20.0" layoutX="210.0" layoutY="102.5" onMouseClicked="#delete" pickOnBounds="true" preserveRatio="true" style="-fx-cursor: hand;">
+               <image>
+                  <Image url="@../Image/HistoryIMG/delete.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="delete7" fitHeight="150.0" fitWidth="20.0" layoutX="210.0" layoutY="177.5" onMouseClicked="#delete" pickOnBounds="true" preserveRatio="true" style="-fx-cursor: hand;">
+               <image>
+                  <Image url="@../Image/HistoryIMG/delete.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="delete8" fitHeight="150.0" fitWidth="20.0" layoutX="210.0" layoutY="252.2" onMouseClicked="#delete" pickOnBounds="true" preserveRatio="true" style="-fx-cursor: hand;">
+               <image>
+                  <Image url="@../Image/HistoryIMG/delete.png" />
+               </image>
+            </ImageView>
             </children>
         </AnchorPane>
         <AnchorPane layoutX="620.0" layoutY="230.0" prefHeight="300.0" prefWidth="250.0" style="-fx-background-color: F8E8EE;">
@@ -217,6 +257,26 @@
                         </ImageView>
                     </graphic>
                 </Label>
+            <ImageView fx:id="delete9" fitHeight="150.0" fitWidth="20.0" layoutX="210.0" layoutY="27.5" onMouseClicked="#delete" pickOnBounds="true" preserveRatio="true" style="-fx-cursor: hand;">
+               <image>
+                  <Image url="@../Image/HistoryIMG/delete.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="delete10" fitHeight="150.0" fitWidth="20.0" layoutX="210.0" layoutY="102.5" onMouseClicked="#delete" pickOnBounds="true" preserveRatio="true" style="-fx-cursor: hand;">
+               <image>
+                  <Image url="@../Image/HistoryIMG/delete.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="delete11" fitHeight="150.0" fitWidth="20.0" layoutX="210.0" layoutY="177.5" onMouseClicked="#delete" pickOnBounds="true" preserveRatio="true" style="-fx-cursor: hand;">
+               <image>
+                  <Image url="@../Image/HistoryIMG/delete.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="delete12" fitHeight="150.0" fitWidth="20.0" layoutX="210.0" layoutY="252.5" onMouseClicked="#delete" pickOnBounds="true" preserveRatio="true" style="-fx-cursor: hand;">
+               <image>
+                  <Image url="@../Image/HistoryIMG/delete.png" />
+               </image>
+            </ImageView>
             </children>
         </AnchorPane>
         <AnchorPane layoutX="910.0" layoutY="230.0" prefHeight="300.0" prefWidth="250.0" style="-fx-background-color: F9F5F6;">
@@ -269,6 +329,26 @@
                         </ImageView>
                     </graphic>
                 </Label>
+            <ImageView fx:id="delete13" fitHeight="150.0" fitWidth="20.0" layoutX="210.0" layoutY="27.5" onMouseClicked="#delete" pickOnBounds="true" preserveRatio="true" style="-fx-cursor: hand;">
+               <image>
+                  <Image url="@../Image/HistoryIMG/delete.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="delete14" fitHeight="150.0" fitWidth="20.0" layoutX="210.0" layoutY="102.5" onMouseClicked="#delete" pickOnBounds="true" preserveRatio="true" style="-fx-cursor: hand;">
+               <image>
+                  <Image url="@../Image/HistoryIMG/delete.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="delete15" fitHeight="150.0" fitWidth="20.0" layoutX="210.0" layoutY="177.5" onMouseClicked="#delete" pickOnBounds="true" preserveRatio="true" style="-fx-cursor: hand;">
+               <image>
+                  <Image url="@../Image/HistoryIMG/delete.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="delete16" fitHeight="150.0" fitWidth="20.0" layoutX="210.0" layoutY="252.5" onMouseClicked="#delete" pickOnBounds="true" preserveRatio="true" style="-fx-cursor: hand;">
+               <image>
+                  <Image url="@../Image/HistoryIMG/delete.png" />
+               </image>
+            </ImageView>
             </children>
         </AnchorPane>
         <Text fill="#618264" layoutY="180.0" strokeType="OUTSIDE" strokeWidth="0.0" text="HISTORY SEARCH" textAlignment="CENTER" wrappingWidth="1200.0">
@@ -285,5 +365,15 @@
                 <Image url="@../../../../../Java/test/JavaFX_test/test/src/main/resources/Image/MenuIMG/minimize.png" />
             </image>
         </ImageView>
+      <ImageView fx:id="nextPage" fitHeight="150.0" fitWidth="100.0" layoutX="845.0" layoutY="116.0" onMouseClicked="#toNextPage" pickOnBounds="true" preserveRatio="true" style="-fx-cursor: hand;">
+         <image>
+            <Image url="@../../../../../AppStudyEnglish_testJavaFX/src/main/resources/Image/SaveIMG/Next.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="prePage" fitHeight="150.0" fitWidth="100.0" layoutX="257.0" layoutY="116.0" onMouseClicked="#toPreviousPage" pickOnBounds="true" preserveRatio="true" style="-fx-cursor: hand;" visible="false">
+         <image>
+            <Image url="@../../../../../AppStudyEnglish_testJavaFX/src/main/resources/Image/SaveIMG/Pre.png" />
+         </image>
+      </ImageView>
     </children>
 </AnchorPane>
