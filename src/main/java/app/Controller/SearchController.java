@@ -159,7 +159,11 @@ public class SearchController implements Initializable {
                 SearchingBar.setText(selectedWord);
             }
 
-            //wordList.setVisible(false);
+            wordList.setVisible(false);
+            wordTarget.setText(SearchingBar.getText());
+            GoSearchLabel.setVisible(false);
+            GoSearchPic.setVisible(false);
+            StartSearching();
         });
 
         if (event.getCode() == KeyCode.ENTER) {
