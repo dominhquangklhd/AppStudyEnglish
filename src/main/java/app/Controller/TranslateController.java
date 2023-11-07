@@ -121,7 +121,25 @@ public class TranslateController implements Initializable {
             //wordList.setVisible(false);
         });
 
+        if (event.getCode() == KeyCode.DOWN
+                && wordList.getSelectionModel().getSelectedIndex() < wordList.getItems().size() - 1) {
+            // Move selection down
+            if (!wordList.getSelectionModel().isEmpty()) {
+                wordList.getSelectionModel().selectNext();
+            } else {
+                wordList.getSelectionModel().selectFirst();
+            }
+        }
+
+        if (event.getCode() == KeyCode.UP && wordList.getSelectionModel().getSelectedIndex() > 0) {
+            // Move selection up
+            wordList.getSelectionModel().selectPrevious();
+        }
+
         if (event.getCode() == KeyCode.ENTER) {
+            if (!wordList.getSelectionModel().isEmpty()) {
+                SearchingBar.setText((String) wordList.getSelectionModel().getSelectedItem());
+            }
             wordList.setVisible(false);
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/FXML/Search.fxml"));
             Parent root = loader.load();

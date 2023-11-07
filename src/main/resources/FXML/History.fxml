@@ -356,10 +356,6 @@
                 <Font name="Gill Sans Ultra Bold" size="36.0" />
             </font>
         </Text>
-        <ListView fx:id="wordList" editable="true" fixedCellSize="0.0" layoutX="50.0" layoutY="78.0" prefHeight="250.0" prefWidth="500.0" visible="false">
-            <cursor>
-                <Cursor fx:constant="HAND" />
-            </cursor></ListView>
         <ImageView fx:id="minimize" fitHeight="150.0" fitWidth="30.0" layoutX="1010.0" layoutY="21.0" onMouseClicked="#minimizeStage" pickOnBounds="true" preserveRatio="true" style="-fx-cursor: hand;">
             <image>
                 <Image url="@../../../../../Java/test/JavaFX_test/test/src/main/resources/Image/MenuIMG/minimize.png" />
@@ -375,5 +371,9 @@
             <Image url="@../../../../../AppStudyEnglish_testJavaFX/src/main/resources/Image/SaveIMG/Pre.png" />
          </image>
       </ImageView>
+        <ListView fx:id="wordList" editable="true" fixedCellSize="0.0" layoutX="50.0" layoutY="78.0" prefHeight="250.0" prefWidth="500.0" visible="false">
+            <cursor>
+                <Cursor fx:constant="HAND" />
+            </cursor></ListView>
     </children>
 </AnchorPane>
