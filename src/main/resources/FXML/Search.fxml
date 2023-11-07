@@ -47,7 +47,7 @@
                <Font name="Arial Rounded MT Bold" size="24.0" />
             </font>
          </Label>
-         <Label id="wordExplain" fx:id="wordExplain" alignment="TOP_LEFT" layoutX="20.0" layoutY="80.0" prefHeight="350.0" prefWidth="560.0">
+         <Label id="wordExplain" fx:id="wordExplain" alignment="TOP_LEFT" layoutX="20.0" layoutY="80.0" prefHeight="350.0" prefWidth="560.0" wrapText="true">
             <font>
                <Font name="Times New Roman" size="18.0" />
             </font>
