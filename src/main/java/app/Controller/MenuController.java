@@ -25,6 +25,7 @@ import javafx.scene.layout.AnchorPane;
 
 import java.io.IOException;
 import java.net.URL;
+import java.security.Key;
 import java.util.ResourceBundle;
 
 public class MenuController implements Initializable {
@@ -118,21 +119,6 @@ public class MenuController implements Initializable {
         System.out.println("Guide");
     }
 
-    /*public void intoWord(KeyEvent event) throws IOException {
-        if (event.getCode() == KeyCode.ENTER) {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/FXML/Search.fxml"));
-            Parent root = loader.load();
-            ((SearchController) loader.getController()).getWordTarget().setText(SearchingBar.getText());
-            ((SearchController) loader.getController()).StartSearching();
-
-            //Switch scene to SearchScene
-            stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-            scene = new Scene(root);
-            stage.setScene (scene);
-            stage.show();
-        }
-    }*/
-
     public void intoWord(KeyEvent event) throws IOException {
         ObservableList<String> items = FXCollections.observableArrayList();
 
@@ -160,7 +146,25 @@ public class MenuController implements Initializable {
             //wordList.setVisible(false);
         });
 
+        if (event.getCode() == KeyCode.DOWN
+                && wordList.getSelectionModel().getSelectedIndex() < wordList.getItems().size() - 1) {
+            // Move selection down
+            if (!wordList.getSelectionModel().isEmpty()) {
+                wordList.getSelectionModel().selectNext();
+            } else {
+                wordList.getSelectionModel().selectFirst();
+            }
+        }
+
+        if (event.getCode() == KeyCode.UP && wordList.getSelectionModel().getSelectedIndex() > 0) {
+            // Move selection up
+            wordList.getSelectionModel().selectPrevious();
+        }
+
         if (event.getCode() == KeyCode.ENTER) {
+            if (!wordList.getSelectionModel().isEmpty()) {
+                SearchingBar.setText((String) wordList.getSelectionModel().getSelectedItem());
+            }
             wordList.setVisible(false);
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/FXML/Search.fxml"));
             Parent root = loader.load();
@@ -189,6 +193,10 @@ public class MenuController implements Initializable {
     //Supporting methods
     public void outSearch() {
         wordList.setVisible(false);
+    }
+
+    public void test() {
+        System.out.println("test");
     }
 
     @Override
