@@ -159,7 +159,11 @@ public class SearchController implements Initializable {
                 SearchingBar.setText(selectedWord);
             }
 
-            //wordList.setVisible(false);
+            wordList.setVisible(false);
+            wordTarget.setText(SearchingBar.getText());
+            GoSearchLabel.setVisible(false);
+            GoSearchPic.setVisible(false);
+            StartSearching();
         });
 
         if (event.getCode() == KeyCode.ENTER) {
@@ -173,6 +177,8 @@ public class SearchController implements Initializable {
     }
 
     public void intoHistory(MouseEvent event) throws IOException {
+        Main.dictionaryManagement.recentHistoryPage = 1;
+
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/FXML/History.fxml"));
         Parent root = loader.load();
         ((HistoryController) loader.getController()).StartHistory();
@@ -213,27 +219,11 @@ public class SearchController implements Initializable {
         stage.setIconified(true);
     }
 
-    public void intoOut() {
+    public void intoOut() throws IOException {
+        Main.dictionaryManagement.historyExportToFile();
         stage = (Stage) scenePane.getScene().getWindow();
         stage.close();
     }
-
-    //Supporting methods
-    /*public void StartSearching() {
-        boolean has = false;
-        for (Word w : Main.dictionaryManagement.dictionary.words) {
-            if (w.getWordTarget().equals(wordTarget.getText())) {
-                word.setWordExplain("In Vietnamese: " + w.getWordExplain());
-                wordExplain.setText(word.getWordExplain());
-                has = true;
-                Main.dictionaryManagement.addWordtoHistory(word);
-                WordFoundSet();
-            }
-        }
-        if (!has) {
-            CryIfCannotFindWord();
-        }
-    }*/
 
     public void StartSearching() {
         String explainWord = Main.databaseConnection.findWordInDatabase(wordTarget.getText());
@@ -241,7 +231,13 @@ public class SearchController implements Initializable {
             CryIfCannotFindWord();
         } else {
             wordExplain.setText(explainWord);
+            int preSize = Main.dictionaryManagement.wordHistoryList.size();
+            Main.dictionaryManagement.wordHistoryList.remove(wordTarget.getText());
+            if (preSize != Main.dictionaryManagement.wordHistoryList.size()) {
+                Main.dictionaryManagement.decreaseHistoryPage();
+            }
             Main.dictionaryManagement.addWordtoHistory(wordTarget.getText());
+            Main.dictionaryManagement.increaseHistoryPage();
             if (Main.databaseConnection.isSaved(wordTarget.getText())) {
                 savedIcon.setVisible(true);
                 UNsavedIcon.setVisible(false);

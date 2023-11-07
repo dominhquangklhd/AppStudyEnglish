@@ -32,6 +32,7 @@ public class Main extends Application {
     public void start(Stage stage) {
         try {
             dictionaryManagement.insertFromFile();
+            dictionaryManagement.insertHistoryFromFile();
             databaseConnection.createConnection();
             databaseConnection.setSavedWord();
             databaseConnection.insertIntoTrie();

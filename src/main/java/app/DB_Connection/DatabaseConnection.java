@@ -47,9 +47,13 @@ public class DatabaseConnection {
             username = "root";
             password = "Boquoctrung10012004";*/
 
-            url = "jdbc:mysql://localhost:3306/appEnglish";
+            /*url = "jdbc:mysql://localhost:3306/appEnglish";
             username = "root";
-            password = "Minhquanadc@1";
+            password = "Minhquanadc@1";*/
+
+            url = "jdbc:mysql://localhost:3306/dict_database";
+            username = "root";
+            password = "Q25012004kl#";
 
             connection = DriverManager.getConnection(url, username, password);
 
@@ -175,7 +179,7 @@ public class DatabaseConnection {
                 Main.dictionaryManagement.wordSavedList.add(word);
             }
 
-            Main.dictionaryManagement.number_of_page = Main.dictionaryManagement.wordSavedList.size()/16 + 1;
+            Main.dictionaryManagement.number_of_Savedpage = Main.dictionaryManagement.wordSavedList.size()/16 + 1;
         } catch (SQLException ex) {
             System.out.println("Can not create Saved list!");
         }
