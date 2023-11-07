@@ -124,11 +124,12 @@ public class MenuController implements Initializable {
 
         //lập ra danh sách các từ gợi ý mỗi khi từ trên SearchingBar(TestField) thay đổi.
         SearchingBar.textProperty().addListener((observable, oldValue, newValue) -> {
+
             wordList.getItems().clear();
             Main.trie.resetWordList();
 
             SearchingBar.setText(newValue);
-            Main.trie.search(SearchingBar.getText());
+            Main.trie.search(SearchingBar.getText().toLowerCase());
 
             wordList.setVisible(!Main.trie.getWordsBySearching().isEmpty());
 
