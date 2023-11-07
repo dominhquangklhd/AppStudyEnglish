@@ -96,7 +96,7 @@
         <Line endX="1200.0" layoutY="100.0" />
         <ImageView fx:id="minimize" fitHeight="150.0" fitWidth="30.0" layoutX="1010.0" layoutY="21.0" onMouseClicked="#minimizeStage" pickOnBounds="true" preserveRatio="true" style="-fx-cursor: hand;">
             <image>
-                <Image url="@../../../../../Java/test/JavaFX_test/test/src/main/resources/Image/MenuIMG/minimize.png" />
+                <Image url="@../Image/MenuIMG/minimize.png" />
             </image>
         </ImageView>
       <TextArea fx:id="textBar" layoutX="100.0" layoutY="240.0" onKeyPressed="#countWord" prefHeight="250.0" prefWidth="400.0" promptText="Enter the text to be translated!" wrapText="true">
