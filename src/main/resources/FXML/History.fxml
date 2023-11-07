@@ -358,17 +358,17 @@
         </Text>
         <ImageView fx:id="minimize" fitHeight="150.0" fitWidth="30.0" layoutX="1010.0" layoutY="21.0" onMouseClicked="#minimizeStage" pickOnBounds="true" preserveRatio="true" style="-fx-cursor: hand;">
             <image>
-                <Image url="@../../../../../Java/test/JavaFX_test/test/src/main/resources/Image/MenuIMG/minimize.png" />
+                <Image url="@../Image/MenuIMG/minimize.png" />
             </image>
         </ImageView>
       <ImageView fx:id="nextPage" fitHeight="150.0" fitWidth="100.0" layoutX="845.0" layoutY="116.0" onMouseClicked="#toNextPage" pickOnBounds="true" preserveRatio="true" style="-fx-cursor: hand;">
          <image>
-            <Image url="@../../../../../AppStudyEnglish_testJavaFX/src/main/resources/Image/SaveIMG/Next.png" />
+            <Image url="@../Image/SaveIMG/Next.png" />
          </image>
       </ImageView>
       <ImageView fx:id="prePage" fitHeight="150.0" fitWidth="100.0" layoutX="257.0" layoutY="116.0" onMouseClicked="#toPreviousPage" pickOnBounds="true" preserveRatio="true" style="-fx-cursor: hand;" visible="false">
          <image>
-            <Image url="@../../../../../AppStudyEnglish_testJavaFX/src/main/resources/Image/SaveIMG/Pre.png" />
+            <Image url="@../Image/SaveIMG/Pre.png" />
          </image>
       </ImageView>
         <ListView fx:id="wordList" editable="true" fixedCellSize="0.0" layoutX="50.0" layoutY="78.0" prefHeight="250.0" prefWidth="500.0" visible="false">

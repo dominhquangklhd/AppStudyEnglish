@@ -103,7 +103,7 @@ public class TranslateController implements Initializable {
             Main.trie.resetWordList();
 
             SearchingBar.setText(newValue);
-            Main.trie.search(SearchingBar.getText());
+            Main.trie.search(SearchingBar.getText().toLowerCase());
 
             wordList.setVisible(!Main.trie.getWordsBySearching().isEmpty());
 
