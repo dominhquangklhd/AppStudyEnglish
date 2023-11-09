@@ -17,7 +17,7 @@
     <children>
         <Button fx:id="paneButton" mnemonicParsing="false" onMouseClicked="#outSearch" opacity="0.0" prefHeight="700.0" prefWidth="1200.0" text="Button" />
         <AnchorPane layoutY="580.0" prefHeight="120.0" prefWidth="1200.0" style="-fx-background-color: EEEEEE;" />
-        <ImageView id="intoSearch" fx:id="intoSearch" fitHeight="150.0" fitWidth="70.0" layoutX="410.0" layoutY="620.0" onMouseClicked="#intoSearch" pickOnBounds="true" preserveRatio="true">
+        <ImageView id="intoSearch" fx:id="intoSearch" fitHeight="150.0" fitWidth="70.0" layoutX="410.0" layoutY="620.0" onMouseClicked="#intoSearch" pickOnBounds="true" preserveRatio="true" style="-fx-cursor: hand;">
             <image>
                 <Image url="@../Image/MenuIMG/search_but.png" />
             </image>
@@ -176,5 +176,25 @@
             </ImageView>
          </graphic>
       </Label>
+      <ImageView fx:id="EnFlagLeft" fitHeight="50.0" fitWidth="50.0" layoutX="200.0" layoutY="175.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../Image/TranslateIMG/EnFlag.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="ViFlagRight" fitHeight="150.0" fitWidth="50.0" layoutX="780.0" layoutY="175.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../Image/TranslateIMG/ViFlag.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="ViFlagLeft" fitHeight="150.0" fitWidth="50.0" layoutX="180.0" layoutY="175.0" pickOnBounds="true" preserveRatio="true" visible="false">
+         <image>
+            <Image url="@../Image/TranslateIMG/ViFlag.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="EnFlagRight" fitHeight="50.0" fitWidth="50.0" layoutX="800.0" layoutY="175.0" pickOnBounds="true" preserveRatio="true" visible="false">
+         <image>
+            <Image url="@../Image/TranslateIMG/EnFlag.png" />
+         </image>
+      </ImageView>
     </children>
 </AnchorPane>
