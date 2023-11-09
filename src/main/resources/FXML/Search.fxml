@@ -10,6 +10,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
+<?import javafx.scene.web.WebView?>
 
 <AnchorPane fx:id="scenePane" onMouseClicked="#outSearch" prefHeight="700.0" prefWidth="1200.0" style="-fx-background-color: FFF8DC;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="app.Controller.SearchController">
    <children>
@@ -40,16 +41,30 @@
             <Image url="@../Image/MenuIMG/intoHistory.png" />
          </image>
       </ImageView>
-      <Line endX="1200.0" layoutY="580.0" strokeWidth="3.0" />
+      <AnchorPane id="scenePane2" fx:id="scenePane2" layoutX="600.0" layoutY="100.0" prefHeight="480.0" prefWidth="600.0">
+         <children>
+            <ImageView fitHeight="237.0" fitWidth="340.0" layoutX="121.0" layoutY="219.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../../../AppStudyEnglish/src/main/resources/Image/SearchIMG/TontonPic1.png" />
+               </image>
+            </ImageView>
+            <Label layoutX="40.0" layoutY="60.0" prefWidth="520.0" text="If you want more information about this word, click" wrapText="true">
+               <font>
+                  <Font name="Arial Rounded MT Bold" size="30.0" />
+               </font>
+            </Label>
+            <Label fx:id="changeToCam" layoutX="273.0" layoutY="96.0" onMouseClicked="#intoCambrigde" onMouseEntered="#DragInLink" onMouseExited="#DragOutLink" style="-fx-cursor: hand;" text="HERE" textFill="#116a7b">
+               <font>
+                  <Font name="Arial Rounded MT Bold" size="30.0" />
+               </font>
+            </Label>
+            <Line fx:id="linkLine" endX="360.0" layoutY="132.0" startX="273.0" stroke="#116a7b" visible="false" />
+            <WebView fx:id="cambrigde" prefHeight="480.0" prefWidth="600.0" visible="false" />
+         </children></AnchorPane>
       <AnchorPane id="scenePane1" fx:id="scenePane1" layoutY="100.0" prefHeight="480.0" prefWidth="600.0">
-         <Label id="wordTarget" fx:id="wordTarget" layoutX="20.0" layoutY="20.0">
+         <Label id="wordTarget" fx:id="wordTarget" layoutX="50.0" layoutY="20.0">
             <font>
                <Font name="Arial Rounded MT Bold" size="24.0" />
-            </font>
-         </Label>
-         <Label id="wordExplain" fx:id="wordExplain" alignment="TOP_LEFT" layoutX="20.0" layoutY="80.0" prefHeight="350.0" prefWidth="560.0" wrapText="true">
-            <font>
-               <Font name="Times New Roman" size="18.0" />
             </font>
          </Label>
          <Line id="separateLine" endX="600.0" endY="480.0" startX="600.0" />
@@ -68,6 +83,9 @@
                <Image url="@../Image/TranslateIMG/Speaker_Icon.png" />
             </image>
          </ImageView>
+         <WebView fx:id="wordExplain" layoutX="50.0" layoutY="80.0" prefHeight="350.0" prefWidth="500.0" style="-fx-background-color: FFF8DC;" />
+         <Line endX="550.0" endY="80.0" startX="50.0" startY="80.0" stroke="#776b5d" />
+         <Line endX="550.0" endY="430.0" startX="50.0" startY="430.0" stroke="#776b5d" />
       </AnchorPane>
       <TextField id="SearchingBar" fx:id="SearchingBar" layoutX="50.0" layoutY="23.0" onKeyPressed="#intoWord" prefHeight="55.0" prefWidth="500.0" promptText="Search">
          <font>
@@ -89,13 +107,13 @@
             <Image url="@../Image/MenuIMG/Guide.png" />
          </image>
       </ImageView>
-      <AnchorPane id="scenePane2" fx:id="scenePane2" layoutX="600.0" layoutY="100.0" prefHeight="480.0" prefWidth="600.0" />
       <Line endX="1200.0" layoutY="100.0" />
       <ImageView id="WordNotFoundIMG" fx:id="WordNotFoundIMG" fitHeight="300.0" fitWidth="250.0" layoutX="200.0" layoutY="200.0" pickOnBounds="true" preserveRatio="true" visible="false">
          <image>
             <Image url="@../Image/SearchIMG/BellaCry.png" />
          </image>
       </ImageView>
+      <Line endX="1200.0" layoutY="580.0" strokeWidth="3.0" />
       <Label id="WordNotFoundNoti" fx:id="WordNotFoundNoti" layoutX="500.0" layoutY="250.0" prefHeight="100.0" prefWidth="500.0" text="Sorry, we don't have that word!" textFill="DARKCYAN" visible="false" wrapText="true">
          <font>
             <Font name="Gill Sans Ultra Bold" size="36.0" />
@@ -118,7 +136,7 @@
       </ImageView>
       <ImageView fx:id="minimize" fitHeight="150.0" fitWidth="30.0" layoutX="1010.0" layoutY="21.0" onMouseClicked="#minimizeStage" pickOnBounds="true" preserveRatio="true" style="-fx-cursor: hand;">
          <image>
-            <Image url="@../Image/MenuIMG/minimize.png" />
+            <Image url="@../../../../../Java/test/JavaFX_test/test/src/main/resources/Image/MenuIMG/minimize.png" />
          </image>
       </ImageView>
       <ListView fx:id="wordList" editable="true" fixedCellSize="0.0" layoutX="50.0" layoutY="78.0" prefHeight="250.0" prefWidth="500.0" visible="false">

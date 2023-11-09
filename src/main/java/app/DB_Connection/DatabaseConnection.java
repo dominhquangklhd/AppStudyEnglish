@@ -64,13 +64,13 @@ public class DatabaseConnection {
 
     public void insertFromDatabase() {
         try {
-            preparedStatement = connection.prepareStatement("SELECT * FROM av");
+            preparedStatement = connection.prepareStatement("SELECT * FROM dictionary");
 
             resultSet = preparedStatement.executeQuery();
 
             while(resultSet.next()) {
-                String target = resultSet.getString("word");
-                String explain = resultSet.getString("description");
+                String target = resultSet.getString("target");
+                String explain = resultSet.getString("definition");
                 Word newWord = new Word(target, explain);
                 cmdLine.dictionaryManagement.dictionary.words.add(newWord);
             }
@@ -99,7 +99,7 @@ public class DatabaseConnection {
 
     public void setSave(String word) {
         try {
-            String sql = "UPDATE av SET isSaved = true WHERE word = ?";
+            String sql = "UPDATE dictionary SET isSaved = true WHERE target = ?";
             preparedStatement = connection.prepareStatement(sql);
             preparedStatement.setString(1, word);
 
@@ -112,7 +112,7 @@ public class DatabaseConnection {
 
     public void setUnSave(String word) {
         try {
-            String sql = "UPDATE av SET isSaved = false WHERE word = ?";
+            String sql = "UPDATE dictionary SET isSaved = false WHERE target = ?";
             preparedStatement = connection.prepareStatement(sql);
             preparedStatement.setString(1, word);
 
@@ -124,7 +124,7 @@ public class DatabaseConnection {
 
     public boolean isSaved(String word) {
         try {
-            String sql = "SELECT isSaved FROM av WHERE word = ?";
+            String sql = "SELECT isSaved FROM dictionary WHERE target = ?";
             preparedStatement = connection.prepareStatement(sql);
             preparedStatement.setString(1, word);
 
@@ -146,18 +146,14 @@ public class DatabaseConnection {
     public String findWordInDatabase(String word) {
         String res = "";
         try {
-            String sql = "SELECT * FROM av WHERE word = ?";
+            String sql = "SELECT * FROM dictionary WHERE target = ?";
             preparedStatement = connection.prepareStatement(sql);
             preparedStatement.setString(1, word);
 
             resultSet = preparedStatement.executeQuery();
 
             if (resultSet.next()) {
-                String pronounce = resultSet.getString("pronounce");
-                if (!pronounce.isEmpty()) {
-                    res += "/" + pronounce + "/" + "\n";
-                }
-                String des = resultSet.getString("description");
+                String des = resultSet.getString("definition");
                 res += des + "\n";
             }
         } catch (SQLException ex) {
@@ -169,13 +165,13 @@ public class DatabaseConnection {
 
     public void setSavedWord() {
         try {
-            String sql = "SELECT * FROM av WHERE isSaved = true";
+            String sql = "SELECT * FROM dictionary WHERE isSaved = true";
             preparedStatement = connection.prepareStatement(sql);
 
             resultSet = preparedStatement.executeQuery();
 
             while (resultSet.next()) {
-                String word = resultSet.getString("word");
+                String word = resultSet.getString("target");
                 Main.dictionaryManagement.wordSavedList.add(word);
             }
 
@@ -187,13 +183,13 @@ public class DatabaseConnection {
 
     public void insertIntoTrie() {
         try {
-            String sql = "SELECT * FROM av";
+            String sql = "SELECT * FROM dictionary";
             preparedStatement = connection.prepareStatement(sql);
 
             resultSet = preparedStatement.executeQuery();
 
             while (resultSet.next()) {
-                String value = resultSet.getString("word");
+                String value = resultSet.getString("target");
                 Main.trie.insertWord(value);
             }
 

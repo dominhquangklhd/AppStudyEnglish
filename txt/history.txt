@@ -1,4 +1,7 @@
+hand
+show
 hello
+hgv
 banana
 apple
 goalee
