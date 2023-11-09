@@ -32,7 +32,13 @@
 
 ## Preview
 
+![appenglish1](https://github.com/dominhquangklhd/AppStudyEnglish/assets/123967452/aef25718-b567-406b-b6d1-b56e2db3cbcb)
+
+![Capture](https://github.com/dominhquangklhd/AppStudyEnglish/assets/123967452/cc858497-9514-4ad9-880e-2ecc23e09cd3)
+
+
 ## Hướng dẫn cài đặt
+
 
 - Clone project này về bằng lệnh git.
   ```
