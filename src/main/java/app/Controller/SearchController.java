@@ -151,7 +151,7 @@ public class SearchController implements Initializable {
             Main.trie.resetWordList();
 
             SearchingBar.setText(newValue);
-            Main.trie.search(SearchingBar.getText());
+            Main.trie.search(SearchingBar.getText().toLowerCase());
 
             wordList.setVisible(!Main.trie.getWordsBySearching().isEmpty());
 
@@ -259,6 +259,7 @@ public class SearchController implements Initializable {
 
     //Supporting methods
     public void StartSearching() {
+        wordTarget.setText(wordTarget.getText().toLowerCase());
         String explainWord = Main.databaseConnection.findWordInDatabase(wordTarget.getText());
         if (explainWord.isEmpty()) {
             CryIfCannotFindWord();
