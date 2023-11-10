@@ -106,6 +106,17 @@ public class SaveController implements Initializable {
         StartSave();
     }
 
+    @FXML
+    public void intoGame(MouseEvent event) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/FXML/MenuGame.fxml"));
+        Parent root = loader.load();
+
+        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        scene = new Scene(root);
+        stage.setScene (scene);
+        stage.show();
+    }
+
     public void intoWord(KeyEvent event) throws IOException {
         ObservableList<String> items = FXCollections.observableArrayList();
 
