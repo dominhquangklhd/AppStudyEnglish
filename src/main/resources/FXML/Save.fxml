@@ -26,7 +26,7 @@
                 <Image url="@../Image/MenuIMG/translate_but.png" />
             </image>
         </ImageView>
-        <ImageView id="intoGame" fx:id="intoGame" fitHeight="100.0" fitWidth="70.0" layoutX="550.0" layoutY="620.0" pickOnBounds="true" preserveRatio="true" style="-fx-cursor: hand;">
+        <ImageView id="intoGame" fx:id="intoGame" fitHeight="100.0" fitWidth="70.0" layoutX="550.0" layoutY="620.0" onMouseClicked="#intoGame" pickOnBounds="true" preserveRatio="true" style="-fx-cursor: hand;">
             <image>
                 <Image url="@../Image/MenuIMG/intoGame.png" />
             </image>
