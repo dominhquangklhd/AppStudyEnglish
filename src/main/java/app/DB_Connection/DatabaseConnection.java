@@ -43,17 +43,13 @@ public class DatabaseConnection {
         try {
             // mn chỉnh theo db sql của mn.
 
-            /*url = "jdbc:mysql://localhost:3306/dictionary_manager?autoReconnect=true&useSSL=false";
+            url = "jdbc:mysql://localhost:3306/dictionary?autoReconnect=true&useSSL=false";
             username = "root";
-            password = "Boquoctrung10012004";*/
+            password = "Boquoctrung10012004";
 
-            url = "jdbc:mysql://localhost:3306/appEnglish";
+            /*url = "jdbc:mysql://localhost:3306/appEnglish";
             username = "root";
-            password = "Minhquanadc@1";
-
-            /*url = "jdbc:mysql://localhost:3306/dict_database";
-            username = "root";
-            password = "Q25012004kl#";*/
+            password = "Minhquanadc@1";*/
 
             connection = DriverManager.getConnection(url, username, password);
 
@@ -80,20 +76,24 @@ public class DatabaseConnection {
         }
     }
 
-    //Chua hoan thien
-    public void exportToDatabase(List<Word> newWords) {
+    public boolean insertToDatabase(String word, String description) {
         try {
-            String sql = "INSERT INTO av (word, description) VALUES (?, ?)";
+            String sql = "INSERT INTO dictionary (word, description) VALUES (?, ?)";
 
             preparedStatement = connection.prepareStatement(sql);
-            for (Word w : newWords) {
-                String value1 = w.getWordTarget();
-                String value2 = w.getWordExplain();
-                preparedStatement.setString(1, value1);
-                preparedStatement.setString(2, value2);
+            preparedStatement.setString(1, word);
+            preparedStatement.setString(2, description);
+
+            try {
+                preparedStatement.executeUpdate();
+            } catch (SQLIntegrityConstraintViolationException e) {
+                return false;
             }
+            return true;
+
         } catch (SQLException e) {
-            System.out.println("Insert data problems: " + e.getMessage());
+            e.printStackTrace();
+            return false;
         }
     }
 
@@ -181,6 +181,27 @@ public class DatabaseConnection {
         }
     }
 
+    public boolean deleteWordInDatabase(String word) {
+        try {
+            String sql = "DELETE FROM dictionary WHERE word = ?";
+            preparedStatement = connection.prepareStatement(sql);
+
+            preparedStatement.setString(1, word);
+
+            int deletedRow = preparedStatement.executeUpdate();
+            if (deletedRow <= 0)
+                return false;
+            insertIntoTrie();
+            return true;
+        }
+        catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+
+
     public void insertIntoTrie() {
         try {
             String sql = "SELECT * FROM dictionary";
@@ -212,7 +233,7 @@ public class DatabaseConnection {
             String C = resultSet.getString("C");
             String D = resultSet.getString("D");
             String answer = resultSet.getString("answer");
-            List<String> tmp = Arrays.asList(question, A, B, C, D, answer);;
+            List<String> tmp = Arrays.asList(question, A, B, C, D, answer);
 
             listDB_MC.add(tmp);
         }
