@@ -10,6 +10,10 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
+import javafx.scene.layout.VBox;
+import javafx.scene.shape.Line;
+import javafx.scene.web.WebEngine;
+import javafx.scene.web.WebView;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -41,7 +45,7 @@ public class SearchController implements Initializable {
     @FXML
     public Label wordTarget;
     @FXML
-    public Label wordExplain;
+    public WebView wordExplain;
     @FXML
     public TextField SearchingBar;
     @FXML
@@ -76,6 +80,12 @@ public class SearchController implements Initializable {
     public ImageView intoTranslate;
     @FXML
     public ImageView speaker;
+    @FXML
+    public Label changeToCam;
+    @FXML
+    public WebView cambrigde;
+    @FXML
+    public Line linkLine;
 
     //Nor
     private Word word = new Word();
@@ -99,9 +109,6 @@ public class SearchController implements Initializable {
         return wordTarget;
     }
 
-    public Label getWordExplain() {
-        return wordExplain;
-    }
 
     //Action handlers
     public void speakWord() {
@@ -244,13 +251,25 @@ public class SearchController implements Initializable {
         stage.close();
     }
 
+    public void intoCambrigde() {
+        WebEngine webEngine = cambrigde.getEngine();
+        webEngine.load("https://dictionary.cambridge.org/vi/dictionary/english/" + wordTarget.getText());
+        cambrigde.setVisible(true);
+    }
+
+    //Supporting methods
     public void StartSearching() {
         wordTarget.setText(wordTarget.getText().toLowerCase());
         String explainWord = Main.databaseConnection.findWordInDatabase(wordTarget.getText());
         if (explainWord.isEmpty()) {
             CryIfCannotFindWord();
         } else {
-            wordExplain.setText(explainWord);
+            WebEngine webEngine = wordExplain.getEngine();
+            webEngine.loadContent(explainWord);
+            //VBox root = new VBox(wordExplain);
+
+            // Apply CSS to change the background color
+            //root.setStyle("-fx-background-color: lightblue;");
             int preSize = Main.dictionaryManagement.wordHistoryList.size();
             Main.dictionaryManagement.wordHistoryList.remove(wordTarget.getText());
             if (preSize != Main.dictionaryManagement.wordHistoryList.size()) {
@@ -280,6 +299,7 @@ public class SearchController implements Initializable {
     public void WordFoundSet() {
         scenePane1.setVisible(true);
         scenePane2.setVisible(true);
+        cambrigde.setVisible(false);
         WordNotFoundIMG.setVisible(false);
         WordNotFoundNoti.setVisible(false);
         Advice.setVisible(false);
@@ -293,6 +313,14 @@ public class SearchController implements Initializable {
         WordNotFoundIMG.setVisible(false);
         WordNotFoundNoti.setVisible(false);
         Advice.setVisible(false);
+    }
+
+    public void DragInLink() {
+        linkLine.setVisible(true);
+    }
+
+    public void DragOutLink() {
+        linkLine.setVisible(false);
     }
 
     @Override

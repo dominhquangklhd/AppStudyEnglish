@@ -5,6 +5,7 @@ module app {
     requires java.sql;
     requires jlayer;
     requires java.desktop;
+    requires javafx.web;
 
     //opens com.example.test.Controller to javafx.fxml;
     //exports com.example.test.Model;

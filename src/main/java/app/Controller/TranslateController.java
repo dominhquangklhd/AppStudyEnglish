@@ -72,6 +72,14 @@ public class TranslateController implements Initializable {
     public ImageView translationSpeaker;
     @FXML
     public ImageView textSpeaker;
+    @FXML
+    public ImageView EnFlagRight;
+    @FXML
+    public ImageView ViFlagLeft;
+    @FXML
+    public ImageView ViFlagRight;
+    @FXML
+    public ImageView EnFlagLeft;
 
     //Nor
     private String translation = "";
@@ -204,14 +212,22 @@ public class TranslateController implements Initializable {
         GGTranslateAPI.isEnglish = !GGTranslateAPI.isEnglish;
         if (GGTranslateAPI.isEnglish) {
             EnLeft.setVisible(true);
+            EnFlagLeft.setVisible(true);
             ViRight.setVisible(true);
+            ViFlagRight.setVisible(true);
             EnRight.setVisible(false);
+            EnFlagRight.setVisible(false);
             ViLeft.setVisible(false);
+            ViFlagLeft.setVisible(false);
         } else {
             EnLeft.setVisible(false);
+            EnFlagLeft.setVisible(false);
             ViRight.setVisible(false);
+            ViFlagRight.setVisible(false);
             EnRight.setVisible(true);
+            EnFlagRight.setVisible(true);
             ViLeft.setVisible(true);
+            ViFlagLeft.setVisible(true);
         }
         translate();
     }
