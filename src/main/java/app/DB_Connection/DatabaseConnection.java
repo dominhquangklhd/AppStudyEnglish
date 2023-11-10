@@ -47,13 +47,17 @@ public class DatabaseConnection {
         try {
             // mn chỉnh theo db sql của mn.
 
-            url = "jdbc:mysql://localhost:3306/dictionary?autoReconnect=true&useSSL=false";
+            /*url = "jdbc:mysql://localhost:3306/dictionary?autoReconnect=true&useSSL=false";
             username = "root";
-            password = "Boquoctrung10012004";
+            password = "Boquoctrung10012004";*/
 
             /*url = "jdbc:mysql://localhost:3306/appEnglish";
             username = "root";
             password = "Minhquanadc@1";*/
+
+            url = "jdbc:mysql://localhost:3306/dict_database";
+            username = "root";
+            password = "Q25012004kl#";
 
             connection = DriverManager.getConnection(url, username, password);
 
