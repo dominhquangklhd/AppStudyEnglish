@@ -12,6 +12,7 @@ import java.util.List;
 
 public class DatabaseConnection {
     private final int NumOfQuestionMC = 10;
+    public static final int NUmOfQuestionGameIMG = 10;
     String url;
     String username;
     String password;
@@ -22,10 +23,13 @@ public class DatabaseConnection {
     Trie trie;
 
     public boolean englishWord = true;
-
     private List<String> wordBySearch = new LinkedList<>();
-
     private List<List<String>> listDB_MC = new LinkedList<>();
+    private List<String> ansGameIMG = new LinkedList<>();
+
+    public List<String> getAnsGameIMG() {
+        return ansGameIMG;
+    }
 
     public List<String> getWordBySearch() {
         return wordBySearch;
@@ -239,6 +243,18 @@ public class DatabaseConnection {
         }
     }
 
+    public void dataGameIMG() throws SQLException {
+        String sql = "SELECT * FROM gameimage ORDER BY RAND() LIMIT ?";
+        preparedStatement = connection.prepareStatement(sql);
+        preparedStatement.setInt(1, NUmOfQuestionGameIMG);
+
+        resultSet = preparedStatement.executeQuery();
+
+        while (resultSet.next()) {
+            String ansIMG = resultSet.getString("nameimg");
+            ansGameIMG.add(ansIMG);
+        }
+    }
 
     public void DatabaseClose() {
         try {
