@@ -257,6 +257,17 @@ public class HistoryController implements Initializable {
         stage.show();
     }
 
+    @FXML
+    public void intoGame(MouseEvent event) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/FXML/MenuGame.fxml"));
+        Parent root = loader.load();
+
+        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        scene = new Scene(root);
+        stage.setScene (scene);
+        stage.show();
+    }
+
     public void intoSave(MouseEvent event) throws IOException {
         Main.dictionaryManagement.recentSavePage = 1;
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/FXML/Save.fxml"));
