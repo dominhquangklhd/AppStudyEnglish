@@ -47,17 +47,17 @@ public class DatabaseConnection {
         try {
             // mn chỉnh theo db sql của mn.
 
-            /*url = "jdbc:mysql://localhost:3306/dictionary?autoReconnect=true&useSSL=false";
+            url = "jdbc:mysql://localhost:3306/appenglish?autoReconnect=true&useSSL=false";
             username = "root";
-            password = "Boquoctrung10012004";*/
+            password = "Boquoctrung10012004";
 
             /*url = "jdbc:mysql://localhost:3306/appEnglish";
             username = "root";
             password = "Minhquanadc@1";*/
 
-            url = "jdbc:mysql://localhost:3306/dict_database";
+            /*url = "jdbc:mysql://localhost:3306/dict_database";
             username = "root";
-            password = "Q25012004kl#";
+            password = "Q25012004kl#";*/
 
             connection = DriverManager.getConnection(url, username, password);
 
@@ -84,13 +84,24 @@ public class DatabaseConnection {
         }
     }
 
-    public boolean insertToDatabase(String word, String description) {
+    public boolean insertToDatabase(String target, String IPA, List<String> type, List<String> definition) {
         try {
-            String sql = "INSERT INTO dictionary (word, description) VALUES (?, ?)";
+            String html = "<body style=\"background-color: #FFF8DC;\">" +
+                    "<p style=\"font-family: 'Lobster'; font-size: 20px; font-weight: 700;\">";
+            html += "@" + target + "<br />";
+
+            int n = type.size();
+            for (int i = 0; i < n; i++) {
+                html += "* " + type.get(i) + "<br />";
+                html += "- " + definition.get(i) + "<br />";
+            }
+            html += "</p></body>";
+
+            String sql = "INSERT INTO dictionary (target, definition) VALUES (?, ?)";
 
             preparedStatement = connection.prepareStatement(sql);
-            preparedStatement.setString(1, word);
-            preparedStatement.setString(2, description);
+            preparedStatement.setString(1, target);
+            preparedStatement.setString(2, html);
 
             try {
                 preparedStatement.executeUpdate();
@@ -191,7 +202,7 @@ public class DatabaseConnection {
 
     public boolean deleteWordInDatabase(String word) {
         try {
-            String sql = "DELETE FROM dictionary WHERE word = ?";
+            String sql = "DELETE FROM dictionary WHERE target = ?";
             preparedStatement = connection.prepareStatement(sql);
 
             preparedStatement.setString(1, word);
@@ -208,7 +219,13 @@ public class DatabaseConnection {
         }
     }
 
-
+    public boolean updateWordInDatabase(String target, String IPA, List<String> type, List<String> definition) {
+        if (!deleteWordInDatabase(target))
+            return false;
+        if (!insertToDatabase(target, IPA, type, definition))
+            return false;
+        return true;
+    }
 
     public void insertIntoTrie() {
         try {
