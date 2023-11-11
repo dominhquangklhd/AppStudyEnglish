@@ -143,5 +143,35 @@
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor></ListView>
+      <ImageView fitHeight="150.0" fitWidth="45.0" layoutX="640.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../Image/MenuIMG/insert.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="150.0" fitWidth="45.0" layoutX="740.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../Image/MenuIMG/Adjust.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="150.0" fitWidth="45.0" layoutX="840.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../Image/MenuIMG/deleteWord.png" />
+         </image>
+      </ImageView>
+      <Label layoutX="634.0" layoutY="70.0" text="Insert">
+         <font>
+            <Font name="Arial Rounded MT Bold" size="20.0" />
+         </font>
+      </Label>
+      <Label layoutX="831.0" layoutY="70.0" text="Delete">
+         <font>
+            <Font name="Arial Rounded MT Bold" size="20.0" />
+         </font>
+      </Label>
+      <Label layoutX="743.0" layoutY="70.0" text="Edit">
+         <font>
+            <Font name="Arial Rounded MT Bold" size="20.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>

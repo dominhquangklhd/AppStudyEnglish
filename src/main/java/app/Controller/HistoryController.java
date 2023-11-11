@@ -120,6 +120,8 @@ public class HistoryController implements Initializable {
     public ImageView nextPage;
     @FXML
     public ImageView prePage;
+    @FXML
+    public Label deletaAll;
 
     //Nor
     private int number_of_page = 0;
@@ -268,6 +270,11 @@ public class HistoryController implements Initializable {
         scene = new Scene(root);
         stage.setScene (scene);
         stage.show();
+    }
+
+    public void deleteAll() {
+        Main.dictionaryManagement.wordHistoryList.clear();
+        StartHistory();
     }
 
     public void backHome(MouseEvent event) throws IOException {

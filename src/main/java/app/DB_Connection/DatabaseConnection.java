@@ -43,13 +43,13 @@ public class DatabaseConnection {
         try {
             // mn chỉnh theo db sql của mn.
 
-            url = "jdbc:mysql://localhost:3306/dictionary?autoReconnect=true&useSSL=false";
+            /*url = "jdbc:mysql://localhost:3306/dictionary?autoReconnect=true&useSSL=false";
             username = "root";
-            password = "Boquoctrung10012004";
+            password = "Boquoctrung10012004";*/
 
-            /*url = "jdbc:mysql://localhost:3306/appEnglish";
+            url = "jdbc:mysql://localhost:3306/appEnglish";
             username = "root";
-            password = "Minhquanadc@1";*/
+            password = "Minhquanadc@1";
 
             connection = DriverManager.getConnection(url, username, password);
 
@@ -76,13 +76,13 @@ public class DatabaseConnection {
         }
     }
 
-    public boolean insertToDatabase(String word, String description) {
+    public boolean insertToDatabase(String word, String definition) {
         try {
-            String sql = "INSERT INTO dictionary (word, description) VALUES (?, ?)";
+            String sql = "INSERT INTO dictionary (word, definition) VALUES (?, ?)";
 
             preparedStatement = connection.prepareStatement(sql);
             preparedStatement.setString(1, word);
-            preparedStatement.setString(2, description);
+            preparedStatement.setString(2, definition);
 
             try {
                 preparedStatement.executeUpdate();
