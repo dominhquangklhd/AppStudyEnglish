@@ -375,5 +375,17 @@
             <cursor>
                 <Cursor fx:constant="HAND" />
             </cursor></ListView>
+      <Label fx:id="deletaAll" layoutX="1020.0" layoutY="120.0" onMouseClicked="#deleteAll" prefHeight="45.0" prefWidth="180.0" style="-fx-cursor: hand;" text=" Delete all">
+         <font>
+            <Font name="Arial Rounded MT Bold" size="24.0" />
+         </font>
+         <graphic>
+            <ImageView fitHeight="30.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../Image/HistoryIMG/deleteAll.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Label>
     </children>
 </AnchorPane>
