@@ -12,6 +12,7 @@ import java.util.List;
 
 public class DatabaseConnection {
     private final int NumOfQuestionMC = 10;
+    public static final int NUmOfQuestionGameIMG = 10;
     String url;
     String username;
     String password;
@@ -22,10 +23,13 @@ public class DatabaseConnection {
     Trie trie;
 
     public boolean englishWord = true;
-
     private List<String> wordBySearch = new LinkedList<>();
-
     private List<List<String>> listDB_MC = new LinkedList<>();
+    private List<String> ansGameIMG = new LinkedList<>();
+
+    public List<String> getAnsGameIMG() {
+        return ansGameIMG;
+    }
 
     public List<String> getWordBySearch() {
         return wordBySearch;
@@ -43,13 +47,17 @@ public class DatabaseConnection {
         try {
             // mn chỉnh theo db sql của mn.
 
-            /*url = "jdbc:mysql://localhost:3306/dictionary?autoReconnect=true&useSSL=false";
+            url = "jdbc:mysql://localhost:3306/appenglish?autoReconnect=true&useSSL=false";
             username = "root";
-            password = "Boquoctrung10012004";*/
+            password = "Boquoctrung10012004";
 
-            url = "jdbc:mysql://localhost:3306/appEnglish";
+            /*url = "jdbc:mysql://localhost:3306/appEnglish";
             username = "root";
-            password = "Minhquanadc@1";
+            password = "Minhquanadc@1";*/
+
+            /*url = "jdbc:mysql://localhost:3306/dict_database";
+            username = "root";
+            password = "Q25012004kl#";*/
 
             connection = DriverManager.getConnection(url, username, password);
 
@@ -76,13 +84,26 @@ public class DatabaseConnection {
         }
     }
 
-    public boolean insertToDatabase(String word, String definition) {
+    public boolean insertToDatabase(String target, String IPA, List<String> type, List<List<String>> definition) {
         try {
-            String sql = "INSERT INTO dictionary (word, definition) VALUES (?, ?)";
+            String html = "<body style=\"background-color: #FFF8DC;\">" +
+                    "<p style=\"font-family: 'Lobster'; font-size: 20px; font-weight: 700;\">";
+            html += "@" + target + " /" + IPA + "/" + "<br />";
+
+            int n = type.size();
+            for (int i = 0; i < n; i++) {
+                html += "* " + type.get(i) + "<br />";
+                for (int j = 0; j < definition.get(i).size(); j++) {
+                    html += "- " + definition.get(i).get(j) + "<br />";
+                }
+            }
+            html += "</p></body>";
+
+            String sql = "INSERT INTO dictionary (target, definition) VALUES (?, ?)";
 
             preparedStatement = connection.prepareStatement(sql);
-            preparedStatement.setString(1, word);
-            preparedStatement.setString(2, definition);
+            preparedStatement.setString(1, target);
+            preparedStatement.setString(2, html);
 
             try {
                 preparedStatement.executeUpdate();
@@ -94,6 +115,12 @@ public class DatabaseConnection {
         } catch (SQLException e) {
             e.printStackTrace();
             return false;
+        } finally {
+            try {
+                preparedStatement.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
         }
     }
 
@@ -110,6 +137,11 @@ public class DatabaseConnection {
         }
     }
 
+    /**
+     * Unsave a word.
+     * @param word the word to unsave
+     */
+
     public void setUnSave(String word) {
         try {
             String sql = "UPDATE dictionary SET isSaved = false WHERE target = ?";
@@ -121,6 +153,12 @@ public class DatabaseConnection {
             System.out.println("Cannot unsaved this word");
         }
     }
+
+    /**
+     * Check if the word has been saved or not.
+     * @param word the word to consider
+     * @return true if the word has been saved
+     */
 
     public boolean isSaved(String word) {
         try {
@@ -163,6 +201,10 @@ public class DatabaseConnection {
         return res;
     }
 
+    /**
+     * Set the word to be saved if isSaved in database = true.
+     */
+
     public void setSavedWord() {
         try {
             String sql = "SELECT * FROM dictionary WHERE isSaved = true";
@@ -183,7 +225,7 @@ public class DatabaseConnection {
 
     public boolean deleteWordInDatabase(String word) {
         try {
-            String sql = "DELETE FROM dictionary WHERE word = ?";
+            String sql = "DELETE FROM dictionary WHERE target = ?";
             preparedStatement = connection.prepareStatement(sql);
 
             preparedStatement.setString(1, word);
@@ -200,7 +242,13 @@ public class DatabaseConnection {
         }
     }
 
-
+    public boolean updateWordInDatabase(String target, String IPA, List<String> type, List<List<String>> definition) {
+        if (!deleteWordInDatabase(target))
+            return false;
+        if (!insertToDatabase(target, IPA, type, definition))
+            return false;
+        return true;
+    }
 
     public void insertIntoTrie() {
         try {
@@ -239,6 +287,18 @@ public class DatabaseConnection {
         }
     }
 
+    public void dataGameIMG() throws SQLException {
+        String sql = "SELECT * FROM gameimage ORDER BY RAND() LIMIT ?";
+        preparedStatement = connection.prepareStatement(sql);
+        preparedStatement.setInt(1, NUmOfQuestionGameIMG);
+
+        resultSet = preparedStatement.executeQuery();
+
+        while (resultSet.next()) {
+            String ansIMG = resultSet.getString("nameimg");
+            ansGameIMG.add(ansIMG);
+        }
+    }
 
     public void DatabaseClose() {
         try {
