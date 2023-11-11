@@ -84,16 +84,18 @@ public class DatabaseConnection {
         }
     }
 
-    public boolean insertToDatabase(String target, String IPA, List<String> type, List<String> definition) {
+    public boolean insertToDatabase(String target, String IPA, List<String> type, List<List<String>> definition) {
         try {
             String html = "<body style=\"background-color: #FFF8DC;\">" +
                     "<p style=\"font-family: 'Lobster'; font-size: 20px; font-weight: 700;\">";
-            html += "@" + target + "<br />";
+            html += "@" + target + " /" + IPA + "/" + "<br />";
 
             int n = type.size();
             for (int i = 0; i < n; i++) {
                 html += "* " + type.get(i) + "<br />";
-                html += "- " + definition.get(i) + "<br />";
+                for (int j = 0; j < definition.get(i).size(); j++) {
+                    html += "- " + definition.get(i).get(j) + "<br />";
+                }
             }
             html += "</p></body>";
 
@@ -113,6 +115,12 @@ public class DatabaseConnection {
         } catch (SQLException e) {
             e.printStackTrace();
             return false;
+        } finally {
+            try {
+                preparedStatement.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
         }
     }
 
@@ -129,6 +137,11 @@ public class DatabaseConnection {
         }
     }
 
+    /**
+     * Unsave a word.
+     * @param word the word to unsave
+     */
+
     public void setUnSave(String word) {
         try {
             String sql = "UPDATE dictionary SET isSaved = false WHERE target = ?";
@@ -140,6 +153,12 @@ public class DatabaseConnection {
             System.out.println("Cannot unsaved this word");
         }
     }
+
+    /**
+     * Check if the word has been saved or not.
+     * @param word the word to consider
+     * @return true if the word has been saved
+     */
 
     public boolean isSaved(String word) {
         try {
@@ -182,6 +201,10 @@ public class DatabaseConnection {
         return res;
     }
 
+    /**
+     * Set the word to be saved if isSaved in database = true.
+     */
+
     public void setSavedWord() {
         try {
             String sql = "SELECT * FROM dictionary WHERE isSaved = true";
@@ -219,7 +242,7 @@ public class DatabaseConnection {
         }
     }
 
-    public boolean updateWordInDatabase(String target, String IPA, List<String> type, List<String> definition) {
+    public boolean updateWordInDatabase(String target, String IPA, List<String> type, List<List<String>> definition) {
         if (!deleteWordInDatabase(target))
             return false;
         if (!insertToDatabase(target, IPA, type, definition))
