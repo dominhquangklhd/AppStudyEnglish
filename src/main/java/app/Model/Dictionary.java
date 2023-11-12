@@ -10,6 +10,11 @@ public class Dictionary {
 
     }
 
+    /**
+     * Creates a new word.
+     * @param tg the word
+     * @param exp the explaination for the word
+     */
     public void setWord(String tg, String exp) {
         Word word = new Word();
         word.setWordTarget(tg);

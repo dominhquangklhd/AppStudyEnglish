@@ -25,6 +25,10 @@ public class DictionaryManagement {
 
     public DictionaryManagement() {
     }
+
+    /**
+     * Add words to the dictionary.
+     */
     public void insertFromCommandline() {
         Scanner in = new Scanner(System.in);
         System.out.print("Enter the number of words you want to insert: ");
@@ -41,6 +45,11 @@ public class DictionaryManagement {
         in.close();
     }
 
+    /**
+     * Creates a file to store data for the dictionary.
+     * @throws IOException if an I/O error occurs
+     */
+
     public void createNewFile() throws IOException {
         File dicFile = new File("txt/dictionaries.txt");
         if (dicFile.exists()) {
@@ -50,6 +59,11 @@ public class DictionaryManagement {
             System.out.println("Created!");
         }
     }
+
+    /**
+     * Creates a dictionary using data in file.
+     * @throws IOException
+     */
 
     public void insertFromFile() throws IOException {
         String filePath = "txt/dictionaries.txt";
@@ -69,6 +83,11 @@ public class DictionaryManagement {
         }
     }
 
+    /**
+     * Create a history of using dictionary using data in file
+     * @throws IOException
+     */
+
     public void insertHistoryFromFile() throws IOException {
         String filePath = "txt/history.txt";
         try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
@@ -81,6 +100,11 @@ public class DictionaryManagement {
             System.out.println("ERROR: " + e.getMessage());
         }
     }
+
+    /**
+     * Exports history using dictionary to a file.
+     * @throws IOException
+     */
 
     public void historyExportToFile() throws IOException {
         File path = new File("txt/history.txt");
@@ -95,7 +119,9 @@ public class DictionaryManagement {
         bufferedWriter.close();
     }
 
-
+    /**
+     * Lookup for a word and return the definition of the word.
+     */
     public void dictionaryLookup() {
         Scanner sc = new Scanner(System.in);
         System.out.print("Enter a word you want to look up: ");
@@ -111,6 +137,11 @@ public class DictionaryManagement {
             System.out.println("The word does not exist in this dictionary!");
         }
     }
+
+    /**
+     * Creates a multiple choice game.
+     * @throws SQLException if an sql error occurs
+     */
 
     public void gameMultipleChoice() throws SQLException {
         int num = 1;
@@ -193,6 +224,11 @@ public class DictionaryManagement {
         }
     }
 
+    /**
+     * Adds a new word to the dictionary.
+     * @throws IOException if an I/O error occurs
+     */
+
     public void addNewWord() throws IOException {
         System.out.print("Add new word!\n");
         Scanner sc = new Scanner(System.in);
@@ -217,6 +253,11 @@ public class DictionaryManagement {
         }
     }
 
+    /**
+     * Update the definition of a word.
+     * @throws IOException if an io error occurs
+     */
+
     public void updateWord() throws IOException {
         Scanner sc = new Scanner(System.in);
         System.out.print("Enter your word you want to update: ");
@@ -231,6 +272,11 @@ public class DictionaryManagement {
         dictionaryExportToFile();
         sc.close();
     }
+
+    /**
+     * Deletes a word in the dictionary.
+     * @throws IOException if an I/O error occurs
+     */
 
     public void deleteWord() throws IOException {
         Scanner sc = new Scanner(System.in);
@@ -248,6 +294,10 @@ public class DictionaryManagement {
     public void removeDuplicates() {
 
     }
+
+    /**
+     * Find words in dictionary that contain the searched word.
+     */
 
     public void dictionarySearcher() {
         Scanner sc = new Scanner(System.in);
@@ -275,6 +325,11 @@ public class DictionaryManagement {
         sc.close();
     }
 
+    /**
+     * Exports the data of dictionary to a file.
+     * @throws IOException
+     */
+
     public void dictionaryExportToFile() throws IOException {
         File path = new File("txt/dictionaries.txt");
         BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(path));
@@ -290,6 +345,10 @@ public class DictionaryManagement {
         bufferedWriter.close();
     }
 
+    /**
+     * Display all words in the dictionary.
+     */
+
     public void showAllWords() {
         int i = 1;
         System.out.println("No      |  English     |    Vietnamese");
@@ -301,6 +360,11 @@ public class DictionaryManagement {
         }
         System.out.println("...");
     }
+
+    /**
+     * Provides an advanced command-line interface for managing a dictionary with various actions.
+     * @throws IOException if an I/O error occurs
+     */
 
     public void dictionaryAdvanced() throws IOException {
         System.out.print("Welcome to My Application!\n" +
