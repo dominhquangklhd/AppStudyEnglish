@@ -5,10 +5,18 @@ import java.io.IOException;
 public class DictionaryCommandline {
     public DictionaryManagement dictionaryManagement = new DictionaryManagement();
 
+    /**
+     * Imports words from a file into the dictionary.
+     * @throws IOException if an io error occurs
+     */
+
     public void importFromFile() throws IOException {
         dictionaryManagement.insertFromFile();
     }
 
+    /**
+     * Display all words in the dictionary.
+     */
     public void showAllWords() {
         int i = 1;
         System.out.println("No      |  English     |    Vietnamese");
@@ -20,6 +28,10 @@ public class DictionaryCommandline {
         }
         System.out.println("...");
     }
+
+    /**
+     * Inserts word, and then show it.
+     */
 
     public void dictionaryBasic() {
         dictionaryManagement.insertFromCommandline();
