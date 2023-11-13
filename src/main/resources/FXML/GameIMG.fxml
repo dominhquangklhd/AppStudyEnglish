@@ -149,9 +149,9 @@
                   <Font size="27.0" />
                </font>
             </Label>
-            <ImageView fitHeight="150.0" fitWidth="240.0" layoutX="55.0" layoutY="148.0" onMouseClicked="#intoSportsTopic" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="137.0" fitWidth="200.0" layoutX="68.0" layoutY="155.0" onMouseClicked="#intoSportsTopic" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../Image/GameIMG/sports/running.jpg" />
+                  <Image url="@../Image/GameIMG/Learn-Sport-Names-List-of-Sports-in-English.jpg" />
                </image>
                <cursor>
                   <Cursor fx:constant="HAND" />
@@ -167,7 +167,7 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
                <image>
-                  <Image url="@../Image/ItemsGame/q.jpg" />
+                  <Image url="@../Image/GameIMG/body%20parts.jpg" />
                </image>
             </ImageView>
             <Label alignment="CENTER" layoutX="361.0" layoutY="298.0" prefHeight="50.0" prefWidth="112.0" text="Body Parts">
@@ -175,9 +175,9 @@
                   <Font size="15.0" />
                </font>
             </Label>
-            <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="775.0" layoutY="148.0" onMouseClicked="#intoJobsTopic" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="150.0" fitWidth="155.0" layoutX="775.0" layoutY="148.0" onMouseClicked="#intoJobsTopic" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../Image/ItemsGame/q.jpg" />
+                  <Image url="@../Image/GameIMG/work.jpg" />
                </image>
                <cursor>
                   <Cursor fx:constant="HAND" />
@@ -188,9 +188,9 @@
                   <Font size="15.0" />
                </font>
             </Label>
-            <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="987.0" layoutY="148.0" onMouseClicked="#intoUniverseTopic" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="150.0" fitWidth="150.0" layoutX="987.0" layoutY="142.0" onMouseClicked="#intoUniverseTopic" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../Image/ItemsGame/q.jpg" />
+                  <Image url="@../Image/GameIMG/uni.jpg" />
                </image>
                <cursor>
                   <Cursor fx:constant="HAND" />
@@ -201,22 +201,22 @@
                   <Font size="15.0" />
                </font>
             </Label>
-            <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="80.0" layoutY="379.0" onMouseClicked="#intoFoodTopic" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="150.0" fitWidth="155.0" layoutX="98.0" layoutY="379.0" onMouseClicked="#intoFoodTopic" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../Image/ItemsGame/q.jpg" />
+                  <Image url="@../Image/GameIMG/f2.jpg" />
                </image>
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>
             </ImageView>
-            <Label alignment="CENTER" layoutX="103.0" layoutY="529.0" prefHeight="50.0" prefWidth="104.0" text="Food">
+            <Label alignment="CENTER" layoutX="126.0" layoutY="529.0" prefHeight="50.0" prefWidth="84.0" text="Food">
                <font>
                   <Font size="15.0" />
                </font>
             </Label>
             <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="342.0" layoutY="379.0" onMouseClicked="#intoDrinksTopic" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../Image/ItemsGame/q.jpg" />
+                  <Image url="@../Image/GameIMG/beverage.jpg" />
                </image>
                <cursor>
                   <Cursor fx:constant="HAND" />
@@ -227,9 +227,9 @@
                   <Font size="15.0" />
                </font>
             </Label>
-            <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="552.0" layoutY="379.0" onMouseClicked="#intoTechnologyTopic" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="150.0" fitWidth="165.0" layoutX="545.0" layoutY="370.0" onMouseClicked="#intoTechnologyTopic" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../Image/ItemsGame/q.jpg" />
+                  <Image url="@../Image/GameIMG/Technology.png" />
                </image>
                <cursor>
                   <Cursor fx:constant="HAND" />
@@ -242,7 +242,7 @@
             </Label>
             <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="775.0" layoutY="379.0" onMouseClicked="#intoHousesTopic" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../Image/ItemsGame/q.jpg" />
+                  <Image url="@../Image/GameIMG/hous.jpg" />
                </image>
                <cursor>
                   <Cursor fx:constant="HAND" />
@@ -253,9 +253,9 @@
                   <Font size="15.0" />
                </font>
             </Label>
-            <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="987.0" layoutY="379.0" onMouseClicked="#intoSchoolsTopic" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="137.0" fitWidth="147.0" layoutX="994.0" layoutY="383.0" onMouseClicked="#intoSchoolsTopic" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../Image/ItemsGame/q.jpg" />
+                  <Image url="@../Image/GameIMG/sch1.jpg" />
                </image>
                <cursor>
                   <Cursor fx:constant="HAND" />
