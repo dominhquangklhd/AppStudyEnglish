@@ -11,7 +11,7 @@ import java.util.List;
 
 
 public class DatabaseConnection {
-    private final int NumOfQuestionMC = 10;
+    public static final int NumOfQuestionMC = 15;
     public static final int NUmOfQuestionGameIMG = 10;
     String url;
     String username;
@@ -43,6 +43,10 @@ public class DatabaseConnection {
         wordBySearch.clear();
     }
 
+    /**
+     * Creates a database connection.
+     */
+
     public void createConnection() {
         try {
             // mn chỉnh theo db sql của mn.
@@ -66,6 +70,10 @@ public class DatabaseConnection {
         }
     }
 
+    /**
+     * Retrieves words from the database and inserts them into the application's dictionary.
+     */
+
     public void insertFromDatabase() {
         try {
             preparedStatement = connection.prepareStatement("SELECT * FROM dictionary");
@@ -83,6 +91,16 @@ public class DatabaseConnection {
             System.out.println(e.getMessage());
         }
     }
+
+    /**
+     * Inserts a new word into the database.
+     *
+     * @param target      The target word.
+     * @param IPA         The International Phonetic Alphabet representation.
+     * @param type        The list of word types.
+     * @param definition  The list of definitions corresponding to each type.
+     * @return True if the word is successfully inserted, false otherwise.
+     */
 
     public boolean insertToDatabase(String target, String IPA, List<String> type, List<List<String>> definition) {
         try {
@@ -123,6 +141,12 @@ public class DatabaseConnection {
             }
         }
     }
+
+    /**
+     * Marks a word as saved in the database.
+     *
+     * @param word The word to be saved.
+     */
 
     public void setSave(String word) {
         try {
@@ -181,6 +205,12 @@ public class DatabaseConnection {
         return false;
     }
 
+    /**
+     * Finds the definition of a word in the database.
+     * @param word The word to search for.
+     * @return The definition of the word, or an empty string if the word is not found.
+     */
+
     public String findWordInDatabase(String word) {
         String res = "";
         try {
@@ -223,6 +253,13 @@ public class DatabaseConnection {
         }
     }
 
+    /**
+     * Deletes a word from the database.
+     *
+     * @param word The word to be deleted.
+     * @return True if the word is successfully deleted, false otherwise.
+     */
+
     public boolean deleteWordInDatabase(String word) {
         try {
             String sql = "DELETE FROM dictionary WHERE target = ?";
@@ -242,6 +279,16 @@ public class DatabaseConnection {
         }
     }
 
+    /**
+     * Updates a word in the database.
+     *
+     * @param target      The target word.
+     * @param IPA         The International Phonetic Alphabet representation.
+     * @param type        The list of word types.
+     * @param definition  The list of definitions corresponding to each type.
+     * @return True if the word is successfully updated, false otherwise.
+     */
+
     public boolean updateWordInDatabase(String target, String IPA, List<String> type, List<List<String>> definition) {
         if (!deleteWordInDatabase(target))
             return false;
@@ -249,6 +296,10 @@ public class DatabaseConnection {
             return false;
         return true;
     }
+
+    /**
+     * Inserts words from the database into the trie data structure.
+     */
 
     public void insertIntoTrie() {
         try {
@@ -266,6 +317,12 @@ public class DatabaseConnection {
             System.out.println("Can not insert into trie!");
         }
     }
+
+    /**
+     * Fetches multiple-choice game questions from the database and populates the list.
+     *
+     * @throws SQLException If a database access error occurs.
+     */
 
     public void gameDataBaseMultipleChoice() throws SQLException {
         String sql = "SELECT * FROM abcdquestion ORDER BY RAND() LIMIT ?";
@@ -287,6 +344,11 @@ public class DatabaseConnection {
         }
     }
 
+    /**
+     * Gets data for the game from a game database.
+     * @throws SQLException if an error occurs
+     */
+
     public void dataGameIMG() throws SQLException {
         String sql = "SELECT * FROM gameimage ORDER BY RAND() LIMIT ?";
         preparedStatement = connection.prepareStatement(sql);
@@ -299,6 +361,10 @@ public class DatabaseConnection {
             ansGameIMG.add(ansIMG);
         }
     }
+
+    /**
+     * Close the database connection.
+     */
 
     public void DatabaseClose() {
         try {
