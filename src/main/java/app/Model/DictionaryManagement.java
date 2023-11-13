@@ -1,14 +1,12 @@
 package app.Model;
 
 import app.DB_Connection.DatabaseConnection;
-import app.Main;
 
 import java.io.*;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
-import java.sql.SQLException;
 
 public class DictionaryManagement {
     public static boolean exit = false;

@@ -32,6 +32,17 @@ public class MenuGame {
     }
 
     @FXML
+    void intoMCGame(MouseEvent event) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/FXML/MultipleChoiceGame.fxml"));
+        Parent root = loader.load();
+
+        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        scene = new Scene(root);
+        stage.setScene (scene);
+        stage.show();
+    }
+
+    @FXML
     void backToMainMenu(MouseEvent event) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/FXML/Menu.fxml"));
         Parent root = loader.load();
