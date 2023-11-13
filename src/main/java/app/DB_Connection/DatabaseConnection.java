@@ -43,21 +43,25 @@ public class DatabaseConnection {
         wordBySearch.clear();
     }
 
+    /**
+     * Creates a database connection.
+     */
+
     public void createConnection() {
         try {
             // mn chỉnh theo db sql của mn.
 
-            /*url = "jdbc:mysql://localhost:3306/dictionary?autoReconnect=true&useSSL=false";
+            url = "jdbc:mysql://localhost:3306/appenglish?autoReconnect=true&useSSL=false";
             username = "root";
-            password = "Boquoctrung10012004";*/
+            password = "Boquoctrung10012004";
 
             /*url = "jdbc:mysql://localhost:3306/appEnglish";
             username = "root";
             password = "Minhquanadc@1";*/
 
-            url = "jdbc:mysql://localhost:3306/dict_database";
+            /*url = "jdbc:mysql://localhost:3306/dict_database";
             username = "root";
-            password = "Q25012004kl#";
+            password = "Q25012004kl#";*/
 
             connection = DriverManager.getConnection(url, username, password);
 
@@ -65,6 +69,10 @@ public class DatabaseConnection {
             System.out.println(e.getMessage());
         }
     }
+
+    /**
+     * Retrieves words from the database and inserts them into the application's dictionary.
+     */
 
     public void insertFromDatabase() {
         try {
@@ -84,13 +92,36 @@ public class DatabaseConnection {
         }
     }
 
-    public boolean insertToDatabase(String word, String description) {
+    /**
+     * Inserts a new word into the database.
+     *
+     * @param target      The target word.
+     * @param IPA         The International Phonetic Alphabet representation.
+     * @param type        The list of word types.
+     * @param definition  The list of definitions corresponding to each type.
+     * @return True if the word is successfully inserted, false otherwise.
+     */
+
+    public boolean insertToDatabase(String target, String IPA, List<String> type, List<List<String>> definition) {
         try {
-            String sql = "INSERT INTO dictionary (word, description) VALUES (?, ?)";
+            String html = "<body style=\"background-color: #FFF8DC;\">" +
+                    "<p style=\"font-family: 'Lobster'; font-size: 20px; font-weight: 700;\">";
+            html += "@" + target + " /" + IPA + "/" + "<br />";
+
+            int n = type.size();
+            for (int i = 0; i < n; i++) {
+                html += "* " + type.get(i) + "<br />";
+                for (int j = 0; j < definition.get(i).size(); j++) {
+                    html += "- " + definition.get(i).get(j) + "<br />";
+                }
+            }
+            html += "</p></body>";
+
+            String sql = "INSERT INTO dictionary (target, definition) VALUES (?, ?)";
 
             preparedStatement = connection.prepareStatement(sql);
-            preparedStatement.setString(1, word);
-            preparedStatement.setString(2, description);
+            preparedStatement.setString(1, target);
+            preparedStatement.setString(2, html);
 
             try {
                 preparedStatement.executeUpdate();
@@ -102,8 +133,20 @@ public class DatabaseConnection {
         } catch (SQLException e) {
             e.printStackTrace();
             return false;
+        } finally {
+            try {
+                preparedStatement.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
         }
     }
+
+    /**
+     * Marks a word as saved in the database.
+     *
+     * @param word The word to be saved.
+     */
 
     public void setSave(String word) {
         try {
@@ -118,6 +161,11 @@ public class DatabaseConnection {
         }
     }
 
+    /**
+     * Unsave a word.
+     * @param word the word to unsave
+     */
+
     public void setUnSave(String word) {
         try {
             String sql = "UPDATE dictionary SET isSaved = false WHERE target = ?";
@@ -129,6 +177,12 @@ public class DatabaseConnection {
             System.out.println("Cannot unsaved this word");
         }
     }
+
+    /**
+     * Check if the word has been saved or not.
+     * @param word the word to consider
+     * @return true if the word has been saved
+     */
 
     public boolean isSaved(String word) {
         try {
@@ -151,6 +205,12 @@ public class DatabaseConnection {
         return false;
     }
 
+    /**
+     * Finds the definition of a word in the database.
+     * @param word The word to search for.
+     * @return The definition of the word, or an empty string if the word is not found.
+     */
+
     public String findWordInDatabase(String word) {
         String res = "";
         try {
@@ -171,6 +231,10 @@ public class DatabaseConnection {
         return res;
     }
 
+    /**
+     * Set the word to be saved if isSaved in database = true.
+     */
+
     public void setSavedWord() {
         try {
             String sql = "SELECT * FROM dictionary WHERE isSaved = true";
@@ -189,9 +253,16 @@ public class DatabaseConnection {
         }
     }
 
+    /**
+     * Deletes a word from the database.
+     *
+     * @param word The word to be deleted.
+     * @return True if the word is successfully deleted, false otherwise.
+     */
+
     public boolean deleteWordInDatabase(String word) {
         try {
-            String sql = "DELETE FROM dictionary WHERE word = ?";
+            String sql = "DELETE FROM dictionary WHERE target = ?";
             preparedStatement = connection.prepareStatement(sql);
 
             preparedStatement.setString(1, word);
@@ -208,7 +279,27 @@ public class DatabaseConnection {
         }
     }
 
+    /**
+     * Updates a word in the database.
+     *
+     * @param target      The target word.
+     * @param IPA         The International Phonetic Alphabet representation.
+     * @param type        The list of word types.
+     * @param definition  The list of definitions corresponding to each type.
+     * @return True if the word is successfully updated, false otherwise.
+     */
 
+    public boolean updateWordInDatabase(String target, String IPA, List<String> type, List<List<String>> definition) {
+        if (!deleteWordInDatabase(target))
+            return false;
+        if (!insertToDatabase(target, IPA, type, definition))
+            return false;
+        return true;
+    }
+
+    /**
+     * Inserts words from the database into the trie data structure.
+     */
 
     public void insertIntoTrie() {
         try {
@@ -226,6 +317,12 @@ public class DatabaseConnection {
             System.out.println("Can not insert into trie!");
         }
     }
+
+    /**
+     * Fetches multiple-choice game questions from the database and populates the list.
+     *
+     * @throws SQLException If a database access error occurs.
+     */
 
     public void gameDataBaseMultipleChoice() throws SQLException {
         String sql = "SELECT * FROM abcdquestion ORDER BY RAND() LIMIT ?";
@@ -247,6 +344,11 @@ public class DatabaseConnection {
         }
     }
 
+    /**
+     * Gets data for the game from a game database.
+     * @throws SQLException if an error occurs
+     */
+
     public void dataGameIMG() throws SQLException {
         String sql = "SELECT * FROM gameimage ORDER BY RAND() LIMIT ?";
         preparedStatement = connection.prepareStatement(sql);
@@ -259,6 +361,10 @@ public class DatabaseConnection {
             ansGameIMG.add(ansIMG);
         }
     }
+
+    /**
+     * Close the database connection.
+     */
 
     public void DatabaseClose() {
         try {
