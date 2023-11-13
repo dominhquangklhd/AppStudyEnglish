@@ -17,5 +17,10 @@
             <Image url="@../Image/ItemsGame/back1.png" />
          </image>
       </ImageView>
+      <Button layoutX="101.0" layoutY="350.0" mnemonicParsing="false" onMouseClicked="#intoMCGame" prefHeight="100.0" prefWidth="200.0" text="Multiple TT" textAlignment="CENTER">
+         <font>
+            <Font name=".VnBlack" size="25.0" />
+         </font>
+      </Button>
    </children>
 </AnchorPane>

@@ -1,6 +1,7 @@
 package app.Controller;
 
 import app.DB_Connection.DatabaseConnection;
+import app.DB_Connection.DatabaseTXTGameIMG;
 import javafx.animation.TranslateTransition;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -78,15 +79,20 @@ public class GameIMG implements Initializable {
     @FXML
     private Pane ansPane;
 
+    @FXML
+    private Pane topicPane;
+
     private EventHandler<ActionEvent> buttonClickHandler;
-    private DatabaseConnection databaseGame = new DatabaseConnection();
+    private DatabaseTXTGameIMG databaseTXTGameIMG = new DatabaseTXTGameIMG();
     private Stage stage;
     private Scene scene;
     private Image image;
-    private List<String> ansGame;
+    private List<String> ansGame = new LinkedList<>();
+    private List<String> topicGame = new LinkedList<>();
     private static int curQ = 0;
     private int numScore = 0;
     private int numAns = 0;
+    private String topicName = "";
 
     HashMap<Button, Boolean> buttonHashMap = new HashMap<>();
     private List<TranslateTransition> shakeList = new LinkedList<>();
@@ -104,7 +110,7 @@ public class GameIMG implements Initializable {
     //in check ans pane.
     public void setAnsPic() {
         String prepareLink = "file:src/main/resources/Image/GameIMG/";
-        Image tmpIMG = new Image(prepareLink + ansGame.get(numAns) + ".jpg");
+        Image tmpIMG = new Image(prepareLink + topicName + "/" + ansGame.get(numAns) + ".jpg");
         ansIMGView.setImage(tmpIMG);
     }
 
@@ -138,6 +144,78 @@ public class GameIMG implements Initializable {
         menuSettingPane.setVisible(true);
     }
 
+    public void topicCommon(int topic) {
+        databaseTXTGameIMG.readFileTXT(topic);
+
+        for (int i = 0; i < DatabaseTXTGameIMG.NUmOfQuestionGameIMG; i++) {
+            ansGame.add(databaseTXTGameIMG.getListDBGame().get(i));
+        }
+
+        if (topicGame.isEmpty()) {
+            for (int i = 0; i < DatabaseTXTGameIMG.NumOfTopic; i++) {
+                topicGame.add(databaseTXTGameIMG.getListTopic().get(i));
+            }
+        }
+
+        topicName = topicGame.get(topic - 1);
+        score.setText(numScore + "");
+
+        topicPane.setVisible(false);
+        mainPaneGame.setVisible(true);
+
+        questionCommon();
+    }
+
+    @FXML
+    void intoAnimalTopic() {
+        topicCommon(DatabaseTXTGameIMG.ANIMAL);
+    }
+
+    @FXML
+    void intoSportsTopic() {
+        topicCommon(DatabaseTXTGameIMG.SPORTS);
+    }
+
+    @FXML
+    void intoBodyPartsTopic() {
+        topicCommon(DatabaseTXTGameIMG.BODY_PARTS);
+    }
+
+    @FXML
+    void intoJobsTopic() {
+        topicCommon(DatabaseTXTGameIMG.JOBS);
+    }
+
+    @FXML
+    void intoUniverseTopic() {
+        topicCommon(DatabaseTXTGameIMG.UNIVERSE);
+    }
+
+    @FXML
+    void intoFoodTopic() {
+        topicCommon(DatabaseTXTGameIMG.FOOD);
+    }
+
+    @FXML
+    void intoDrinksTopic() {
+        topicCommon(DatabaseTXTGameIMG.DRINKS);
+    }
+
+    @FXML
+    void intoTechnologyTopic() {
+        topicCommon(DatabaseTXTGameIMG.TECHNOLOGY);
+    }
+
+    @FXML
+    void intoHousesTopic() {
+        topicCommon(DatabaseTXTGameIMG.HOUSES);
+    }
+
+    @FXML
+    void intoSchoolsTopic() {
+        topicCommon(DatabaseTXTGameIMG.SCHOOLS);
+    }
+
     @FXML
     void backToMenuGame(MouseEvent event) throws IOException {
         resetDataGame();
@@ -158,9 +236,9 @@ public class GameIMG implements Initializable {
     }
 
     @FXML
-    void restartGame(MouseEvent event) throws SQLException {
-        mainPaneGame.setDisable(false);
-        buttonNext.setVisible(true);
+    void restartGame(MouseEvent event) {
+        mainPaneGame.setVisible(false);
+        topicPane.setVisible(true);
         finishPane.setVisible(false);
         resetDataGame();
         startGameIMG();
@@ -170,11 +248,13 @@ public class GameIMG implements Initializable {
         mainPaneGame.setDisable(false);
         menuSettingPane.setVisible(false);
         buttonNext.setText("next");
+
         curQ = 0;
         numScore = 0;
 
-        databaseGame.DatabaseClose();
-        databaseGame = new DatabaseConnection();
+        ansGame.clear();
+
+        databaseTXTGameIMG = new DatabaseTXTGameIMG();
     }
 
     public void setShakeTransition(TranslateTransition shakeTransition, Button button) {
@@ -241,7 +321,7 @@ public class GameIMG implements Initializable {
     // set up question.
     public void questionCommon() {
         String prepareLink = "file:src/main/resources/Image/GameIMG/";
-        image = new Image(prepareLink + ansGame.get(curQ) + ".jpg");
+        image = new Image(prepareLink + topicName + "/" + ansGame.get(curQ) + ".jpg");
         imageView.setImage(image);
 
         // trộn chữ.
@@ -267,20 +347,13 @@ public class GameIMG implements Initializable {
             dataChars.getChildren().add(button);
         }
 
-        numQ.setText(curQ + 1 + "/10");
+        numQ.setText(curQ + 1 + "/" + DatabaseTXTGameIMG.NUmOfQuestionGameIMG);
     }
 
     @FXML
-    public void startGameIMG() throws SQLException {
-        databaseGame.createConnection();
-        databaseGame.dataGameIMG();
-        ansGame = databaseGame.getAnsGameIMG();
-        score.setText(numScore + "");
-
+    public void startGameIMG() {
         introducePane.setVisible(false);
-        mainPaneGame.setVisible(true);
-
-        questionCommon();
+        topicPane.setVisible(true);
     }
 
     @FXML
@@ -309,5 +382,6 @@ public class GameIMG implements Initializable {
          introducePane.setVisible(true);
          finishPane.setVisible(false);
          ansPane.setVisible(false);
+         topicPane.setVisible(false);
     }
 }

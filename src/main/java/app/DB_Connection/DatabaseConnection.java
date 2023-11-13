@@ -11,7 +11,7 @@ import java.util.List;
 
 
 public class DatabaseConnection {
-    private final int NumOfQuestionMC = 10;
+    public static final int NumOfQuestionMC = 15;
     public static final int NUmOfQuestionGameIMG = 10;
     String url;
     String username;
