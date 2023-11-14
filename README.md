@@ -19,7 +19,7 @@
 - Nghĩa của từ viết ở dạng HTML tăng tính thẩm mĩ
 - API Google translate: dịch từ Anh<>Việt
 - API Text to Speech: phát âm từ Anh<>Việt
-- Trò chơi ghép chữ thành từ Tiếng Anh hoàn chỉnh
+- Trò chơi ghép chữ thành từ Tiếng Anh hoàn chỉnh, điền từ vào chỗ trống
 
 ## Công nghệ
 
@@ -36,6 +36,9 @@
 
 ![Capture](https://github.com/dominhquangklhd/AppStudyEnglish/assets/123967452/cc858497-9514-4ad9-880e-2ecc23e09cd3)
 
+![image](https://github.com/dominhquangklhd/AppStudyEnglish/assets/123967452/cf4e005f-2b2b-44e2-9625-4571346855ee)
+
+
 
 ## Hướng dẫn cài đặt
 
@@ -43,11 +46,6 @@
 - Clone project này về bằng lệnh git.
   ```
   git clone https://github.com/dominhquangklhd/AppStudyEnglish.git
-  ```
-- Chạy bằng Maven.
-  ```
-  cd AppStudyEnglish
-  mvn clean javafx:run
   ```
 
 
