@@ -17,11 +17,9 @@ public class DatabaseConnection {
     String username;
     String password;
     DictionaryCommandline cmdLine = new DictionaryCommandline();
-    Connection connection;
-    PreparedStatement preparedStatement;
-    ResultSet resultSet;
-    Trie trie;
-
+    protected Connection connection;
+    protected PreparedStatement preparedStatement;
+    protected ResultSet resultSet;
     public boolean englishWord = true;
     private List<String> wordBySearch = new LinkedList<>();
     private List<List<String>> listDB_MC = new LinkedList<>();
@@ -51,13 +49,13 @@ public class DatabaseConnection {
         try {
             // mn chỉnh theo db sql của mn.
 
-            /*url = "jdbc:mysql://localhost:3306/appenglish?autoReconnect=true&useSSL=false";
+            url = "jdbc:mysql://localhost:3306/appenglish?autoReconnect=true&useSSL=false";
             username = "root";
-            password = "Boquoctrung10012004";*/
+            password = "Boquoctrung10012004";
 
-            url = "jdbc:mysql://localhost:3306/appEnglish";
+            /*url = "jdbc:mysql://localhost:3306/appEnglish";
             username = "root";
-            password = "Minhquanadc@1";
+            password = "Minhquanadc@1";*/
 
             /*url = "jdbc:mysql://localhost:3306/dict_database";
             username = "root";
@@ -289,7 +287,7 @@ public class DatabaseConnection {
             int deletedRow = preparedStatement.executeUpdate();
             if (deletedRow <= 0)
                 return false;
-            insertIntoTrie();
+            Main.trie.deleteWord(word);
             return true;
         }
         catch (SQLException e) {
