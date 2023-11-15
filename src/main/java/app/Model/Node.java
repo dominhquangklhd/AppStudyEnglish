@@ -7,7 +7,7 @@ public class Node {
     public Node[] next = new Node[SizeNode];
     public boolean isEnd = false;
 
-    Node(){
+    Node() {
 
     }
 }

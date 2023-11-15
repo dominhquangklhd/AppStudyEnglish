@@ -1,5 +1,9 @@
 package app.Model;
 
+import app.DB_Connection.DatabaseConnection;
+import app.Main;
+
+import java.sql.SQLException;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -9,7 +13,7 @@ public class Trie {
     private static int numOfWord = 0;
     private List<String> wordsBySearching = new LinkedList<>();
 
-    public Trie(){
+    public Trie() {
 
     }
 
@@ -101,5 +105,47 @@ public class Trie {
             cur = cur.next[idx];
         }
         return cur.count;
+    }
+
+    public void deleteWord(String word) {
+        boolean checkString = word.matches("^[a-z ]*$");
+        if (checkString) {
+            deleteWord(root, word, 0);
+        }
+    }
+
+    private boolean deleteWord(Node cur, String word, int depth) {
+        if (cur == null) {
+            return false;
+        }
+
+        if (depth == word.length()) {
+            if (cur.isEnd) {
+                cur.isEnd = false; // Mark as not the end of a word
+                return isLeafNode(cur);
+            }
+            return false;
+        }
+
+        int idx = word.charAt(depth) - 'a';
+        if (idx == ' ' - 'a') {
+            idx = Node.SizeNode - 1;
+        }
+
+        if (deleteWord(cur.next[idx], word, depth + 1)) {
+            cur.next[idx] = null; // Remove the child node if it's unnecessary
+            return !isLeafNode(cur) && !cur.isEnd;
+        }
+
+        return false;
+    }
+
+    private boolean isLeafNode(Node node) {
+        for (int i = 0; i < Node.SizeNode; i++) {
+            if (node.next[i] != null) {
+                return false;
+            }
+        }
+        return true;
     }
 }

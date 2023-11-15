@@ -44,7 +44,7 @@ public class GGTranslateAPI {
             String input;
 
             while((input = buffer.readLine()) != null) {
-                output = output.append(input);
+                output.append(input);
             }
             buffer.close();
             return output.toString();
@@ -52,9 +52,5 @@ public class GGTranslateAPI {
             e.printStackTrace();
             return "ERROR TRANSLATING";
         }
-    }
-
-    public static void main(String[] args) {
-        System.out.print(translate("Họ chính là chúng ta"));
     }
 }

@@ -1,6 +1,7 @@
 package app.Controller;
 
 import app.DB_Connection.DatabaseConnection;
+import app.Main;
 import javafx.animation.*;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -76,7 +77,6 @@ public class MultipleChoiceGame implements Initializable {
 
     private Stage stage;
     private Scene scene;
-    private DatabaseConnection databaseConnection = new DatabaseConnection();
     private String question;
     private String A;
     private String B;
@@ -95,10 +95,9 @@ public class MultipleChoiceGame implements Initializable {
 
     @FXML
     void startGame(MouseEvent event) throws SQLException {
-        databaseConnection.createConnection();
-        databaseConnection.gameDataBaseMultipleChoice();
+        Main.databaseConnection.gameDataBaseMultipleChoice();
 
-        dataGame = databaseConnection.getListDB_MC();
+        dataGame = Main.databaseConnection.getListDB_MC();
 
         setUpQuestion();
 
@@ -200,7 +199,7 @@ public class MultipleChoiceGame implements Initializable {
 
     @FXML
     void exitGame(MouseEvent event) throws IOException {
-        databaseConnection.DatabaseClose();
+        //Main.databaseConnection.DatabaseClose();
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/FXML/MenuGame.fxml"));
         Parent root = loader.load();
 
@@ -229,11 +228,11 @@ public class MultipleChoiceGame implements Initializable {
         score = 0;
         numQCheckAns = 0;
         numQ = 0;
-        databaseConnection.DatabaseClose();
+
         dataGame.clear();
         ansDetails.clear();
         quesInGame.clear();
-        databaseConnection = new DatabaseConnection();
+
         startGame(event);
     }
 
