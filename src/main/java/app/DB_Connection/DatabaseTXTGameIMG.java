@@ -41,7 +41,7 @@ public class DatabaseTXTGameIMG {
                 if (numTopic == 0) {
                     String[] split = line.split("-");
                     listTopic.addAll(Arrays.asList(split));
-                    System.out.println(listTopic);
+                    //System.out.println(listTopic);
                 }
                 if (numTopic != topic) {
                     numTopic++;
@@ -56,6 +56,5 @@ public class DatabaseTXTGameIMG {
             System.out.println(ex.getMessage());
         }
     }
-
 
 }
