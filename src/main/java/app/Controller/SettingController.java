@@ -172,14 +172,6 @@ public class SettingController {
                 }
                 Main.databaseConnection.insertToDatabase(target, IPA, types, definitions);
                 Main.trie.insertWord(target);
-                /*System.out.println(target);
-                System.out.println(IPA);
-                for (int i = 0; i < types.size(); i++) {
-                    System.out.println(types.get(i));
-                    for (int j = 0; j < definitions.get(i).size(); j++) {
-                        System.out.println(definitions.get(i).get(j));
-                    }
-                }*/
                 EditSuccessPane.setVisible(true);
             }
         }
@@ -207,7 +199,8 @@ public class SettingController {
                 }
             }
         }
-        //Main.databaseConnection.insertToDatabase(target, IPA, types, definitions);
+        Main.databaseConnection.insertToDatabase(target, IPA, types, definitions);
+        Main.trie.insertWord(target);
         System.out.println(target);
         System.out.println(IPA);
         for (int i = 0; i < types.size(); i++) {
@@ -219,8 +212,8 @@ public class SettingController {
     }
 
     public void delete() throws SQLException {
+        String target = wordDelete.getText();
         if (!wordDelete.getText().equals("")) {
-            String target = wordDelete.getText();
             if (Main.databaseConnection.hasInDatabase(target)) {
                 Main.databaseConnection.deleteWordInDatabase(target);
             } else {
@@ -228,6 +221,9 @@ public class SettingController {
             }
         }
         DeleteSuccessPane.setVisible(true);
+        if (Main.dictionaryManagement.wordHistoryList.contains(target)) {
+            Main.dictionaryManagement.wordHistoryList.remove(target);
+        }
     }
 
     //Supporting methods
