@@ -3,6 +3,7 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
@@ -51,11 +52,6 @@
          <Image url="@../Image/MenuIMG/heart.png" />
       </image>
    </ImageView>
-   <ImageView fx:id="minimize" fitHeight="150.0" fitWidth="30.0" layoutX="1060.0" layoutY="21.0" onMouseClicked="#minimizeStage" pickOnBounds="true" preserveRatio="true" style="-fx-cursor: hand;">
-      <image>
-         <Image url="@../Image/MenuIMG/minimize.png" />
-      </image>
-   </ImageView>
    <ImageView id="intoTranslate" fx:id="intoTranslate" fitHeight="100.0" fitWidth="100.0" layoutX="470.0" layoutY="480.0" onMouseClicked="#intoTranslate" pickOnBounds="true" preserveRatio="true" style="-fx-cursor: hand;">
       <Image url="@../Image/MenuIMG/translate_but.png" />
    </ImageView>
@@ -70,12 +66,6 @@
    </ImageView>
    <ImageView id="intoHistory" fx:id="intoHistory" fitHeight="100.0" fitWidth="100.0" layoutX="710.0" layoutY="400.0" onMouseClicked="#intoHistory" pickOnBounds="true" preserveRatio="true" style="-fx-cursor: hand;">
       <Image url="@../Image/MenuIMG/intoHistory.png" />
-   </ImageView>
-   <ImageView id="guide" fx:id="guide" fitHeight="35.0" fitWidth="28.0" layoutX="1102.0" layoutY="21.0" onMouseClicked="#intoGuide" pickOnBounds="true" preserveRatio="true" style="-fx-cursor: hand;">
-      <Image url="@../Image/MenuIMG/Guide.png" />
-   </ImageView>
-   <ImageView id="Out" fx:id="Out" fitHeight="35.0" fitWidth="35.0" layoutX="1138.0" layoutY="17.0" onMouseClicked="#intoOut" pickOnBounds="true" preserveRatio="true" style="-fx-cursor: hand;">
-      <Image url="@../Image/MenuIMG/out_but.png" />
    </ImageView>
    <ListView fx:id="wordList" editable="true" fixedCellSize="0.0" layoutX="350.0" layoutY="345.0" prefHeight="250.0" prefWidth="500.0" style="-fx-background-color: ECE3CE;" visible="false">
       <cursor>
@@ -92,4 +82,59 @@
          <Cursor fx:constant="DEFAULT" />
       </cursor>
    </TextField>
+   <AnchorPane fx:id="settingPane" layoutX="900.0" layoutY="55.0" prefHeight="250.0" prefWidth="300.0" visible="false">
+      <children>
+         <ImageView fitHeight="241.0" fitWidth="300.0" layoutX="5.0" pickOnBounds="true" preserveRatio="true">
+            <image>
+               <Image url="@../Image/MenuIMG/settingBox.png" />
+            </image>
+         </ImageView>
+         <ImageView fitHeight="78.0" fitWidth="45.0" layoutX="40.0" layoutY="50.0" pickOnBounds="true" preserveRatio="true">
+            <image>
+               <Image url="@../Image/MenuIMG/insert.png" />
+            </image>
+         </ImageView>
+         <ImageView fitHeight="78.0" fitWidth="45.0" layoutX="40.0" layoutY="110.0" pickOnBounds="true" preserveRatio="true">
+            <image>
+               <Image url="@../Image/MenuIMG/Adjust.png" />
+            </image>
+         </ImageView>
+         <ImageView fitHeight="78.0" fitWidth="45.0" layoutX="40.0" layoutY="170.0" pickOnBounds="true" preserveRatio="true">
+            <image>
+               <Image url="@../Image/MenuIMG/deleteWord.png" />
+            </image>
+         </ImageView>
+         <Label fx:id="insertWord" layoutX="40.0" layoutY="50.0" onMouseClicked="#adjustDictionary" prefHeight="45.0" style="-fx-cursor: hand;" text="          Insert Word" textFill="#232d3f">
+            <font>
+               <Font name="Arial Rounded MT Bold" size="24.0" />
+            </font>
+         </Label>
+         <Label fx:id="editWord" layoutX="40.0" layoutY="110.0" onMouseClicked="#adjustDictionary" prefHeight="45.0" style="-fx-cursor: hand;" text="          Edit Word" textFill="#232d3f">
+            <font>
+               <Font name="Arial Rounded MT Bold" size="24.0" />
+            </font>
+         </Label>
+         <Label fx:id="deleteWord" layoutX="40.0" layoutY="170.0" onMouseClicked="#adjustDictionary" prefHeight="45.0" style="-fx-cursor: hand;" text="          Delete Word" textFill="#232d3f">
+            <font>
+               <Font name="Arial Rounded MT Bold" size="24.0" />
+            </font>
+         </Label>
+      </children>
+   </AnchorPane>
+   <ImageView id="guide" fx:id="guide" fitHeight="35.0" fitWidth="28.0" layoutX="1102.0" layoutY="21.0" onMouseClicked="#intoGuide" pickOnBounds="true" preserveRatio="true" style="-fx-cursor: hand;">
+      <Image url="@../Image/MenuIMG/Guide.png" />
+   </ImageView>
+   <ImageView fx:id="setting" fitHeight="150.0" fitWidth="35.0" layoutX="1060.0" layoutY="19.0" onMouseClicked="#intoSetting" pickOnBounds="true" preserveRatio="true" style="-fx-cursor: hand;">
+      <image>
+         <Image url="@../Image/MenuIMG/setting.png" />
+      </image>
+   </ImageView>
+   <ImageView fx:id="minimize" fitHeight="150.0" fitWidth="30.0" layoutX="1017.0" layoutY="20.0" onMouseClicked="#minimizeStage" pickOnBounds="true" preserveRatio="true" style="-fx-cursor: hand;">
+      <image>
+         <Image url="@../Image/MenuIMG/minimize.png" />
+      </image>
+   </ImageView>
+   <ImageView id="Out" fx:id="Out" fitHeight="35.0" fitWidth="35.0" layoutX="1138.0" layoutY="17.0" onMouseClicked="#intoOut" pickOnBounds="true" preserveRatio="true" style="-fx-cursor: hand;">
+      <Image url="@../Image/MenuIMG/out_but.png" />
+   </ImageView>
 </AnchorPane>

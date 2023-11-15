@@ -51,13 +51,13 @@ public class DatabaseConnection {
         try {
             // mn chỉnh theo db sql của mn.
 
-            url = "jdbc:mysql://localhost:3306/appenglish?autoReconnect=true&useSSL=false";
+            /*url = "jdbc:mysql://localhost:3306/appenglish?autoReconnect=true&useSSL=false";
             username = "root";
-            password = "Boquoctrung10012004";
+            password = "Boquoctrung10012004";*/
 
-            /*url = "jdbc:mysql://localhost:3306/appEnglish";
+            url = "jdbc:mysql://localhost:3306/appEnglish";
             username = "root";
-            password = "Minhquanadc@1";*/
+            password = "Minhquanadc@1";
 
             /*url = "jdbc:mysql://localhost:3306/dict_database";
             username = "root";
@@ -117,7 +117,7 @@ public class DatabaseConnection {
             }
             html += "</p></body>";
 
-            String sql = "INSERT INTO dictionary (target, definition) VALUES (?, ?)";
+            String sql = "INSERT INTO dictionary (target, definition, isSaved) VALUES (?, ?, false)";
 
             preparedStatement = connection.prepareStatement(sql);
             preparedStatement.setString(1, target);
@@ -200,6 +200,25 @@ public class DatabaseConnection {
                 }
             }
         } catch (SQLException ex) {
+            System.out.println("Can not check this word!");
+        }
+        return false;
+    }
+
+    public boolean hasInDatabase(String word) throws SQLException {
+        try {
+            String sql = "SELECT COUNT(*) FROM dictionary WHERE target = ?";
+            preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setString(1, word);
+
+            resultSet = preparedStatement.executeQuery();
+
+            if (resultSet.next()) {
+                int count = resultSet.getInt(1);
+                return count > 0;
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
             System.out.println("Can not check this word!");
         }
         return false;

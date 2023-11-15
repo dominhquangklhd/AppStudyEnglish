@@ -14,6 +14,7 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
@@ -37,24 +38,39 @@ public class MenuController implements Initializable {
     @FXML
     public Button paneButton;
     @FXML
+    public ImageView setting;
+    @FXML
+    public AnchorPane settingPane;
+    @FXML
+    public Label insertWord;
+    @FXML
+    public Label editWord;
+    @FXML
+    public Label deleteWord;
+    @FXML
+    public ImageView intoSearch;
+    @FXML
+    public ImageView intoTranslate;
+    @FXML
+    public ImageView intoGame;
+    @FXML
+    public ImageView intoSave;
+    @FXML
+    public ImageView intoHistory;
+    @FXML
+    public ImageView guide;
+    @FXML
+    public ImageView Out;
+    @FXML
+    public ImageView outSetting;
+    @FXML
     private AnchorPane scenePane;
-    @FXML
-    private ImageView guide;
-    @FXML
-    private ImageView intoSearch;
-    @FXML
-    private ImageView intoTranslate;
-    @FXML
-    private ImageView Out;
-    @FXML
-    private ImageView intoGame;
-    @FXML
-    private ImageView intoHistory;
-    @FXML
-    private ImageView intoSave;
     @FXML
     private TextField SearchingBar;
     //Nor
+    public FXMLLoader settingLoader = new FXMLLoader(getClass().getResource("/FXML/Setting.fxml"));
+    public AnchorPane adjustPane;
+    boolean settingLoaded = false;
 
     //Present
     private Stage stage;
@@ -130,12 +146,10 @@ public class MenuController implements Initializable {
 
         //lập ra danh sách các từ gợi ý mỗi khi từ trên SearchingBar(TestField) thay đổi.
         SearchingBar.textProperty().addListener((observable, oldValue, newValue) -> {
-
             wordList.getItems().clear();
             Main.trie.resetWordList();
 
             SearchingBar.setText(newValue);
-            Main.trie.search(SearchingBar.getText());
             Main.trie.search(SearchingBar.getText().toLowerCase());
 
             wordList.setVisible(!Main.trie.getWordsBySearching().isEmpty());
@@ -198,13 +212,37 @@ public class MenuController implements Initializable {
         stage.close();
     }
 
+    public void intoSetting() throws IOException {
+        if (settingPane.isVisible()) {
+            scenePane.getChildren().remove(adjustPane);
+            settingPane.setVisible(false);
+        } else {
+            settingLoader.getClass().getResource("/FXML/Setting.fxml");
+            settingPane.setVisible(true);
+            if (!settingLoaded) {
+                adjustPane = settingLoader.load();
+                settingLoaded = true;
+            }
+            scenePane.getChildren().add(adjustPane);
+            adjustPane.setLayoutX(106);
+            adjustPane.setLayoutY(106);
+            ((SettingController) settingLoader.getController()).StartInsert();
+        }
+    }
+
+    public void adjustDictionary(MouseEvent event) throws IOException {
+        if (event.getSource() == insertWord) {
+            ((SettingController) settingLoader.getController()).StartInsert();
+        } else if (event.getSource() == editWord) {
+            ((SettingController) settingLoader.getController()).StartEdit();
+        } else if (event.getSource() == deleteWord) {
+            ((SettingController) settingLoader.getController()).StartDelete();
+        }
+    }
+
     //Supporting methods
     public void outSearch() {
         wordList.setVisible(false);
-    }
-
-    public void test() {
-        System.out.println("test");
     }
 
     @Override
