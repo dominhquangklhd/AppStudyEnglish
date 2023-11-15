@@ -124,9 +124,9 @@
                   </ImageView>
                </children>
             </AnchorPane>
-            <AnchorPane layoutX="190.0" layoutY="51.0" prefHeight="400.0" prefWidth="400.0" visible="false">
+            <AnchorPane fx:id="EditWarning" layoutX="190.0" layoutY="51.0" prefHeight="400.0" prefWidth="400.0" visible="false">
                <children>
-                  <ImageView fx:id="EditWarning" fitHeight="320.0" fitWidth="320.0" layoutX="40.0" layoutY="100.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fitHeight="320.0" fitWidth="320.0" layoutX="40.0" layoutY="100.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../Image/MenuIMG/editWarning.png" />
                      </image>
@@ -136,7 +136,7 @@
                         <Image url="@../Image/MenuIMG/Cancel.png" />
                      </image>
                   </ImageView>
-                  <ImageView fx:id="insertAnyway" fitHeight="37.0" fitWidth="84.0" layoutX="228.0" layoutY="240.0" onMouseClicked="#insertAnyway" pickOnBounds="true" preserveRatio="true" style="-fx-cursor: hand;">
+                  <ImageView fx:id="insertAnyway" fitHeight="37.0" fitWidth="84.0" layoutX="228.0" layoutY="240.0" onMouseClicked="#insert" pickOnBounds="true" preserveRatio="true" style="-fx-cursor: hand;">
                      <image>
                         <Image url="@../Image/MenuIMG/insertAnyway.png" />
                      </image>
