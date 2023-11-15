@@ -1,0 +1,235 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="510.0" prefWidth="780.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="app.Controller.SettingController">
+   <children>
+      <AnchorPane fx:id="insertPane" prefHeight="510.0" prefWidth="780.0">
+         <children>
+            <Button mnemonicParsing="false" prefHeight="510.0" prefWidth="780.0" text="Button" visible="false" />
+            <ImageView fitHeight="571.0" fitWidth="780.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../Image/MenuIMG/settingPane.png" />
+               </image>
+            </ImageView>
+            <Text fx:id="editTitle" fill="#9e7676" layoutX="14.0" layoutY="80.0" strokeType="OUTSIDE" strokeWidth="0.0" text="EDIT WORD" textAlignment="CENTER" visible="false" wrappingWidth="752.13671875">
+               <font>
+                  <Font name="Gill Sans Ultra Bold" size="30.0" />
+               </font>
+            </Text>
+            <Text fx:id="insertTitle" fill="#7eaa92" layoutX="14.0" layoutY="80.0" strokeType="OUTSIDE" strokeWidth="0.0" text="INSERT WORD" textAlignment="CENTER" wrappingWidth="752.13671875">
+               <font>
+                  <Font name="Gill Sans Ultra Bold" size="30.0" />
+               </font>
+            </Text>
+            <Label layoutX="53.0" layoutY="118.0" text="Word">
+               <font>
+                  <Font name="Arial Rounded MT Bold" size="24.0" />
+               </font>
+            </Label>
+            <TextField fx:id="wordInsert" layoutX="53.0" layoutY="153.0" prefHeight="50.0" prefWidth="300.0" promptText="Word">
+               <font>
+                  <Font name="Lobster Regular" size="18.0" />
+               </font>
+            </TextField>
+            <Label fx:id="typeLabelinsert" layoutX="104.0" layoutY="318.0" text="Type 1">
+               <font>
+                  <Font name="Arial Rounded MT Bold" size="24.0" />
+               </font>
+            </Label>
+            <TextField fx:id="typeInsert" layoutX="53.0" layoutY="358.0" prefHeight="50.0" prefWidth="300.0" promptText="Type">
+               <font>
+                  <Font name="Lobster Regular" size="18.0" />
+               </font>
+            </TextField>
+            <Label layoutX="53.0" layoutY="217.0" text="IPA">
+               <font>
+                  <Font name="Arial Rounded MT Bold" size="24.0" />
+               </font>
+            </Label>
+            <TextField fx:id="ipaInsert" layoutX="53.0" layoutY="256.0" prefHeight="50.0" prefWidth="300.0" promptText="IPA">
+               <font>
+                  <Font name="Lobster Regular" size="18.0" />
+               </font>
+            </TextField>
+            <ImageView fx:id="preType" fitHeight="150.0" fitWidth="40.0" layoutX="54.0" layoutY="312.0" onMouseClicked="#toOtherType" pickOnBounds="true" preserveRatio="true" style="-fx-cursor: hand;" visible="false">
+               <image>
+                  <Image url="@../Image/MenuIMG/preType.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="nextType" fitHeight="150.0" fitWidth="40.0" layoutX="191.0" layoutY="312.0" onMouseClicked="#toOtherType" pickOnBounds="true" preserveRatio="true" style="-fx-cursor: hand;">
+               <image>
+                  <Image url="@../Image/MenuIMG/nextType.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="preDef" fitHeight="150.0" fitWidth="40.0" layoutX="420.0" layoutY="112.0" onMouseClicked="#toOtherDef" pickOnBounds="true" preserveRatio="true" style="-fx-cursor: hand;" visible="false">
+               <image>
+                  <Image url="@../Image/MenuIMG/preDef.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="nextDef" fitHeight="150.0" fitWidth="40.0" layoutX="611.0" layoutY="112.0" onMouseClicked="#toOtherDef" pickOnBounds="true" preserveRatio="true" style="-fx-cursor: hand;">
+               <image>
+                  <Image url="@../Image/MenuIMG/nextDef.png" />
+               </image>
+            </ImageView>
+            <Label fx:id="defLabelinsert" layoutX="471.0" layoutY="118.0" text="Definition 1">
+               <font>
+                  <Font name="Arial Rounded MT Bold" size="24.0" />
+               </font>
+            </Label>
+            <TextArea fx:id="definitionInsert" layoutX="420.0" layoutY="153.0" prefHeight="205.0" prefWidth="300.0" promptText="Definition">
+               <font>
+                  <Font name="Lobster Regular" size="18.0" />
+               </font>
+            </TextArea>
+            <Label fx:id="edit" layoutX="523.0" layoutY="412.0" onMouseClicked="#edit" style="-fx-cursor: hand;" text="ACCEPT EDIT" textFill="#04364a" visible="false">
+               <font>
+                  <Font name="Gill Sans Ultra Bold" size="24.0" />
+               </font>
+            </Label>
+            <Label fx:id="insert" layoutX="603.0" layoutY="412.0" onMouseClicked="#insert" style="-fx-cursor: hand;" text="INSERT" textFill="#a86464">
+               <font>
+                  <Font name="Gill Sans Ultra Bold" size="24.0" />
+               </font>
+            </Label>
+            <AnchorPane fx:id="InsertwarningPane" layoutX="190.0" layoutY="51.0" prefHeight="400.0" prefWidth="400.0" visible="false">
+               <children>
+                  <ImageView fitHeight="320.0" fitWidth="320.0" layoutX="40.0" layoutY="100.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../Image/MenuIMG/alreadyHas.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="40.0" fitWidth="120.0" layoutX="54.0" layoutY="236.0" onMouseClicked="#cancelInsert" pickOnBounds="true" preserveRatio="true" style="-fx-cursor: hand;">
+                     <image>
+                        <Image url="@../Image/MenuIMG/Cancel.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="40.0" fitWidth="120.0" layoutX="155.0" layoutY="236.0" onMouseClicked="#lookUp" pickOnBounds="true" preserveRatio="true" style="-fx-cursor: hand;">
+                     <image>
+                        <Image url="@../Image/MenuIMG/lookup.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="40.0" fitWidth="120.0" layoutX="254.0" layoutY="236.0" onMouseClicked="#edit" pickOnBounds="true" preserveRatio="true" style="-fx-cursor: hand;">
+                     <image>
+                        <Image url="@../Image/MenuIMG/edit.png" />
+                     </image>
+                  </ImageView>
+               </children>
+            </AnchorPane>
+            <AnchorPane layoutX="190.0" layoutY="51.0" prefHeight="400.0" prefWidth="400.0" visible="false">
+               <children>
+                  <ImageView fx:id="EditWarning" fitHeight="320.0" fitWidth="320.0" layoutX="40.0" layoutY="100.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../Image/MenuIMG/editWarning.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fx:id="cancelEdit" fitHeight="37.0" fitWidth="122.0" layoutX="95.0" layoutY="240.0" onMouseClicked="#cancelEdit" pickOnBounds="true" preserveRatio="true" style="-fx-cursor: hand;">
+                     <image>
+                        <Image url="@../Image/MenuIMG/Cancel.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fx:id="insertAnyway" fitHeight="37.0" fitWidth="84.0" layoutX="228.0" layoutY="240.0" onMouseClicked="#insertAnyway" pickOnBounds="true" preserveRatio="true" style="-fx-cursor: hand;">
+                     <image>
+                        <Image url="@../Image/MenuIMG/insertAnyway.png" />
+                     </image>
+                  </ImageView>
+               </children>
+            </AnchorPane>
+            <AnchorPane fx:id="InsertSuccessPane" layoutX="190.0" layoutY="51.0" prefHeight="400.0" prefWidth="400.0" visible="false">
+               <children>
+                  <ImageView fitHeight="320.0" fitWidth="320.0" layoutX="40.0" layoutY="100.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../Image/MenuIMG/insertSuccess.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fx:id="insertSuccess" fitHeight="43.0" fitWidth="119.0" layoutX="151.0" layoutY="232.0" onMouseClicked="#StartInsert" pickOnBounds="true" preserveRatio="true" style="-fx-cursor: hand;">
+                     <image>
+                        <Image url="@../Image/MenuIMG/cancelDelete.png" />
+                     </image>
+                  </ImageView>
+               </children>
+            </AnchorPane>
+            <AnchorPane fx:id="EditSuccessPane" layoutX="190.0" layoutY="51.0" prefHeight="400.0" prefWidth="400.0" visible="false">
+               <children>
+                  <ImageView fitHeight="320.0" fitWidth="320.0" layoutX="40.0" layoutY="100.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../Image/MenuIMG/edittedSuccess.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fx:id="editSuccess" fitHeight="43.0" fitWidth="119.0" layoutX="151.0" layoutY="232.0" onMouseClicked="#StartEdit" pickOnBounds="true" preserveRatio="true" style="-fx-cursor: hand;">
+                     <image>
+                        <Image url="@../Image/MenuIMG/cancelDelete.png" />
+                     </image>
+                  </ImageView>
+               </children>
+            </AnchorPane>
+         </children>
+      </AnchorPane>
+      <AnchorPane fx:id="deletePane" prefHeight="510.0" prefWidth="780.0" visible="false">
+         <children>
+            <Button mnemonicParsing="false" prefHeight="510.0" prefWidth="780.0" text="Button" visible="false" />
+            <ImageView fitHeight="571.0" fitWidth="780.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../Image/MenuIMG/settingPane.png" />
+               </image>
+            </ImageView>
+            <Text fill="#545b77" layoutX="14.0" layoutY="80.0" strokeType="OUTSIDE" strokeWidth="0.0" text="DELETE WORD" textAlignment="CENTER" wrappingWidth="752.13671875">
+               <font>
+                  <Font name="Gill Sans Ultra Bold" size="30.0" />
+               </font>
+            </Text>
+            <Label layoutX="194.0" layoutY="188.0" text="Word to delete">
+               <font>
+                  <Font name="Arial Rounded MT Bold" size="24.0" />
+               </font>
+            </Label>
+            <TextField fx:id="wordDelete" layoutX="194.0" layoutY="230.0" prefHeight="50.0" prefWidth="415.0" promptText="Word">
+               <font>
+                  <Font name="Lobster Regular" size="18.0" />
+               </font>
+            </TextField>
+            <Label fx:id="delete" layoutX="579.0" layoutY="412.0" onMouseClicked="#delete" style="-fx-cursor: hand;" text="DELETE" textFill="#e97777">
+               <font>
+                  <Font name="Gill Sans Ultra Bold" size="24.0" />
+               </font>
+            </Label>
+            <AnchorPane fx:id="DeleteWarning" layoutX="190.0" layoutY="51.0" prefHeight="400.0" prefWidth="400.0" visible="false">
+               <children>
+                  <ImageView fitHeight="320.0" fitWidth="320.0" layoutX="40.0" layoutY="100.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../Image/MenuIMG/alreadyNOThas.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fx:id="cancelDelete" fitHeight="50.0" fitWidth="97.0" layoutX="152.0" layoutY="238.0" onMouseClicked="#StartDelete" pickOnBounds="true" preserveRatio="true" style="-fx-cursor: hand;">
+                     <image>
+                        <Image url="@../Image/MenuIMG/cancelDelete.png" />
+                     </image>
+                  </ImageView>
+               </children>
+            </AnchorPane>
+            <AnchorPane fx:id="DeleteSuccessPane" layoutX="190.0" layoutY="51.0" prefHeight="400.0" prefWidth="400.0" visible="false">
+               <children>
+                  <ImageView fitHeight="320.0" fitWidth="320.0" layoutX="40.0" layoutY="100.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../Image/MenuIMG/deleteSuccess.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fx:id="deleteSucess" fitHeight="43.0" fitWidth="119.0" layoutX="151.0" layoutY="232.0" onMouseClicked="#StartDelete" pickOnBounds="true" preserveRatio="true" style="-fx-cursor: hand;">
+                     <image>
+                        <Image url="@../Image/MenuIMG/cancelDelete.png" />
+                     </image>
+                  </ImageView>
+               </children>
+            </AnchorPane>
+         </children>
+      </AnchorPane>
+   </children>
+</AnchorPane>
