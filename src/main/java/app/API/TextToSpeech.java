@@ -38,16 +38,12 @@ public class TextToSpeech {
             HttpURLConnection connection = (HttpURLConnection) url.openConnection();
             connection.setRequestMethod("GET");
 
-            InputStream audio = connection.getInputStream();
-            new Player(audio).play();
+            InputStream speaker = connection.getInputStream();
+            Player player = new Player(speaker);
+            player.play();
             connection.disconnect();
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
-
-    /*public static void main(String[] args) {
-        String text = "I love you so much";
-        playVoice(text, true);
-    }*/
 }

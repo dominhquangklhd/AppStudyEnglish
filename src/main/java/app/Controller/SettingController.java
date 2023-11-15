@@ -68,7 +68,7 @@ public class SettingController {
     @FXML
     public ImageView cancelDelete;
     @FXML
-    public ImageView EditWarning;
+    public AnchorPane EditWarning;
     @FXML
     public ImageView cancelEdit;
     @FXML
@@ -181,46 +181,16 @@ public class SettingController {
         EditWarning.setVisible(false);
     }
 
-    public void insertAnyway() {
-        String target = wordInsert.getText();
-        String IPA = ipaInsert.getText();
-        if (!typeInsert.getText().equals("")){
-            if (typeIndex >= types.size()) {
-                types.add(typeInsert.getText());
-            }
-            //them th chinh sua def
-            if (!definitionInsert.getText().equals("") ) {
-                if (definitionIndex >= definitions.get(typeIndex).size()) {
-                    definitions.get(typeIndex).add(definitionInsert.getText());
-                }
-                else if (definitions.get(typeIndex).get(definitionIndex) != definitionInsert.getText()) {
-                    definitions.get(typeIndex).remove(definitionIndex);
-                    definitions.get(typeIndex).add(definitionIndex, definitionInsert.getText());
-                }
-            }
-        }
-        Main.databaseConnection.insertToDatabase(target, IPA, types, definitions);
-        Main.trie.insertWord(target);
-        System.out.println(target);
-        System.out.println(IPA);
-        for (int i = 0; i < types.size(); i++) {
-            System.out.println(types.get(i));
-            for (int j = 0; j < definitions.get(i).size(); j++) {
-                System.out.println(definitions.get(i).get(j));
-            }
-        }
-    }
-
     public void delete() throws SQLException {
         String target = wordDelete.getText();
         if (!wordDelete.getText().equals("")) {
             if (Main.databaseConnection.hasInDatabase(target)) {
                 Main.databaseConnection.deleteWordInDatabase(target);
+                DeleteSuccessPane.setVisible(true);
             } else {
                 DeleteWarning.setVisible(true);
             }
         }
-        DeleteSuccessPane.setVisible(true);
         if (Main.dictionaryManagement.wordHistoryList.contains(target)) {
             Main.dictionaryManagement.wordHistoryList.remove(target);
         }
@@ -332,8 +302,10 @@ public class SettingController {
         definitionIndex = 0;
 
         if (event.getSource().equals(nextType)) {
-            preType.setVisible(true);
             if (!deleteType) typeIndex++;
+            if (typeIndex > 0) {
+                preType.setVisible(true);
+            }
             typeLabelinsert.setText("Type " + String.valueOf(typeIndex + 1));
             if (typeIndex > types.size() - 1) {
                 typeInsert.clear();
@@ -352,6 +324,8 @@ public class SettingController {
             }
             typeLabelinsert.setText("Type " + String.valueOf(typeIndex + 1));
             typeInsert.setText(types.get(typeIndex));
+            if (definitionIndex == 0 && definitionInsert.getText().equals(""))
+                return;
             definitionInsert.setText(definitions.get(typeIndex).get(0));
         }
     }
@@ -372,8 +346,10 @@ public class SettingController {
         }
 
         if (event.getSource().equals(nextDef)) {
-            preDef.setVisible(true);
             if (!deleteDef) definitionIndex++;
+            if (definitionIndex > 0) {
+                preDef.setVisible(true);
+            }
             defLabelinsert.setText("Definition " + String.valueOf(definitionIndex + 1));
             if (definitionIndex > definitions.get(typeIndex).size() - 1) {
                 definitionInsert.clear();
