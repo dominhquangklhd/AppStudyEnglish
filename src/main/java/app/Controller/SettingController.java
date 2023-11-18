@@ -194,6 +194,9 @@ public class SettingController {
         if (Main.dictionaryManagement.wordHistoryList.contains(target)) {
             Main.dictionaryManagement.wordHistoryList.remove(target);
         }
+        if (Main.dictionaryManagement.wordSavedList.contains(target)) {
+            Main.dictionaryManagement.wordSavedList.remove(target);
+        }
     }
 
     //Supporting methods

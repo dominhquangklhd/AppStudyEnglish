@@ -85,10 +85,23 @@ public class SaveController implements Initializable {
     public ImageView intoTranslate;
     @FXML
     public ImageView intoGame;
+    @FXML
+    public ImageView setting;
+    @FXML
+    public AnchorPane settingPane;
+    @FXML
+    public Label insertWord;
+    @FXML
+    public Label editWord;
+    @FXML
+    public Label deleteWord;
 
     //Nor
     int recentPage = 1;
     int number_of_page = 0;
+    public FXMLLoader settingLoader = new FXMLLoader(getClass().getResource("/FXML/Setting.fxml"));
+    public AnchorPane adjustPane;
+    boolean settingLoaded = false;
 
     //Present
     private Stage stage;
@@ -106,7 +119,7 @@ public class SaveController implements Initializable {
         StartSave();
     }
 
-    @FXML
+
     public void intoGame(MouseEvent event) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/FXML/MenuGame.fxml"));
         Parent root = loader.load();
@@ -257,6 +270,34 @@ public class SaveController implements Initializable {
         Main.dictionaryManagement.historyExportToFile();
         stage = (Stage) scenePane.getScene().getWindow();
         stage.close();
+    }
+
+    public void intoSetting() throws IOException {
+        if (settingPane.isVisible()) {
+            scenePane.getChildren().remove(adjustPane);
+            settingPane.setVisible(false);
+        } else {
+            settingLoader.getClass().getResource("/FXML/Setting.fxml");
+            settingPane.setVisible(true);
+            if (!settingLoaded) {
+                adjustPane = settingLoader.load();
+                settingLoaded = true;
+            }
+            scenePane.getChildren().add(adjustPane);
+            adjustPane.setLayoutX(106);
+            adjustPane.setLayoutY(106);
+            ((SettingController) settingLoader.getController()).StartInsert();
+        }
+    }
+
+    public void adjustDictionary(MouseEvent event) throws IOException {
+        if (event.getSource() == insertWord) {
+            ((SettingController) settingLoader.getController()).StartInsert();
+        } else if (event.getSource() == editWord) {
+            ((SettingController) settingLoader.getController()).StartEdit();
+        } else if (event.getSource() == deleteWord) {
+            ((SettingController) settingLoader.getController()).StartDelete();
+        }
     }
 
     //Supporting methods
