@@ -14,12 +14,12 @@
    <children>
       <AnchorPane fx:id="insertPane" prefHeight="510.0" prefWidth="780.0">
          <children>
-            <Button mnemonicParsing="false" prefHeight="510.0" prefWidth="780.0" text="Button" visible="false" />
             <ImageView fitHeight="571.0" fitWidth="780.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../Image/MenuIMG/settingPane.png" />
                </image>
             </ImageView>
+            <Button mnemonicParsing="false" prefHeight="510.0" prefWidth="780.0" text="Button" visible="false" />
             <Text fx:id="editTitle" fill="#9e7676" layoutX="14.0" layoutY="80.0" strokeType="OUTSIDE" strokeWidth="0.0" text="EDIT WORD" textAlignment="CENTER" visible="false" wrappingWidth="752.13671875">
                <font>
                   <Font name="Gill Sans Ultra Bold" size="30.0" />
@@ -175,12 +175,12 @@
       </AnchorPane>
       <AnchorPane fx:id="deletePane" prefHeight="510.0" prefWidth="780.0" visible="false">
          <children>
-            <Button mnemonicParsing="false" prefHeight="510.0" prefWidth="780.0" text="Button" visible="false" />
             <ImageView fitHeight="571.0" fitWidth="780.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../Image/MenuIMG/settingPane.png" />
                </image>
             </ImageView>
+            <Button mnemonicParsing="false" prefHeight="510.0" prefWidth="780.0" text="Button" visible="false" />
             <Text fill="#545b77" layoutX="14.0" layoutY="80.0" strokeType="OUTSIDE" strokeWidth="0.0" text="DELETE WORD" textAlignment="CENTER" wrappingWidth="752.13671875">
                <font>
                   <Font name="Gill Sans Ultra Bold" size="30.0" />

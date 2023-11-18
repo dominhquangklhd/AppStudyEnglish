@@ -13,10 +13,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.Background;
-import javafx.scene.layout.BackgroundFill;
-import javafx.scene.layout.CornerRadii;
-import javafx.scene.layout.Pane;
+import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.util.Duration;
@@ -29,6 +26,16 @@ import java.util.List;
 import java.util.ResourceBundle;
 
 public class MultipleChoiceGame implements Initializable {
+
+    @FXML
+    public Pane sub50Pane;
+    @FXML
+    public Pane sub100Pane;
+    @FXML
+    public Pane sub150Pane;
+
+    @FXML
+    private AnchorPane scenePane;
 
     @FXML
     private Label ansALabel;
@@ -108,7 +115,6 @@ public class MultipleChoiceGame implements Initializable {
     @FXML
     void intoCheckAns() {
         checkAnsPane.setVisible(true);
-        finishPane.setVisible(false);
 
         finishQuesLabel.setText(quesInGame.get(numQCheckAns));
         finishAnsLabel.setText(ansDetails.get(numQCheckAns));
@@ -137,10 +143,23 @@ public class MultipleChoiceGame implements Initializable {
     public void setUpQuestion() {
         if (numQ == DatabaseConnection.NumOfQuestionMC) {
             numQ = 0;
-            mainPane.setDisable(true);
+            //mainPane.setDisable(true);
             finishPane.setVisible(true);
-            scoreLabel.setText(score + "");
-            finishScoreLabel.setText(score + "");
+            //scoreLabel.setText(score + "");
+            finishScoreLabel.setText("Your score : " + String.valueOf(score));
+            if (score <= 50) {
+                sub50Pane.setVisible(true);
+                sub100Pane.setVisible(false);
+                sub150Pane.setVisible(false);
+            } else if (score <= 100) {
+                sub50Pane.setVisible(false);
+                sub100Pane.setVisible(true);
+                sub150Pane.setVisible(false);
+            } else {
+                sub50Pane.setVisible(false);
+                sub100Pane.setVisible(false);
+                sub150Pane.setVisible(true);
+            }
         } else {
             question = dataGame.get(numQ).get(0);
             A = dataGame.get(numQ).get(1);
@@ -168,23 +187,23 @@ public class MultipleChoiceGame implements Initializable {
             ansCLabel.setVisible(true);
             ansDLabel.setVisible(true);
 
-            BackgroundFill backgroundFill1 = new BackgroundFill(Color.web("#BEADFA"), CornerRadii.EMPTY, javafx.geometry.Insets.EMPTY);
+            BackgroundFill backgroundFill1 = new BackgroundFill(Color.web("rgb(42, 100, 160)"), CornerRadii.EMPTY, javafx.geometry.Insets.EMPTY);
             Background background1 = new Background(backgroundFill1);
             ansALabel.setBackground(background1);
 
-            BackgroundFill backgroundFill2 = new BackgroundFill(Color.web("#E1AA74"), CornerRadii.EMPTY, javafx.geometry.Insets.EMPTY);
+            BackgroundFill backgroundFill2 = new BackgroundFill(Color.web("rgb(36, 130, 139)"), CornerRadii.EMPTY, javafx.geometry.Insets.EMPTY);
             Background background2 = new Background(backgroundFill2);
             ansBLabel.setBackground(background2);
 
-            BackgroundFill backgroundFill3 = new BackgroundFill(Color.web("#D6D46D"), CornerRadii.EMPTY, javafx.geometry.Insets.EMPTY);
+            BackgroundFill backgroundFill3 = new BackgroundFill(Color.web("rgb(178, 127, 33)"), CornerRadii.EMPTY, javafx.geometry.Insets.EMPTY);
             Background background3 = new Background(backgroundFill3);
             ansCLabel.setBackground(background3);
 
-            BackgroundFill backgroundFill4 = new BackgroundFill(Color.web("#CDFAD5"), CornerRadii.EMPTY, javafx.geometry.Insets.EMPTY);
+            BackgroundFill backgroundFill4 = new BackgroundFill(Color.web("rgb(118, 46, 59)"), CornerRadii.EMPTY, javafx.geometry.Insets.EMPTY);
             Background background4 = new Background(backgroundFill4);
             ansDLabel.setBackground(background4);
 
-            scoreLabel.setText(score + "");
+            scoreLabel.setText("  Your score : " + String.valueOf(score));
             numQLabel.setText(numQ + 1 + "/" + DatabaseConnection.NumOfQuestionMC);
 
             numQ++;
@@ -240,17 +259,17 @@ public class MultipleChoiceGame implements Initializable {
         if (canClick) {
             score += 10;
         }
-        BackgroundFill backgroundFill = new BackgroundFill(Color.web(green), CornerRadii.EMPTY, javafx.geometry.Insets.EMPTY);
+        BackgroundFill backgroundFill = new BackgroundFill(Color.web("#419662"), CornerRadii.EMPTY, javafx.geometry.Insets.EMPTY);
         Background background = new Background(backgroundFill);
         curLabel.setBackground(background);
     }
 
     public void wrongAns(Label curLabel, Label rightLabel) {
-        BackgroundFill backgroundFill = new BackgroundFill(Color.web(red), CornerRadii.EMPTY, javafx.geometry.Insets.EMPTY);
+        BackgroundFill backgroundFill = new BackgroundFill(Color.web("#fd5b3c"), CornerRadii.EMPTY, javafx.geometry.Insets.EMPTY);
         Background background = new Background(backgroundFill);
         curLabel.setBackground(background);
 
-        BackgroundFill backgroundFill2 = new BackgroundFill(Color.web(green), CornerRadii.EMPTY, javafx.geometry.Insets.EMPTY);
+        BackgroundFill backgroundFill2 = new BackgroundFill(Color.web("#419662"), CornerRadii.EMPTY, javafx.geometry.Insets.EMPTY);
         Background background2 = new Background(backgroundFill2);
         rightLabel.setBackground(background2);
     }
@@ -370,6 +389,17 @@ public class MultipleChoiceGame implements Initializable {
             }
         }
         delayClicked();
+    }
+
+    public void minimizeStage(MouseEvent event) {
+        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        stage.setIconified(true);
+    }
+
+    public void intoOut() throws IOException {
+        Main.dictionaryManagement.historyExportToFile();
+        stage = (Stage) scenePane.getScene().getWindow();
+        stage.close();
     }
 
     @Override

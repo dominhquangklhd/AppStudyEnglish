@@ -62,8 +62,6 @@ public class MenuController implements Initializable {
     @FXML
     public ImageView Out;
     @FXML
-    public ImageView outSetting;
-    @FXML
     private AnchorPane scenePane;
     @FXML
     private TextField SearchingBar;

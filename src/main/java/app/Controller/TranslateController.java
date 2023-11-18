@@ -80,9 +80,23 @@ public class TranslateController implements Initializable {
     public ImageView ViFlagRight;
     @FXML
     public ImageView EnFlagLeft;
+    @FXML
+    public Label insertWord;
+    @FXML
+    public Label editWord;
+    @FXML
+    public Label deleteWord;
+    @FXML
+    public AnchorPane settingPane;
+    @FXML
+    public ImageView setting;
 
     //Nor
     private String translation = "";
+    public FXMLLoader settingLoader = new FXMLLoader(getClass().getResource("/FXML/Setting.fxml"));
+    public AnchorPane adjustPane;
+    boolean settingLoaded = false;
+
 
     //Present
     private Stage stage;
@@ -217,6 +231,34 @@ public class TranslateController implements Initializable {
         Main.dictionaryManagement.historyExportToFile();
         stage = (Stage) scenePane.getScene().getWindow();
         stage.close();
+    }
+
+    public void intoSetting() throws IOException {
+        if (settingPane.isVisible()) {
+            scenePane.getChildren().remove(adjustPane);
+            settingPane.setVisible(false);
+        } else {
+            settingLoader.getClass().getResource("/FXML/Setting.fxml");
+            settingPane.setVisible(true);
+            if (!settingLoaded) {
+                adjustPane = settingLoader.load();
+                settingLoaded = true;
+            }
+            scenePane.getChildren().add(adjustPane);
+            adjustPane.setLayoutX(106);
+            adjustPane.setLayoutY(106);
+            ((SettingController) settingLoader.getController()).StartInsert();
+        }
+    }
+
+    public void adjustDictionary(MouseEvent event) throws IOException {
+        if (event.getSource() == insertWord) {
+            ((SettingController) settingLoader.getController()).StartInsert();
+        } else if (event.getSource() == editWord) {
+            ((SettingController) settingLoader.getController()).StartEdit();
+        } else if (event.getSource() == deleteWord) {
+            ((SettingController) settingLoader.getController()).StartDelete();
+        }
     }
 
     public void switchLanguage() {
