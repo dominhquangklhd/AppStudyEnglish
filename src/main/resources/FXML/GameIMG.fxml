@@ -9,225 +9,483 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="700.0" prefWidth="1200.0" style="-fx-background-color: FFF8DC;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="app.Controller.GameIMG">
+<AnchorPane fx:id="scenePane" prefHeight="700.0" prefWidth="1200.0" style="-fx-background-color: FFF8DC;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="app.Controller.GameIMG">
    <children>
       <Pane id="mainPaneGame" fx:id="mainPaneGame" prefHeight="700.0" prefWidth="1200.0" visible="false">
          <children>
-            <HBox fx:id="dataChars" alignment="CENTER" layoutX="320.0" layoutY="370.0" prefHeight="85.0" prefWidth="565.0" style="-fx-border-color: E5D4FF;" />
-            <HBox fx:id="answerChars" alignment="CENTER" layoutX="320.0" layoutY="500.0" prefHeight="85.0" prefWidth="565.0" style="-fx-border-color: E5D4FF;" />
-            <Button fx:id="buttonNext" layoutX="1000.0" layoutY="400.0" mnemonicParsing="false" onMouseClicked="#nextQuestion" prefHeight="36.0" prefWidth="65.0" text="next" />
-            <VBox alignment="CENTER" layoutX="372.0" layoutY="8.0" prefHeight="332.0" prefWidth="456.0">
+            <Pane layoutY="100.0" prefHeight="522.0" prefWidth="1200.0" style="-fx-background-color: #371436;">
                <children>
-                  <ImageView fx:id="imageView" fitHeight="247.0" fitWidth="342.0" nodeOrientation="INHERIT" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fitHeight="56.0" fitWidth="50.0" layoutX="16.0" layoutY="127.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../Image/GameIMG/animal/alligator.jpg" />
-                     </image></ImageView>
+                        <Image url="@../Image/GameIMG/sun.png" />
+                     </image>
+                  </ImageView>
+                  <VBox alignment="CENTER" layoutX="28.0" layoutY="158.0" prefHeight="332.0" prefWidth="456.0" style="-fx-background-color: EBE3D5; -fx-background-radius: 20px; -fx-border-color: BLACK; -fx-border-radius: 17px; -fx-border-width: 3;">
+                     <children>
+                        <ImageView fx:id="imageView" fitHeight="247.0" fitWidth="342.0" nodeOrientation="INHERIT" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../Image/GameIMG/animal/alligator.jpg" />
+                           </image>
+                        </ImageView>
+                     </children>
+                  </VBox>
+                  <Button fx:id="buttonNext" layoutX="784.0" layoutY="428.0" mnemonicParsing="false" onMouseClicked="#nextQuestion" prefHeight="56.0" prefWidth="112.0" style="-fx-background-color: rgb(118, 46, 59); -fx-background-radius: 20px; -fx-cursor: hand;" text="SKIP" textFill="WHITE">
+                     <font>
+                        <Font name="Arial Rounded MT Bold" size="18.0" />
+                     </font>
+                  </Button>
+                  <Label fx:id="numQ" alignment="CENTER" layoutX="70.0" layoutY="74.0" prefHeight="50.0" prefWidth="161.0" text="0/10" textAlignment="CENTER" textFill="WHITE">
+                     <font>
+                        <Font name="Arial Rounded MT Bold" size="26.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="score" alignment="CENTER" contentDisplay="CENTER" layoutX="281.0" layoutY="80.0" prefHeight="30.0" prefWidth="147.0" text="100" textAlignment="CENTER" textFill="WHITE">
+                     <font>
+                        <Font name="Arial Rounded MT Bold" size="26.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="43.0" layoutY="14.0" prefHeight="85.0" prefWidth="238.0" text="Question number :" textAlignment="CENTER" textFill="WHITE" wrapText="true">
+                     <font>
+                        <Font name="Arial Rounded MT Bold" size="26.0" />
+                     </font>
+                  </Label>
+                  <Label alignment="CENTER" contentDisplay="CENTER" layoutX="302.0" layoutY="27.0" prefHeight="59.0" prefWidth="118.0" text="Score :" textAlignment="CENTER" textFill="WHITE" wrapText="true">
+                     <font>
+                        <Font name="Arial Rounded MT Bold" size="26.0" />
+                     </font>
+                  </Label>
+                  <ImageView fitHeight="150.0" fitWidth="15.0" layoutX="50.0" layoutY="173.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../Image/GameIMG/redDot.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="150.0" fitWidth="15.0" layoutX="80.0" layoutY="173.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../Image/GameIMG/yellowDot.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="150.0" fitWidth="15.0" layoutX="110.0" layoutY="173.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../Image/GameIMG/greenDot.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="85.0" fitWidth="68.0" layoutX="573.0" layoutY="25.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../Image/GameIMG/cat.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="59.0" fitWidth="59.0" layoutX="1000.0" layoutY="243.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../Image/GameIMG/unicorn.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="140.0" fitWidth="643.0" layoutX="525.0" layoutY="40.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../Image/GameIMG/wordsBar.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="140.0" fitWidth="630.0" layoutX="525.0" layoutY="250.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../Image/GameIMG/answerBar.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="68.0" fitWidth="59.0" layoutX="380.0" layoutY="128.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../Image/GameIMG/cloud.png" />
+                     </image>
+                  </ImageView>
+                  <HBox fx:id="answerChars" alignment="CENTER" layoutX="530.0" layoutY="300.0" prefHeight="85.0" prefWidth="620.0" style="-fx-spacing: 2;" />
+                  <HBox fx:id="dataChars" alignment="CENTER" layoutX="530.0" layoutY="95.0" prefHeight="85.0" prefWidth="620.0" style="-fx-spacing: 2;" />
+                  <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
                </children>
-            </VBox>
-            <ImageView fx:id="settingIMG" fitHeight="50.0" fitWidth="50.0" layoutX="1143.0" onMouseClicked="#intoSettingGame" pickOnBounds="true" preserveRatio="true" style="-fx-cursor: hand;">
+            </Pane>
+            <ImageView fitHeight="150.0" fitWidth="35.0" layoutX="1089.0" layoutY="18.0" onMouseClicked="#intoSettingGame" pickOnBounds="true" preserveRatio="true" style="-fx-cursor: hand;">
                <image>
-                  <Image url="@../Image/ItemsGame/setting.png" />
+                  <Image url="@../Image/MenuIMG/setting.png" />
                </image>
             </ImageView>
-            <ImageView fx:id="picScore" fitHeight="218.0" fitWidth="133.0" layoutX="145.0" layoutY="48.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView id="Out" fitHeight="150.0" fitWidth="35.0" layoutX="1138.0" layoutY="17.0" onMouseClicked="#intoOut" pickOnBounds="true" preserveRatio="true" style="-fx-cursor: hand;">
                <image>
-                  <Image url="@../Image/ItemsGame/infoPlaying.png" />
+                  <Image url="@../Image/MenuIMG/out_but.png" />
                </image>
             </ImageView>
-            <Label fx:id="numQ" alignment="CENTER" layoutX="168.0" layoutY="79.0" prefHeight="50.0" prefWidth="84.0" textAlignment="CENTER">
+            <ImageView fitHeight="150.0" fitWidth="30.0" layoutX="1042.0" layoutY="20.0" onMouseClicked="#minimizeStage" pickOnBounds="true" preserveRatio="true" style="-fx-cursor: hand;">
+               <image>
+                  <Image url="@../../../../../Java/test/JavaFX_test/test/src/main/resources/Image/MenuIMG/minimize.png" />
+               </image>
+            </ImageView>
+            <Pane id="finishPane" fx:id="finishPane" layoutY="100.0" prefHeight="522.0" prefWidth="1200.0" style="-fx-background-color: #371436;" visible="false">
+               <children>
+                  <Label fx:id="scoreFinish" alignment="CENTER" layoutX="350.0" layoutY="30.0" prefHeight="59.0" prefWidth="500.0" text="Your score : 100" textAlignment="CENTER" textFill="WHITE">
+                     <font>
+                        <Font name="Arial Rounded MT Bold" size="40.0" />
+                     </font>
+                  </Label>
+                  <Pane fx:id="sub30Pane" layoutX="300.0" layoutY="124.0" prefHeight="250.0" prefWidth="600.0" visible="false">
+                     <children>
+                        <Label layoutX="43.0" layoutY="25.0" prefHeight="90.0" prefWidth="340.0" text="   Seems like the questions are quite tough . . ." textFill="WHITE" wrapText="true">
+                           <font>
+                              <Font name="Arial Rounded MT Bold" size="24.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="43.0" layoutY="101.0" prefHeight="114.0" prefWidth="340.0" text=" You can check out the answers and be ready to take a new game UwU" textAlignment="JUSTIFY" textFill="WHITE" wrapText="true">
+                           <font>
+                              <Font name="Arial Rounded MT Bold" size="24.0" />
+                           </font>
+                        </Label>
+                        <ImageView fitHeight="180.0" fitWidth="178.0" layoutX="415.0" layoutY="35.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../Image/ItemsGame/sub50.png" />
+                           </image>
+                        </ImageView>
+                     </children>
+                  </Pane>
+                  <Pane fx:id="sub60Pane" layoutX="300.0" layoutY="124.0" prefHeight="250.0" prefWidth="600.0">
+                     <children>
+                        <Label layoutX="43.0" layoutY="41.0" prefHeight="84.0" prefWidth="340.0" text="   You are doing great ! ! !" textAlignment="JUSTIFY" textFill="WHITE" wrapText="true">
+                           <font>
+                              <Font name="Arial Rounded MT Bold" size="24.0" />
+                           </font>
+                        </Label>
+                        <ImageView fitHeight="200.0" fitWidth="200.0" layoutX="392.0" layoutY="31.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../Image/ItemsGame/WinieGuitar.png" />
+                           </image>
+                        </ImageView>
+                        <Label layoutX="43.0" layoutY="96.0" prefHeight="84.0" prefWidth="364.0" text="   Take a new game to improve your score ?" textFill="WHITE" wrapText="true">
+                           <font>
+                              <Font name="Arial Rounded MT Bold" size="24.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </Pane>
+                  <Pane fx:id="sub100Pane" layoutX="300.0" layoutY="124.0" prefHeight="250.0" prefWidth="600.0" visible="false">
+                     <children>
+                        <Label alignment="CENTER" layoutX="28.0" layoutY="44.0" prefHeight="84.0" prefWidth="364.0" text=" Excellent !!!" textAlignment="CENTER" textFill="WHITE" wrapText="true">
+                           <font>
+                              <Font name="Arial Rounded MT Bold" size="24.0" />
+                           </font>
+                        </Label>
+                        <ImageView fitHeight="200.0" fitWidth="200.0" layoutX="392.0" layoutY="31.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../Image/ItemsGame/heartAttack.png" />
+                           </image>
+                        </ImageView>
+                        <Label alignment="CENTER" layoutX="28.0" layoutY="108.0" prefHeight="84.0" prefWidth="364.0" text="You beat the game  UwU!!!" textFill="WHITE" wrapText="true">
+                           <font>
+                              <Font name="Arial Rounded MT Bold" size="24.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </Pane>
+                  <Button layoutX="311.0" layoutY="387.0" mnemonicParsing="false" onMouseClicked="#backToMenuGame" prefHeight="80.0" prefWidth="150.0" style="-fx-background-color: rgb(118, 46, 59); -fx-background-radius: 20px; -fx-cursor: hand;" text="Back to menu" textAlignment="CENTER" textFill="WHITE" wrapText="true">
+                     <font>
+                        <Font name="Arial Rounded MT Bold" size="20.0" />
+                     </font>
+                  </Button>
+                  <Button layoutX="701.0" layoutY="387.0" mnemonicParsing="false" onMouseClicked="#restartGame" prefHeight="80.0" prefWidth="150.0" style="-fx-background-color: rgb(42, 100, 160); -fx-background-radius: 20px; -fx-cursor: hand;" text="Restart" textFill="WHITE">
+                     <font>
+                        <Font name="Arial Rounded MT Bold" size="20.0" />
+                     </font>
+                  </Button>
+                  <Button layoutX="506.0" layoutY="387.0" mnemonicParsing="false" onMouseClicked="#intoCheckAnsPane" prefHeight="80.0" prefWidth="150.0" style="-fx-background-color: rgb(178, 127, 33); -fx-background-radius: 20px; -fx-cursor: hand;" text="Check Answers" textAlignment="CENTER" textFill="WHITE" wrapText="true">
+                     <font>
+                        <Font name="Arial Rounded MT Bold" size="20.0" />
+                     </font>
+                  </Button>
+               </children>
+            </Pane>
+            <Line endX="1200.0" endY="100.0" startY="100.0" />
+            <Line endX="1200.0" endY="622.0" startY="622.0" strokeWidth="3.0" />
+            <ImageView fitHeight="100.0" fitWidth="112.0" layoutX="14.0" layoutY="18.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../Image/GameIMG/winnieWhat.png" />
+               </image>
+            </ImageView>
+            <Label layoutX="160.0" layoutY="31.0" text="What is this photo about?">
                <font>
-                  <Font name="Century" size="32.0" />
+                  <Font name="Arial Rounded MT Bold" size="36.0" />
                </font>
             </Label>
-            <Label fx:id="score" alignment="CENTER" contentDisplay="CENTER" layoutX="161.0" layoutY="145.0" prefHeight="59.0" prefWidth="96.0" textAlignment="CENTER">
-               <font>
-                  <Font name=".VnBlack" size="40.0" />
-               </font>
-            </Label>
-            <ImageView fx:id="actionPerry" fitHeight="150.0" fitWidth="200.0" layoutX="885.0" layoutY="104.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="130.0" fitWidth="130.0" layoutX="1040.0" layoutY="570.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../Image/ItemsGame/Picture4.png" />
+                  <Image url="@../Image/GameIMG/bellaLetsgo.gif" />
                </image>
             </ImageView>
+            <Label layoutX="800.0" layoutY="643.0" text="Let's goo !!!">
+               <font>
+                  <Font name="Arial Rounded MT Bold" size="36.0" />
+               </font>
+            </Label>
          </children>
       </Pane>
-      <Pane id="settingPane" fx:id="menuSettingPane" layoutX="300.0" layoutY="100.0" prefHeight="374.0" prefWidth="598.0" style="-fx-background-color: DAFFFB;" visible="false">
+      <Pane id="settingPane" fx:id="menuSettingPane" layoutX="346.0" layoutY="147.0" prefHeight="371.0" prefWidth="508.0" style="-fx-background-color: ECE3CE; -fx-border-color: BLACK; -fx-background-radius: 20px; -fx-border-radius: 17px; -fx-border-width: 3;" visible="false">
          <children>
-            <Button layoutX="226.0" layoutY="84.0" mnemonicParsing="false" onMouseClicked="#continueGame" prefHeight="50.0" prefWidth="147.0" text="Continue" />
-            <Button layoutX="226.0" layoutY="156.0" mnemonicParsing="false" onMouseClicked="#restartGame" prefHeight="50.0" prefWidth="147.0" text="Restart" />
-            <Button layoutX="226.0" layoutY="231.0" mnemonicParsing="false" onMouseClicked="#backToMenuGame" prefHeight="50.0" prefWidth="147.0" text="Back to menu game" />
+            <Button layoutX="285.0" layoutY="208.0" mnemonicParsing="false" onMouseClicked="#continueGame" prefHeight="60.0" prefWidth="147.0" style="-fx-background-color: A8DF8E; -fx-background-radius: 15px; -fx-border-color: BLACK; -fx-border-width: 2; -fx-border-radius: 13px; -fx-cursor: hand;" text="Continue">
+               <font>
+                  <Font name="Arial Rounded MT Bold" size="19.0" />
+               </font>
+            </Button>
+            <Button layoutX="181.0" layoutY="285.0" mnemonicParsing="false" onMouseClicked="#restartGame" prefHeight="60.0" prefWidth="147.0" style="-fx-background-color: FCDDB0; -fx-background-radius: 15px; -fx-border-color: BLACK; -fx-border-radius: 13px; -fx-border-width: 2; -fx-cursor: hand;" text="Restart">
+               <font>
+                  <Font name="Arial Rounded MT Bold" size="19.0" />
+               </font>
+            </Button>
+            <Button layoutX="70.0" layoutY="208.0" mnemonicParsing="false" onMouseClicked="#backToMenuGame" prefHeight="60.0" prefWidth="147.0" style="-fx-background-color: FF8787; -fx-background-radius: 15px; -fx-border-color: BLACK; -fx-border-radius: 13px; -fx-border-width: 2; -fx-cursor: hand;" text="Back to menu game" textAlignment="CENTER" wrapText="true">
+               <font>
+                  <Font name="Arial Rounded MT Bold" size="19.0" />
+               </font>
+            </Button>
+            <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="48.0" layoutY="38.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../Image/ItemsGame/pause.gif" />
+               </image>
+            </ImageView>
+            <Label layoutX="243.0" layoutY="67.0" text="Oh . . . !!!">
+               <font>
+                  <Font name="Arial Rounded MT Bold" size="24.0" />
+               </font>
+            </Label>
+            <Label layoutX="243.0" layoutY="81.0" prefHeight="84.0" prefWidth="230.0" text="Seems like you paused the game :&lt;" wrapText="true">
+               <font>
+                  <Font name="Arial Rounded MT Bold" size="24.0" />
+               </font>
+            </Label>
          </children>
       </Pane>
       <Pane id="introducePane" fx:id="introducePane" layoutX="-1.0" prefHeight="700.0" prefWidth="1200.0" visible="false">
          <children>
-            <Label alignment="CENTER" contentDisplay="CENTER" layoutX="318.0" layoutY="118.0" prefHeight="162.0" prefWidth="565.0" text="Arrange the letters into words that match the given picture" textAlignment="CENTER" textOverrun="CENTER_WORD_ELLIPSIS" wrapText="true">
+            <Label alignment="CENTER" contentDisplay="CENTER" layoutX="200.0" layoutY="21.0" prefHeight="100.0" prefWidth="800.0" text="Arrange the letters into words that match the given picture" textAlignment="CENTER" textOverrun="CENTER_WORD_ELLIPSIS" wrapText="true">
                <font>
-                  <Font name="Britannic Bold" size="36.0" />
+                  <Font name="Arial Rounded MT Bold" size="36.0" />
                </font>
             </Label>
-            <Label alignment="CENTER" layoutX="429.0" layoutY="280.0" prefHeight="85.0" prefWidth="342.0" text="Press start to play" textAlignment="CENTER">
+            <Button fx:id="startButton" contentDisplay="CENTER" layoutX="500.0" layoutY="561.0" mnemonicParsing="false" onMouseClicked="#startGameIMG" prefHeight="100.0" prefWidth="200.0" style="-fx-background-color: AF2655; -fx-border-color: BLACK; -fx-background-radius: 15px; -fx-border-radius: 13px; -fx-border-width: 2; -fx-cursor: hand;" text="START" textFill="#fcf6f6">
                <font>
-                  <Font name="Wingdings" size="20.0" />
-               </font>
-            </Label>
-            <ImageView fitHeight="232.0" fitWidth="200.0" layoutX="54.0" layoutY="150.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../Image/ItemsGame/Picture2.png" />
-               </image>
-            </ImageView>
-            <ImageView fitHeight="233.0" fitWidth="200.0" layoutX="963.0" layoutY="143.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../Image/ItemsGame/Picture1.png" />
-               </image>
-            </ImageView>
-            <Button fx:id="startButton" contentDisplay="CENTER" layoutX="500.0" layoutY="350.0" mnemonicParsing="false" onMouseClicked="#startGameIMG" prefHeight="100.0" prefWidth="200.0" style="-fx-background-color: DE8F5F; -fx-border-color: DFCCFB; -fx-border-width: 2; -fx-cursor: hand;" text="Start">
-               <font>
-                  <Font name="Serif Regular" size="36.0" />
+                  <Font name="Arial Rounded MT Bold" size="41.0" />
                </font></Button>
+            <ImageView fitHeight="85.0" fitWidth="70.0" layoutX="158.0" layoutY="107.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../Image/GameIMG/starFly.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="500.0" fitWidth="400.0" layoutX="134.0" layoutY="170.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../Image/GameIMG/tutor1.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="82.0" fitWidth="76.0" layoutX="71.0" layoutY="442.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../Image/GameIMG/starGroup.png" />
+               </image></ImageView>
+            <ImageView fitHeight="320.0" fitWidth="433.0" layoutX="660.0" layoutY="170.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../Image/GameIMG/tutor2.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="200.0" fitWidth="250.0" layoutX="50.0" layoutY="534.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../Image/GameIMG/threetonton.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="68.0" fitWidth="76.0" layoutX="516.0" layoutY="518.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../Image/ItemsGame/octo.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="76.0" fitWidth="68.0" layoutX="25.0" layoutY="21.0" onMouseClicked="#backToMenuGame" pickOnBounds="true" preserveRatio="true" style="-fx-cursor: hand;">
+               <image>
+                  <Image url="@../Image/ItemsGame/back1.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="247.0" fitWidth="260.0" layoutX="938.0" layoutY="33.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../Image/GameIMG/paperplane.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="247.0" fitWidth="248.0" layoutX="938.0" layoutY="463.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../Image/GameIMG/chickenFLy.gif" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="70.0" fitWidth="68.0" layoutX="803.0" layoutY="527.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../Image/GameIMG/planet2.png" />
+               </image>
+            </ImageView>
          </children>
       </Pane>
-      <Pane id="finishPane" fx:id="finishPane" layoutX="333.0" layoutY="170.0" prefHeight="361.0" prefWidth="565.0" style="-fx-background-color: EFB495;" visible="false">
+      <Pane fx:id="ansPane" layoutX="221.0" layoutY="104.0" prefHeight="446.0" prefWidth="760.0" style="-fx-background-color: ECE3CE; -fx-background-radius: 20px; -fx-border-color: BLACK; -fx-border-width: 3; -fx-border-radius: 17px;">
          <children>
-            <Label fx:id="scoreFinish" alignment="CENTER" layoutX="209.0" layoutY="181.0" prefHeight="59.0" prefWidth="147.0" textAlignment="CENTER">
-               <font>
-                  <Font name=".VnBlack" size="40.0" />
-               </font>
-            </Label>
-            <Button layoutX="371.0" layoutY="264.0" mnemonicParsing="false" onMouseClicked="#restartGame" prefHeight="50.0" prefWidth="104.0" text="Restart" />
-            <Button layoutX="76.0" layoutY="264.0" mnemonicParsing="false" onMouseClicked="#backToMenuGame" prefHeight="50.0" prefWidth="133.0" text="Back to menu game" />
-            <Button layoutX="239.0" layoutY="264.0" mnemonicParsing="false" onMouseClicked="#intoCheckAnsPane" prefHeight="50.0" prefWidth="104.0" text="Check Ans" />
-         </children>
-      </Pane>
-      <Pane fx:id="ansPane" layoutX="371.0" layoutY="128.0" prefHeight="361.0" prefWidth="490.0" style="-fx-background-color: EFB495;" visible="false">
-         <children>
-            <HBox alignment="CENTER" layoutX="74.0" layoutY="30.0" prefHeight="247.0" prefWidth="342.0">
+            <ImageView fitHeight="114.0" fitWidth="104.0" layoutX="54.0" layoutY="246.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../Image/GameIMG/salad.png" />
+               </image>
+            </ImageView>
+            <HBox alignment="CENTER" layoutX="130.0" layoutY="29.0" prefHeight="300.0" prefWidth="500.0" style="-fx-background-color: F4DFC8; -fx-border-color: BLACK; -fx-background-radius: 10px; -fx-border-radius: 8px; -fx-border-width: 2;">
                <children>
                   <ImageView fx:id="ansIMGView" fitHeight="216.0" fitWidth="270.0" pickOnBounds="true" preserveRatio="true" />
                </children>
             </HBox>
-            <Label fx:id="ansLabel" alignment="CENTER" layoutX="130.0" layoutY="290.0" prefHeight="36.0" prefWidth="230.0" text="Celebration" textAlignment="CENTER">
+            <Label fx:id="ansLabel" alignment="CENTER" layoutX="158.0" layoutY="368.0" prefHeight="36.0" prefWidth="463.0" text="Celebration" textAlignment="CENTER">
                <font>
-                  <Font name=".VnBlack" size="18.0" />
+                  <Font name="Arial Rounded MT Bold" size="24.0" />
                </font>
             </Label>
-            <ImageView fx:id="preAns" fitHeight="50.0" fitWidth="84.0" layoutX="14.0" layoutY="283.0" onMouseClicked="#goPreAns" pickOnBounds="true" preserveRatio="true" style="-fx-cursor: hand;">
+            <ImageView fx:id="preAns" fitHeight="50.0" fitWidth="84.0" layoutX="127.0" layoutY="361.0" onMouseClicked="#goPreAns" pickOnBounds="true" preserveRatio="true" style="-fx-cursor: hand;">
                <image>
                   <Image url="@../Image/ItemsGame/muiten1.png" />
                </image>
             </ImageView>
-            <ImageView fx:id="nextAns" fitHeight="50.0" fitWidth="84.0" layoutX="416.0" layoutY="283.0" onMouseClicked="#goNextAns" pickOnBounds="true" preserveRatio="true" style="-fx-cursor: hand;">
+            <ImageView fx:id="nextAns" fitHeight="50.0" fitWidth="84.0" layoutX="563.0" layoutY="361.0" onMouseClicked="#goNextAns" pickOnBounds="true" preserveRatio="true" style="-fx-cursor: hand;">
                <image>
                   <Image url="@../Image/ItemsGame/muiten1flip.png" />
                </image>
             </ImageView>
-            <ImageView fitHeight="50.0" fitWidth="50.0" layoutX="434.0" layoutY="5.0" onMouseClicked="#backToFinishPane" pickOnBounds="true" preserveRatio="true" style="-fx-cursor: hand;">
+            <ImageView fitHeight="36.0" fitWidth="35.0" layoutX="700.0" layoutY="21.0" onMouseClicked="#backToFinishPane" pickOnBounds="true" preserveRatio="true" style="-fx-cursor: hand;">
                <image>
-                  <Image url="@../Image/ItemsGame/exit1.png" />
+                  <Image url="@../Image/HistoryIMG/delete.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="150.0" fitWidth="15.0" layoutX="150.0" layoutY="39.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../Image/GameIMG/redDot.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="150.0" fitWidth="15.0" layoutX="180.0" layoutY="39.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../Image/GameIMG/yellowDot.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="150.0" fitWidth="15.0" layoutX="210.0" layoutY="39.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../Image/GameIMG/greenDot.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="82.0" fitWidth="84.0" layoutX="586.0" layoutY="268.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../Image/GameIMG/chef.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="110.0" fitWidth="118.0" layoutX="16.0" layoutY="65.0" pickOnBounds="true" preserveRatio="true" rotate="20.0">
+               <image>
+                  <Image url="@../Image/GameIMG/pizza.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="150.0" fitWidth="169.0" layoutX="597.0" layoutY="48.0" pickOnBounds="true" preserveRatio="true" rotate="30.0">
+               <image>
+                  <Image url="@../Image/GameIMG/sushi.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="76.0" fitWidth="82.0" layoutX="662.0" layoutY="368.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../Image/GameIMG/burger.png" />
                </image>
             </ImageView>
          </children>
       </Pane>
-      <Pane fx:id="topicPane" prefHeight="700.0" prefWidth="1200.0">
+      <Pane fx:id="topicPane" prefHeight="700.0" prefWidth="1200.0" visible="false">
          <children>
-            <ImageView fitHeight="150.0" fitWidth="166.0" layoutX="552.0" layoutY="148.0" onMouseClicked="#intoAnimalTopic" pickOnBounds="true" preserveRatio="true">
+            <Label alignment="CENTER" layoutY="42.0" prefHeight="50.0" prefWidth="1200.0" text="CHOOSE A TOPIC" textAlignment="CENTER">
+               <font>
+                  <Font name="Arial Rounded MT Bold" size="48.0" />
+               </font>
+            </Label>
+            <ImageView fitHeight="160.0" fitWidth="183.0" layoutX="540.0" layoutY="188.0" onMouseClicked="#intoAnimalTopic" pickOnBounds="true" preserveRatio="true" style="-fx-cursor: hand; -fx-image-radius: 20px;">
                <image>
-                  <Image url="@../Image/GameIMG/bird.jpg" />
+                  <Image url="@../Image/GameIMG/animal.png" />
                </image>
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>
             </ImageView>
-            <Label alignment="CENTER" layoutX="571.0" layoutY="298.0" prefHeight="50.0" prefWidth="112.0" text="Animal" textAlignment="CENTER">
+            <Label alignment="CENTER" layoutX="559.0" layoutY="338.0" prefHeight="50.0" prefWidth="112.0" text="Animal" textAlignment="CENTER">
                <font>
-                  <Font size="15.0" />
+                  <Font name="Arial Rounded MT Bold" size="18.0" />
                </font>
             </Label>
-            <Label alignment="CENTER" layoutX="417.0" layoutY="42.0" prefHeight="50.0" prefWidth="366.0" text="Choose a Topic" textAlignment="CENTER">
-               <font>
-                  <Font size="27.0" />
-               </font>
-            </Label>
-            <ImageView fitHeight="137.0" fitWidth="200.0" layoutX="68.0" layoutY="155.0" onMouseClicked="#intoSportsTopic" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="150.0" fitWidth="147.0" layoutX="99.0" layoutY="189.0" onMouseClicked="#intoSportsTopic" pickOnBounds="true" preserveRatio="true" style="-fx-cursor: hand; -fx-image-radius: 20px;">
                <image>
-                  <Image url="@../Image/GameIMG/Learn-Sport-Names-List-of-Sports-in-English.jpg" />
+                  <Image url="@../Image/GameIMG/sport.jpg" />
                </image>
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>
             </ImageView>
-            <Label alignment="CENTER" layoutX="94.0" layoutY="298.0" prefHeight="50.0" prefWidth="147.0" text="Sports" textAlignment="CENTER">
+            <Label alignment="CENTER" layoutX="93.0" layoutY="338.0" prefHeight="50.0" prefWidth="147.0" text="Sports" textAlignment="CENTER">
                <font>
-                  <Font size="15.0" />
+                  <Font name="Arial Rounded MT Bold" size="18.0" />
                </font>
             </Label>
-            <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="342.0" layoutY="148.0" onMouseClicked="#intoBodyPartsTopic" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="330.0" layoutY="188.0" onMouseClicked="#intoBodyPartsTopic" pickOnBounds="true" preserveRatio="true" style="-fx-cursor: hand; -fx-image-radius: 20px;">
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>
                <image>
-                  <Image url="@../Image/GameIMG/body%20parts.jpg" />
+                  <Image url="@../Image/GameIMG/bodyparts.png" />
                </image>
             </ImageView>
-            <Label alignment="CENTER" layoutX="361.0" layoutY="298.0" prefHeight="50.0" prefWidth="112.0" text="Body Parts">
+            <Label alignment="CENTER" layoutX="349.0" layoutY="338.0" prefHeight="50.0" prefWidth="112.0" text="Body Parts">
                <font>
-                  <Font size="15.0" />
+                  <Font name="Arial Rounded MT Bold" size="18.0" />
                </font>
             </Label>
-            <ImageView fitHeight="150.0" fitWidth="155.0" layoutX="775.0" layoutY="148.0" onMouseClicked="#intoJobsTopic" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="150.0" fitWidth="155.0" layoutX="763.0" layoutY="188.0" onMouseClicked="#intoJobsTopic" pickOnBounds="true" preserveRatio="true" style="-fx-cursor: hand; -fx-image-radius: 20px;">
                <image>
-                  <Image url="@../Image/GameIMG/work.jpg" />
-               </image>
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
-            </ImageView>
-            <Label alignment="CENTER" layoutX="798.0" layoutY="298.0" prefHeight="50.0" prefWidth="104.0" text="Jobs">
-               <font>
-                  <Font size="15.0" />
-               </font>
-            </Label>
-            <ImageView fitHeight="150.0" fitWidth="150.0" layoutX="987.0" layoutY="142.0" onMouseClicked="#intoUniverseTopic" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../Image/GameIMG/uni.jpg" />
+                  <Image url="@../Image/GameIMG/job.png" />
                </image>
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>
             </ImageView>
-            <Label alignment="CENTER" layoutX="1010.0" layoutY="298.0" prefHeight="50.0" prefWidth="104.0" text="Universe">
+            <Label alignment="CENTER" layoutX="786.0" layoutY="338.0" prefHeight="50.0" prefWidth="104.0" text="Jobs">
                <font>
-                  <Font size="15.0" />
+                  <Font name="Arial Rounded MT Bold" size="18.0" />
                </font>
             </Label>
-            <ImageView fitHeight="150.0" fitWidth="155.0" layoutX="98.0" layoutY="379.0" onMouseClicked="#intoFoodTopic" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="150.0" fitWidth="150.0" layoutX="975.0" layoutY="182.0" onMouseClicked="#intoUniverseTopic" pickOnBounds="true" preserveRatio="true" style="-fx-cursor: hand; -fx-image-radius: 20px;">
                <image>
-                  <Image url="@../Image/GameIMG/f2.jpg" />
+                  <Image url="@../Image/GameIMG/universe.png" />
                </image>
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>
             </ImageView>
-            <Label alignment="CENTER" layoutX="126.0" layoutY="529.0" prefHeight="50.0" prefWidth="84.0" text="Food">
+            <Label alignment="CENTER" layoutX="998.0" layoutY="338.0" prefHeight="50.0" prefWidth="104.0" text="Universe">
                <font>
-                  <Font size="15.0" />
+                  <Font name="Arial Rounded MT Bold" size="18.0" />
                </font>
             </Label>
-            <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="342.0" layoutY="379.0" onMouseClicked="#intoDrinksTopic" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="150.0" fitWidth="155.0" layoutX="86.0" layoutY="419.0" onMouseClicked="#intoFoodTopic" pickOnBounds="true" preserveRatio="true" style="-fx-cursor: hand; -fx-image-radius: 20px;">
                <image>
-                  <Image url="@../Image/GameIMG/beverage.jpg" />
+                  <Image url="@../Image/GameIMG/food.png" />
                </image>
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>
             </ImageView>
-            <Label alignment="CENTER" layoutX="365.0" layoutY="529.0" prefHeight="50.0" prefWidth="104.0" text="Drinks">
+            <Label alignment="CENTER" layoutX="124.0" layoutY="569.0" prefHeight="50.0" prefWidth="84.0" text="Food">
                <font>
-                  <Font size="15.0" />
+                  <Font name="Arial Rounded MT Bold" size="18.0" />
                </font>
             </Label>
-            <ImageView fitHeight="150.0" fitWidth="165.0" layoutX="545.0" layoutY="370.0" onMouseClicked="#intoTechnologyTopic" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="330.0" layoutY="419.0" onMouseClicked="#intoDrinksTopic" pickOnBounds="true" preserveRatio="true" style="-fx-cursor: hand; -fx-image-radius: 20px;">
+               <image>
+                  <Image url="@../Image/GameIMG/drick.png" />
+               </image>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </ImageView>
+            <Label alignment="CENTER" layoutX="353.0" layoutY="569.0" prefHeight="50.0" prefWidth="104.0" text="Drinks">
+               <font>
+                  <Font name="Arial Rounded MT Bold" size="18.0" />
+               </font>
+            </Label>
+            <ImageView fitHeight="150.0" fitWidth="165.0" layoutX="540.0" layoutY="423.0" onMouseClicked="#intoTechnologyTopic" pickOnBounds="true" preserveRatio="true" style="-fx-cursor: hand; -fx-image-radius: 20px;">
                <image>
                   <Image url="@../Image/GameIMG/Technology.png" />
                </image>
@@ -235,37 +493,67 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </ImageView>
-            <Label alignment="CENTER" layoutX="575.0" layoutY="529.0" prefHeight="50.0" prefWidth="104.0" text="Technology">
+            <Label alignment="CENTER" layoutX="563.0" layoutY="569.0" prefHeight="50.0" prefWidth="104.0" text="Technology">
                <font>
-                  <Font size="15.0" />
+                  <Font name="Arial Rounded MT Bold" size="18.0" />
                </font>
             </Label>
-            <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="775.0" layoutY="379.0" onMouseClicked="#intoHousesTopic" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="162.0" fitWidth="161.0" layoutX="758.0" layoutY="418.0" onMouseClicked="#intoHousesTopic" pickOnBounds="true" preserveRatio="true" style="-fx-cursor: hand; -fx-image-radius: 20px;">
                <image>
-                  <Image url="@../Image/GameIMG/hous.jpg" />
+                  <Image url="@../Image/GameIMG/houses.png" />
                </image>
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>
             </ImageView>
-            <Label alignment="CENTER" layoutX="798.0" layoutY="529.0" prefHeight="50.0" prefWidth="104.0" text="Houses">
+            <Label alignment="CENTER" layoutX="786.0" layoutY="569.0" prefHeight="50.0" prefWidth="104.0" text="Houses">
                <font>
-                  <Font size="15.0" />
+                  <Font name="Arial Rounded MT Bold" size="18.0" />
                </font>
             </Label>
-            <ImageView fitHeight="137.0" fitWidth="147.0" layoutX="994.0" layoutY="383.0" onMouseClicked="#intoSchoolsTopic" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="161.0" fitWidth="161.0" layoutX="970.0" layoutY="423.0" onMouseClicked="#intoSchoolsTopic" pickOnBounds="true" preserveRatio="true" style="-fx-cursor: hand; -fx-image-radius: 20px;">
                <image>
-                  <Image url="@../Image/GameIMG/sch1.jpg" />
+                  <Image url="@../Image/GameIMG/school.png" />
                </image>
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>
             </ImageView>
-            <Label alignment="CENTER" layoutX="1010.0" layoutY="529.0" prefHeight="50.0" prefWidth="104.0" text="Schools">
+            <Label alignment="CENTER" layoutX="998.0" layoutY="569.0" prefHeight="50.0" prefWidth="104.0" text="Schools">
                <font>
-                  <Font size="15.0" />
+                  <Font name="Arial Rounded MT Bold" size="18.0" />
                </font>
             </Label>
+            <ImageView fitHeight="127.0" fitWidth="100.0" layoutX="1102.0" layoutY="20.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../Image/GameIMG/star.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="59.0" fitWidth="65.0" layoutX="913.0" layoutY="49.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../Image/GameIMG/star1.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="59.0" fitWidth="65.0" layoutX="266.0" layoutY="69.0" pickOnBounds="true" preserveRatio="true" rotate="-10.0">
+               <image>
+                  <Image url="@../Image/GameIMG/star2.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="79.0" fitWidth="76.0" layoutX="35.0" layoutY="32.0" onMouseClicked="#backToMenuGame" pickOnBounds="true" preserveRatio="true" style="-fx-cursor: hand;">
+               <image>
+                  <Image url="@../Image/ItemsGame/back1.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="109.0" fitWidth="109.0" layoutX="1084.0" layoutY="594.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../Image/GameIMG/yutaPlay.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="110.0" fitWidth="110.0" layoutY="590.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../Image/GameIMG/winnie.png" />
+               </image>
+            </ImageView>
          </children>
       </Pane>
    </children>

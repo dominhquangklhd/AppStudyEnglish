@@ -287,7 +287,7 @@
             </Label>
          </children>
       </Pane>
-      <Pane fx:id="checkAnsPane" layoutX="221.0" layoutY="150.0" prefHeight="400.0" prefWidth="760.0" style="-fx-border-color: BLACK; -fx-background-color: ECE3CE; -fx-background-radius: 20px; -fx-border-radius: 17px; -fx-border-width: 3\;">
+      <Pane fx:id="checkAnsPane" layoutX="221.0" layoutY="150.0" prefHeight="400.0" prefWidth="760.0" style="-fx-border-color: BLACK; -fx-background-color: ECE3CE; -fx-background-radius: 20px; -fx-border-radius: 17px; -fx-border-width: 3;">
          <children>
             <Label fx:id="finishQuesLabel" alignment="CENTER" layoutX="167.0" layoutY="54.0" prefHeight="200.0" prefWidth="421.0" text="Label" textAlignment="CENTER" wrapText="true">
                <font>
