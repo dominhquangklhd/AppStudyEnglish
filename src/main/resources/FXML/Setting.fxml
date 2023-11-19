@@ -178,7 +178,7 @@
                         <Image url="@../Image/MenuIMG/Regex.png" />
                      </image>
                   </ImageView>
-                  <ImageView fitHeight="43.0" fitWidth="97.0" layoutX="152.0" layoutY="237.0" onMouseClicked="#cancelInsert" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fitHeight="43.0" fitWidth="97.0" layoutX="152.0" layoutY="237.0" onMouseClicked="#cancelInsert" pickOnBounds="true" preserveRatio="true" style="-fx-cursor: hand;">
                      <image>
                         <Image url="@../Image/MenuIMG/cancelDelete.png" />
                      </image>
