@@ -42,13 +42,6 @@ public class MenuController extends BaseController implements Initializable {
     @FXML
     public ImageView Out;
 
-
-    public void intoGuide() {
-        System.out.println("Guide");
-    }
-
-
-
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         //Nothing

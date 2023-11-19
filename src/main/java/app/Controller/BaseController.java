@@ -39,6 +39,8 @@ public class BaseController implements Initializable {
     @FXML
     public AnchorPane scenePane;
     @FXML
+    public Pane guidePane;
+    @FXML
     public ImageView out;
     @FXML
     public ImageView intoHistory;
@@ -86,9 +88,15 @@ public class BaseController implements Initializable {
         stage.setIconified(true);
     }
 
+    public void intoGuide() {
+        guidePane.setVisible(true);
+    }
+
+
     public void backHome(MouseEvent event) throws IOException {
         ((Pane) Main.root).getChildren().clear();
         Main.root = homeLoader.load();
+        guidePane.setVisible(false);
         //stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         //scene = new Scene(Main.root);
         Main.scene.setRoot(Main.root);

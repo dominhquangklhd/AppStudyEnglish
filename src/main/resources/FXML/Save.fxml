@@ -8,6 +8,7 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
@@ -329,7 +330,7 @@
             <Image url="@../Image/MenuIMG/out_but.png" />
          </image>
       </ImageView>
-      <ImageView id="guide" fitHeight="150.0" fitWidth="28.0" layoutX="1102.0" layoutY="21.0" pickOnBounds="true" preserveRatio="true" style="-fx-cursor: hand;">
+      <ImageView id="guide" fitHeight="150.0" fitWidth="28.0" layoutX="1102.0" layoutY="21.0" onMouseClicked="#intoGuide" pickOnBounds="true" preserveRatio="true" style="-fx-cursor: hand;">
          <image>
             <Image url="@../Image/MenuIMG/Guide.png" />
          </image>
@@ -339,5 +340,19 @@
             <Image url="@../../../../../Java/test/JavaFX_test/test/src/main/resources/Image/MenuIMG/minimize.png" />
          </image>
       </ImageView>
+      <Pane fx:id="guidePane" prefHeight="700.0" prefWidth="1200.0" style="-fx-background-color: FFF8DC;" visible="false">
+         <children>
+            <ImageView fitHeight="700.0" fitWidth="1200.0" layoutX="41.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../Image/MenuIMG/guideIMG.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="78.0" fitWidth="78.0" layoutX="41.0" layoutY="35.0" onMouseClicked="#backHome" pickOnBounds="true" preserveRatio="true" style="-fx-cursor: hand;">
+               <image>
+                  <Image url="@../Image/ItemsGame/back1.png" />
+               </image>
+            </ImageView>
+         </children>
+      </Pane>
     </children>
 </AnchorPane>
