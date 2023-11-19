@@ -25,22 +25,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class SaveController implements Initializable {
-    //FXML
-    @FXML
-    public ImageView minimize;
-    @FXML
-    public AnchorPane scenePane;
-    @FXML
-    public TextField SearchingBar;
-    @FXML
-    public ImageView intoHistory;
-    @FXML
-    public ImageView home;
-    @FXML
-    public ImageView out;
-    @FXML
-    public ImageView intoSearch;
+public class SaveController extends BaseController implements Initializable {
     @FXML
     public Label label_1;
     @FXML
@@ -77,36 +62,10 @@ public class SaveController implements Initializable {
     public ImageView prePage;
     @FXML
     public ImageView nextPage;
-    @FXML
-    public ListView wordList;
-    @FXML
-    public Button paneButton;
-    @FXML
-    public ImageView intoTranslate;
-    @FXML
-    public ImageView intoGame;
-    @FXML
-    public ImageView setting;
-    @FXML
-    public AnchorPane settingPane;
-    @FXML
-    public Label insertWord;
-    @FXML
-    public Label editWord;
-    @FXML
-    public Label deleteWord;
 
-    //Nor
     int recentPage = 1;
     int number_of_page = 0;
-    public FXMLLoader settingLoader = new FXMLLoader(getClass().getResource("/FXML/Setting.fxml"));
-    public AnchorPane adjustPane;
-    boolean settingLoaded = false;
 
-    //Present
-    private Stage stage;
-    private Scene scene;
-    private Parent root;
 
     //Content Handler
     public void toNextPage() {
@@ -119,88 +78,6 @@ public class SaveController implements Initializable {
         StartSave();
     }
 
-
-    public void intoGame(MouseEvent event) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/FXML/MenuGame.fxml"));
-        Parent root = loader.load();
-
-        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        scene = new Scene(root);
-        stage.setScene (scene);
-        stage.show();
-    }
-
-    public void intoWord(KeyEvent event) throws IOException {
-        ObservableList<String> items = FXCollections.observableArrayList();
-
-        //lập ra danh sách các từ gợi ý mỗi khi từ trên SearchingBar(TestField) thay đổi.
-        SearchingBar.textProperty().addListener((observable, oldValue, newValue) -> {
-            wordList.getItems().clear();
-            Main.trie.resetWordList();
-
-            SearchingBar.setText(newValue);
-            Main.trie.search(SearchingBar.getText().toLowerCase());
-
-            wordList.setVisible(!Main.trie.getWordsBySearching().isEmpty());
-
-            items.addAll(Main.trie.getWordsBySearching());
-            wordList.setItems(items);
-        });
-
-        // lập ra sự kiện khi mình click chuột vào worldList(ListView).
-        wordList.setOnMouseClicked(MouseEvent -> {
-            String selectedWord = (String) wordList.getSelectionModel().getSelectedItem();
-            if (selectedWord != null) {
-                SearchingBar.setText(selectedWord);
-            }
-
-            //wordList.setVisible(false);
-        });
-
-        if (event.getCode() == KeyCode.DOWN
-                && wordList.getSelectionModel().getSelectedIndex() < wordList.getItems().size() - 1) {
-            // Move selection down
-            if (!wordList.getSelectionModel().isEmpty()) {
-                wordList.getSelectionModel().selectNext();
-            } else {
-                wordList.getSelectionModel().selectFirst();
-            }
-        }
-
-        if (event.getCode() == KeyCode.UP && wordList.getSelectionModel().getSelectedIndex() > 0) {
-            // Move selection up
-            wordList.getSelectionModel().selectPrevious();
-        }
-
-        if (event.getCode() == KeyCode.ENTER) {
-            if (!wordList.getSelectionModel().isEmpty()) {
-                SearchingBar.setText((String) wordList.getSelectionModel().getSelectedItem());
-            }
-            wordList.setVisible(false);
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/FXML/Search.fxml"));
-            Parent root = loader.load();
-            ((SearchController) loader.getController()).getWordTarget().setText(SearchingBar.getText());
-            ((SearchController) loader.getController()).StartSearching();
-
-            //Switch scene to SearchScene
-            stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-            scene = new Scene(root);
-            stage.setScene (scene);
-            stage.show();
-        }
-    }
-
-    public void intoSearch(MouseEvent event) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/FXML/Search.fxml"));
-        Parent root = loader.load();
-        ((SearchController) loader.getController()).GoSearch();
-
-        //Switch scene to SearchScene
-        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        scene = new Scene(root);
-        stage.setScene (scene);
-        stage.show();
-    }
 
     public void reSearchWord(MouseEvent event) throws  IOException {
         Label tmp = (Label) event.getSource();
@@ -228,77 +105,6 @@ public class SaveController implements Initializable {
         stage.show();
     }
 
-    public void intoHistory(MouseEvent event) throws IOException {
-        Main.dictionaryManagement.recentHistoryPage = 1;
-
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/FXML/History.fxml"));
-        Parent root = loader.load();
-        ((HistoryController) loader.getController()).StartHistory();
-
-        //Switch scene to HistoryScene
-        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        scene = new Scene(root);
-        stage.setScene (scene);
-        stage.show();
-    }
-
-    public void intoTranslate(MouseEvent event) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/FXML/Translate.fxml"));
-        Parent root = loader.load();
-
-        //Switch scene to HistoryScene
-        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        scene = new Scene(root);
-        stage.setScene (scene);
-        stage.show();
-    }
-    
-    public void backHome(MouseEvent event) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("/FXML/Menu.fxml"));
-        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        scene = new Scene(root);
-        stage.setScene (scene);
-        stage.show();
-    }
-
-    public void minimizeStage(MouseEvent event) {
-        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        stage.setIconified(true);
-    }
-
-    public void intoOut() throws IOException {
-        Main.dictionaryManagement.historyExportToFile();
-        stage = (Stage) scenePane.getScene().getWindow();
-        stage.close();
-    }
-
-    public void intoSetting() throws IOException {
-        if (settingPane.isVisible()) {
-            scenePane.getChildren().remove(adjustPane);
-            settingPane.setVisible(false);
-        } else {
-            settingLoader.getClass().getResource("/FXML/Setting.fxml");
-            settingPane.setVisible(true);
-            if (!settingLoaded) {
-                adjustPane = settingLoader.load();
-                settingLoaded = true;
-            }
-            scenePane.getChildren().add(adjustPane);
-            adjustPane.setLayoutX(106);
-            adjustPane.setLayoutY(106);
-            ((SettingController) settingLoader.getController()).StartInsert();
-        }
-    }
-
-    public void adjustDictionary(MouseEvent event) throws IOException {
-        if (event.getSource() == insertWord) {
-            ((SettingController) settingLoader.getController()).StartInsert();
-        } else if (event.getSource() == editWord) {
-            ((SettingController) settingLoader.getController()).StartEdit();
-        } else if (event.getSource() == deleteWord) {
-            ((SettingController) settingLoader.getController()).StartDelete();
-        }
-    }
 
     //Supporting methods
     public void StartSave() {
@@ -359,7 +165,4 @@ public class SaveController implements Initializable {
         //Nothing
     }
 
-    public void outSearch() {
-        wordList.setVisible(false);
-    }
 }
