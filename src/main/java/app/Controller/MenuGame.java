@@ -17,6 +17,7 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -27,24 +28,29 @@ public class MenuGame extends BaseController {
     @FXML
     private Button buttonGameImg;
 
-    public void intoGameImg(MouseEvent event) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/FXML/GameIMG.fxml"));
-        Parent root = loader.load();
+    private FXMLLoader GameIMGloader = new FXMLLoader(getClass().getResource("/FXML/GameIMG.fxml"));
+    private FXMLLoader MCloader = new FXMLLoader(getClass().getResource("/FXML/MultipleChoiceGame.fxml"));
 
-        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        scene = new Scene(root);
-        stage.setScene (scene);
-        stage.show();
+    public void intoGameImg(MouseEvent event) throws IOException {
+        ((Pane) Main.root).getChildren().clear();
+        Main.root = GameIMGloader.load();
+
+        //stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        //scene = new Scene(root);
+        Main.scene.setRoot(Main.root);
+        //stage.setScene (Main.scene);
+        //stage.show();
     }
 
     public void intoMCGame(MouseEvent event) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/FXML/MultipleChoiceGame.fxml"));
-        Parent root = loader.load();
+        ((Pane) Main.root).getChildren().clear();
+        Main.root = MCloader.load();
 
-        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        scene = new Scene(root);
-        stage.setScene (scene);
-        stage.show();
+        //stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        //scene = new Scene(root);
+        Main.scene.setRoot(Main.root);
+        //stage.setScene (Main.scene);
+        //stage.show();
     }
 
 }

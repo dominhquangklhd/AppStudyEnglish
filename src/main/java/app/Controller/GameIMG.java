@@ -4,6 +4,7 @@ import app.DB_Connection.DatabaseConnection;
 import app.DB_Connection.DatabaseTXTGameIMG;
 import app.Main;
 import javafx.animation.TranslateTransition;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -97,6 +98,7 @@ public class GameIMG implements Initializable {
     private DatabaseTXTGameIMG databaseTXTGameIMG = new DatabaseTXTGameIMG();
     private Stage stage;
     private Scene scene;
+    FXMLLoader loader = new FXMLLoader(getClass().getResource("/FXML/MenuGame.fxml"));
     private Image image;
     private List<String> ansGame = new LinkedList<>();
     private List<String> topicGame = new LinkedList<>();
@@ -231,13 +233,14 @@ public class GameIMG implements Initializable {
     void backToMenuGame(MouseEvent event) throws IOException {
         resetDataGame();
 
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/FXML/MenuGame.fxml"));
-        Parent root = loader.load();
+        ((Pane) Main.root).getChildren().clear();
+        Main.root = loader.load();
 
-        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        scene = new Scene(root);
-        stage.setScene (scene);
-        stage.show();
+        //stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        //scene = new Scene(root);
+        Main.scene.setRoot(Main.root);
+        //stage.setScene (scene);
+        //stage.show();
     }
 
     @FXML

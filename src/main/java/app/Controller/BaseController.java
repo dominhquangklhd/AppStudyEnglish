@@ -9,6 +9,7 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -21,6 +22,7 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Pane;
 import javafx.scene.web.WebView;
 import javafx.stage.Stage;
 
@@ -28,7 +30,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class BaseController {
+public class BaseController implements Initializable {
     // Common FXML elements
     @FXML
     public ImageView minimize;
@@ -67,10 +69,6 @@ public class BaseController {
     @FXML
     public Label deleteWord;
 
-    protected Stage stage;
-    protected Scene scene;
-    protected Parent root;
-
     public AnchorPane adjustPane;
     boolean settingLoaded = false;
 
@@ -81,6 +79,7 @@ public class BaseController {
     public FXMLLoader historyLoader = new FXMLLoader(getClass().getResource("/FXML/History.fxml"));
     public FXMLLoader homeLoader = new FXMLLoader(getClass().getResource("/FXML/Menu.fxml"));
     public FXMLLoader gameLoader = new FXMLLoader(getClass().getResource("/FXML/MenuGame.fxml"));
+    protected Stage stage;
 
     public void minimizeStage(MouseEvent event) {
         stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
@@ -88,11 +87,13 @@ public class BaseController {
     }
 
     public void backHome(MouseEvent event) throws IOException {
-        Parent root = homeLoader.load();
-        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        scene = new Scene(root);
-        stage.setScene(scene);
-        stage.show();
+        ((Pane) Main.root).getChildren().clear();
+        Main.root = homeLoader.load();
+        //stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        //scene = new Scene(Main.root);
+        Main.scene.setRoot(Main.root);
+        //stage.setScene(Main.scene);
+        //stage.show();
     }
 
     public void intoOut() throws IOException {
@@ -104,12 +105,14 @@ public class BaseController {
 
     //Chuyển sang Game
     public void intoGame(MouseEvent event) throws IOException {
-        Parent root = gameLoader.load();
+        ((Pane) Main.root).getChildren().clear();
+        Main.root = gameLoader.load();
 
-        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        scene = new Scene(root);
-        stage.setScene (scene);
-        stage.show();
+        //stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        //scene = new Scene(Main.root);
+        Main.scene.setRoot(Main.root);
+        //stage.setScene (Main.scene);
+        //stage.show();
     }
 
     // Chuyển sang history
@@ -117,50 +120,58 @@ public class BaseController {
     public void intoHistory(MouseEvent event) throws IOException {
         Main.dictionaryManagement.recentHistoryPage = 1;
 
-        Parent root = historyLoader.load();
+        ((Pane) Main.root).getChildren().clear();
+        Main.root = historyLoader.load();
         ((HistoryController) historyLoader.getController()).StartHistory();
 
         //Switch scene to HistoryScene
-        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        scene = new Scene(root);
-        stage.setScene (scene);
-        stage.show();
+        //stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        //scene = new Scene(Main.root);
+        Main.scene.setRoot(Main.root);
+        //stage.setScene (Main.scene);
+        //stage.show();
     }
 
     // Chuyển sang translate
 
     public void intoTranslate(MouseEvent event) throws IOException {
-        Parent root = transLoader.load();
+        ((Pane) Main.root).getChildren().clear();
+        Main.root = transLoader.load();
         //Switch scene to HistoryScene
-        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        scene = new Scene(root);
-        stage.setScene (scene);
-        stage.show();
+        //stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        //scene = new Scene(Main.root);
+        Main.scene.setRoot(Main.root);
+        //stage.setScene (Main.scene);
+        //stage.show();
     }
 
     public void intoSearch(MouseEvent event) throws IOException {
-        Parent root = searchLoader.load();
+        ((Pane) Main.root).getChildren().clear();
+        Main.root = searchLoader.load();
         ((SearchController) searchLoader.getController()).GoSearch();
 
         //Switch scene to SearchScene
-        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        scene = new Scene(root);
-        stage.setScene (scene);
-        stage.show();
+        //stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        //scene = new Scene(Main.root);
+        Main.scene.setRoot(Main.root);
+        //stage.setScene (Main.scene);
+        //stage.show();
     }
 
     // Chuyển sang save
 
     public void intoSave(MouseEvent event) throws IOException {
         Main.dictionaryManagement.recentSavePage = 1;
-        Parent root = saveLoader.load();
+        ((Pane) Main.root).getChildren().clear();
+        Main.root = saveLoader.load();
         ((SaveController) saveLoader.getController()).StartSave();
 
         //Switch scene to HistoryScene
-        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        scene = new Scene(root);
-        stage.setScene (scene);
-        stage.show();
+        //stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        //scene = new Scene(Main.root);
+        Main.scene.setRoot(Main.root);
+        //stage.setScene (Main.scene);
+        //stage.show();
     }
 
 
@@ -212,15 +223,17 @@ public class BaseController {
                 SearchingBar.setText((String) wordList.getSelectionModel().getSelectedItem());
             }
             wordList.setVisible(false);
-            Parent root = searchLoader.load();
+            ((Pane) Main.root).getChildren().clear();
+            Main.root = searchLoader.load();
             ((SearchController) searchLoader.getController()).getWordTarget().setText(SearchingBar.getText());
             ((SearchController) searchLoader.getController()).StartSearching();
 
             //Switch scene to SearchScene
-            stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-            scene = new Scene(root);
-            stage.setScene (scene);
-            stage.show();
+            //stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            //scene = new Scene(Main.root);
+            Main.scene.setRoot(Main.root);
+            //stage.setScene (Main.scene);
+            //stage.show();
         }
     }
 
@@ -253,6 +266,11 @@ public class BaseController {
 
     public void outSearch() {
         wordList.setVisible(false);
+    }
+
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+
     }
 }
 

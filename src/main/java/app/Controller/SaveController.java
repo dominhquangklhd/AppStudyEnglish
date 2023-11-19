@@ -19,6 +19,7 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -65,6 +66,7 @@ public class SaveController extends BaseController implements Initializable {
 
     int recentPage = 1;
     int number_of_page = 0;
+    FXMLLoader loader = new FXMLLoader(getClass().getResource("/FXML/Search.fxml"));
 
 
     //Content Handler
@@ -89,8 +91,8 @@ public class SaveController extends BaseController implements Initializable {
             }
         }
 
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/FXML/Search.fxml"));
-        Parent root = loader.load();
+        ((Pane) Main.root).getChildren().clear();
+        Main.root = loader.load();
         if (w.equals("_____")) {
             ((SearchController) loader.getController()).CryIfCannotFindWord();
         } else {
@@ -99,10 +101,11 @@ public class SaveController extends BaseController implements Initializable {
         }
 
         //Switch scene to SearchScene
-        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        scene = new Scene(root);
-        stage.setScene (scene);
-        stage.show();
+        //stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        //scene = new Scene(root);
+        Main.scene.setRoot(Main.root);
+        //stage.setScene (Main.scene);
+        //stage.show();
     }
 
 

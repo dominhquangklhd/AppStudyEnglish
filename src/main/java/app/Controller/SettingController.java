@@ -85,6 +85,8 @@ public class SettingController {
     public AnchorPane DeleteSuccessPane;
     @FXML
     public ImageView deleteSucess;
+    @FXML
+    public AnchorPane RegexWarningPane;
 
     //Nor
     public List<String> types = new ArrayList<>();
@@ -96,7 +98,11 @@ public class SettingController {
     //Control methods
     public void insert() throws SQLException {
         if (!wordInsert.getText().equals("")) {
-            String target = wordInsert.getText();
+            if (!wordInsert.getText().matches("^[a-z ]*$")) {
+                RegexWarningPane.setVisible(true);
+                return;
+            }
+            String target = wordInsert.getText().toLowerCase();
             String IPA = ipaInsert.getText();
             if (!Main.databaseConnection.hasInDatabase(target)) {
                 if (!typeInsert.getText().equals("")){
@@ -132,6 +138,7 @@ public class SettingController {
 
     public void cancelInsert() {
         InsertwarningPane.setVisible(false);
+        RegexWarningPane.setVisible(false);
     }
 
     public void lookUp(MouseEvent event) throws IOException {
@@ -150,11 +157,15 @@ public class SettingController {
 
     public void edit() throws SQLException {
         if (!wordInsert.getText().equals("")) {
+            if (!wordInsert.getText().matches("^[a-z ]*$")) {
+                RegexWarningPane.setVisible(true);
+                return;
+            }
             if (!Main.databaseConnection.hasInDatabase(wordInsert.getText())) {
                 EditWarning.setVisible(true);
             } else {
                 Main.databaseConnection.deleteWordInDatabase(wordInsert.getText());
-                String target = wordInsert.getText();
+                String target = wordInsert.getText().toLowerCase();
                 String IPA = ipaInsert.getText();
                 if (!typeInsert.getText().equals("")){
                     if (typeIndex >= types.size()) {
@@ -182,7 +193,7 @@ public class SettingController {
     }
 
     public void delete() throws SQLException {
-        String target = wordDelete.getText();
+        String target = wordDelete.getText().toLowerCase();
         if (!wordDelete.getText().equals("")) {
             if (Main.databaseConnection.hasInDatabase(target)) {
                 Main.databaseConnection.deleteWordInDatabase(target);
