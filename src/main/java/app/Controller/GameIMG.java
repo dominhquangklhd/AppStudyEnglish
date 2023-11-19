@@ -2,6 +2,7 @@ package app.Controller;
 
 import app.DB_Connection.DatabaseConnection;
 import app.DB_Connection.DatabaseTXTGameIMG;
+import app.Main;
 import javafx.animation.TranslateTransition;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -13,6 +14,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
@@ -28,6 +30,14 @@ import java.util.*;
 
 public class GameIMG implements Initializable {
 
+    @FXML
+    public AnchorPane scenePane;
+    @FXML
+    public Pane sub30Pane;
+    @FXML
+    public Pane sub60Pane;
+    @FXML
+    public Pane sub100Pane;
     @FXML
     private HBox answerChars;
 
@@ -82,6 +92,7 @@ public class GameIMG implements Initializable {
     @FXML
     private Pane topicPane;
 
+    //Nor
     private EventHandler<ActionEvent> buttonClickHandler;
     private DatabaseTXTGameIMG databaseTXTGameIMG = new DatabaseTXTGameIMG();
     private Stage stage;
@@ -99,7 +110,7 @@ public class GameIMG implements Initializable {
 
     @FXML
     public void intoCheckAnsPane() {
-        finishPane.setVisible(false);
+        finishPane.setVisible(true);
         ansPane.setVisible(true);
 
         numAns = 0;
@@ -340,6 +351,15 @@ public class GameIMG implements Initializable {
             String charAsString = String.valueOf(c);
             Button button = new Button(charAsString);
             button.setPrefSize(40, 40);
+            button.setStyle("-fx-background-color: #F8DE22; " +
+                    "-fx-background-radius: 5px; " +
+                    //"-fx-border-color: BLACK; " +
+                    //"-fx-border-radius: 5px; " +
+                    //"-fx-border-width: 1; " +
+                    "-fx-cursor: hand;" +
+                    "-fx-font-family: 'Arial Rounded MT Bold'; " +
+                    "-fx-font-size: 16px;");
+
 
             buttonHashMap.put(button, true);
             button.setOnAction(buttonClickHandler);
@@ -360,9 +380,6 @@ public class GameIMG implements Initializable {
     public void nextQuestion() {
         if (curQ < DatabaseConnection.NUmOfQuestionGameIMG - 1) {
             curQ++;
-            if (curQ == DatabaseConnection.NUmOfQuestionGameIMG - 1) {
-                buttonNext.setText("finish");
-            }
             questionCommon();
         } else {
             showFinishGame();
@@ -370,9 +387,32 @@ public class GameIMG implements Initializable {
     }
 
     public void showFinishGame() {
-        mainPaneGame.setDisable(true);
         finishPane.setVisible(true);
-        scoreFinish.setText(numScore + "");
+        scoreFinish.setText("Your score : " + String.valueOf(numScore));
+        if (numScore <= 30) {
+            sub30Pane.setVisible(true);
+            sub60Pane.setVisible(false);
+            sub100Pane.setVisible(false);
+        } else if (numScore <= 60) {
+            sub30Pane.setVisible(false);
+            sub60Pane.setVisible(true);
+            sub100Pane.setVisible(false);
+        } else {
+            sub30Pane.setVisible(false);
+            sub60Pane.setVisible(false);
+            sub100Pane.setVisible(true);
+        }
+    }
+
+    public void minimizeStage(MouseEvent event) {
+        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        stage.setIconified(true);
+    }
+
+    public void intoOut() throws IOException {
+        Main.dictionaryManagement.historyExportToFile();
+        stage = (Stage) scenePane.getScene().getWindow();
+        stage.close();
     }
 
     @Override
