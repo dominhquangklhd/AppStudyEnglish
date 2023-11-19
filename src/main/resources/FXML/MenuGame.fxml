@@ -53,6 +53,11 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </ListView>
+      <ImageView fitHeight="162.0" fitWidth="166.0" layoutX="952.0" layoutY="181.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../Image/ItemsGame/heartplane.png" />
+         </image>
+      </ImageView>
       <AnchorPane fx:id="settingPane" layoutX="900.0" layoutY="55.0" prefHeight="250.0" prefWidth="300.0" visible="false">
          <children>
             <ImageView fitHeight="241.0" fitWidth="300.0" layoutX="5.0" pickOnBounds="true" preserveRatio="true">
@@ -150,11 +155,6 @@
       <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="1000.0" layoutY="435.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../Image/ItemsGame/dance2.gif" />
-         </image>
-      </ImageView>
-      <ImageView fitHeight="162.0" fitWidth="166.0" layoutX="952.0" layoutY="181.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../Image/ItemsGame/heartplane.png" />
          </image>
       </ImageView>
       <ImageView fitHeight="120.0" fitWidth="119.0" layoutX="137.0" layoutY="216.0" pickOnBounds="true" preserveRatio="true">

@@ -20,6 +20,7 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -102,6 +103,7 @@ public class HistoryController extends BaseController implements Initializable {
     //Nor
     private int number_of_page = 0;
     private  int recentPage = 1;
+    FXMLLoader loader = new FXMLLoader(getClass().getResource("/FXML/Search.fxml"));
 
 
     //Content Handlers
@@ -132,8 +134,8 @@ public class HistoryController extends BaseController implements Initializable {
             }
         }
 
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/FXML/Search.fxml"));
-        Parent root = loader.load();
+        ((Pane) Main.root).getChildren().clear();
+        Main.root = loader.load();
         if (w.equals("_____")) {
             ((SearchController) loader.getController()).CryIfCannotFindWord();
         } else {
@@ -142,10 +144,11 @@ public class HistoryController extends BaseController implements Initializable {
         }
 
         //Switch scene to SearchScene
-        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        scene = new Scene(root);
-        stage.setScene (scene);
-        stage.show();
+        //stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        //scene = new Scene(root);
+        Main.scene.setRoot(Main.root);
+        //stage.setScene (Main.scene);
+        //stage.show();
     }
 
     public void deleteAll() {

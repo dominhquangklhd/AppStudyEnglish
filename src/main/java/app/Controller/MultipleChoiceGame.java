@@ -3,6 +3,7 @@ package app.Controller;
 import app.DB_Connection.DatabaseConnection;
 import app.Main;
 import javafx.animation.*;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -84,6 +85,7 @@ public class MultipleChoiceGame implements Initializable {
 
     private Stage stage;
     private Scene scene;
+    FXMLLoader loader = new FXMLLoader(getClass().getResource("/FXML/MenuGame.fxml"));
     private String question;
     private String A;
     private String B;
@@ -219,13 +221,14 @@ public class MultipleChoiceGame implements Initializable {
     @FXML
     void exitGame(MouseEvent event) throws IOException {
         //Main.databaseConnection.DatabaseClose();
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/FXML/MenuGame.fxml"));
-        Parent root = loader.load();
+        ((Pane) Main.root).getChildren().clear();
+        Main.root = loader.load();
 
-        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        scene = new Scene(root);
-        stage.setScene (scene);
-        stage.show();
+        //stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        //scene = new Scene(root);
+        Main.scene.setRoot(Main.root);
+        //stage.setScene (scene);
+        //stage.show();
     }
 
     @FXML

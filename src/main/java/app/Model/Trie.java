@@ -134,7 +134,7 @@ public class Trie {
 
         if (deleteWord(cur.next[idx], word, depth + 1)) {
             cur.next[idx] = null; // Remove the child node if it's unnecessary
-            return !isLeafNode(cur) && !cur.isEnd;
+            return isLeafNode(cur) && !cur.isEnd;
         }
 
         return false;

@@ -32,6 +32,10 @@ public class Main extends Application {
 
     public static GGTranslateAPI TranslateAPI = new GGTranslateAPI();
 
+    public static Parent root;
+
+    public static Scene scene;
+
     @Override
     public void start(Stage stage) {
         try {
@@ -41,8 +45,8 @@ public class Main extends Application {
             databaseConnection.setSavedWord();
             databaseConnection.insertIntoTrie();
 
-            Parent root = FXMLLoader.load(getClass().getResource("/FXML/Menu.fxml"));
-            Scene scene = new Scene(root);
+            root = FXMLLoader.load(getClass().getResource("/FXML/Menu.fxml"));
+            scene = new Scene(root);
             
             //stage.setWidth(1200);
             //stage.setHeight(700);
