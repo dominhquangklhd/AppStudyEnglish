@@ -32,11 +32,15 @@
 
 ## Preview
 
+![image](https://github.com/dominhquangklhd/AppStudyEnglish/assets/123967452/e383358a-cd9b-4b7e-a6ef-7758b57bd096)
+
 ![appenglish1](https://github.com/dominhquangklhd/AppStudyEnglish/assets/123967452/aef25718-b567-406b-b6d1-b56e2db3cbcb)
 
-![Capture](https://github.com/dominhquangklhd/AppStudyEnglish/assets/123967452/cc858497-9514-4ad9-880e-2ecc23e09cd3)
+![image](https://github.com/dominhquangklhd/AppStudyEnglish/assets/123967452/d09eec57-721d-4eeb-8b91-7d2211911f43)
 
-![image](https://github.com/dominhquangklhd/AppStudyEnglish/assets/123967452/cf4e005f-2b2b-44e2-9625-4571346855ee)
+![image](https://github.com/dominhquangklhd/AppStudyEnglish/assets/123967452/b427eef2-7d9c-4c7a-a037-cd395ee0f886)
+
+
 
 
 
@@ -44,9 +48,11 @@
 
 
 - Clone project này về bằng lệnh git.
+  
   ```
   git clone https://github.com/dominhquangklhd/AppStudyEnglish.git
   ```
+- Chạy chương trình: Run -> Edit Configurations -> Add new run configuration -> Main -> Run 'Main'.
 
 
 
