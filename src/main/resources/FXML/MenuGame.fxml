@@ -59,6 +59,11 @@
             <Image url="@../Image/ItemsGame/heartplane.png" />
          </image>
       </ImageView>
+      <Text fill="#af2655" layoutY="190.0" strokeType="OUTSIDE" strokeWidth="0.0" text="SELECT A GAME TO PLAY !!!" textAlignment="CENTER" wrappingWidth="1214.0">
+         <font>
+            <Font name="Gill Sans Ultra Bold" size="36.0" />
+         </font>
+      </Text>
       <AnchorPane fx:id="settingPane" layoutX="900.0" layoutY="55.0" prefHeight="250.0" prefWidth="300.0" visible="false">
          <children>
             <ImageView fitHeight="241.0" fitWidth="300.0" layoutX="5.0" pickOnBounds="true" preserveRatio="true">
@@ -143,11 +148,6 @@
             <Font name="Arial Rounded MT Bold" size="30.0" />
          </font>
       </Label>
-      <Text fill="#af2655" layoutY="190.0" strokeType="OUTSIDE" strokeWidth="0.0" text="SELECT A GAME TO PLAY !!!" textAlignment="CENTER" wrappingWidth="1214.0">
-         <font>
-            <Font name="Gill Sans Ultra Bold" size="36.0" />
-         </font>
-      </Text>
       <ImageView fitHeight="180.0" fitWidth="217.0" layoutX="47.0" layoutY="373.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../Image/ItemsGame/dance.gif" />
