@@ -81,6 +81,7 @@ public class BaseController implements Initializable {
     public FXMLLoader historyLoader = new FXMLLoader(getClass().getResource("/FXML/History.fxml"));
     public FXMLLoader homeLoader = new FXMLLoader(getClass().getResource("/FXML/Menu.fxml"));
     public FXMLLoader gameLoader = new FXMLLoader(getClass().getResource("/FXML/MenuGame.fxml"));
+
     protected Stage stage;
 
     public void minimizeStage(MouseEvent event) {
@@ -116,11 +117,7 @@ public class BaseController implements Initializable {
         ((Pane) Main.root).getChildren().clear();
         Main.root = gameLoader.load();
 
-        //stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        //scene = new Scene(Main.root);
         Main.scene.setRoot(Main.root);
-        //stage.setScene (Main.scene);
-        //stage.show();
     }
 
     // Chuyển sang history
@@ -132,12 +129,8 @@ public class BaseController implements Initializable {
         Main.root = historyLoader.load();
         ((HistoryController) historyLoader.getController()).StartHistory();
 
-        //Switch scene to HistoryScene
-        //stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        //scene = new Scene(Main.root);
         Main.scene.setRoot(Main.root);
-        //stage.setScene (Main.scene);
-        //stage.show();
+
     }
 
     // Chuyển sang translate
@@ -145,12 +138,9 @@ public class BaseController implements Initializable {
     public void intoTranslate(MouseEvent event) throws IOException {
         ((Pane) Main.root).getChildren().clear();
         Main.root = transLoader.load();
-        //Switch scene to HistoryScene
-        //stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        //scene = new Scene(Main.root);
+
         Main.scene.setRoot(Main.root);
-        //stage.setScene (Main.scene);
-        //stage.show();
+
     }
 
     public void intoSearch(MouseEvent event) throws IOException {
@@ -236,12 +226,7 @@ public class BaseController implements Initializable {
             ((SearchController) searchLoader.getController()).getWordTarget().setText(SearchingBar.getText());
             ((SearchController) searchLoader.getController()).StartSearching();
 
-            //Switch scene to SearchScene
-            //stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-            //scene = new Scene(Main.root);
             Main.scene.setRoot(Main.root);
-            //stage.setScene (Main.scene);
-            //stage.show();
         }
     }
 

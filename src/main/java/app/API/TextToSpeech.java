@@ -13,7 +13,7 @@ public class TextToSpeech {
     public static boolean SpeakEnglish = true;
 
     /**
-     * Speak the text in Vietnamese or English.
+     * Speaks the text in Vietnamese or English.
      *
      * @param text text The text to speak
      */

@@ -32,6 +32,11 @@ public class DatabaseTXTGameIMG {
         return listTopic;
     }
 
+    /**
+     * Initialize data for the game, depending on the chosen topic.
+     * @param topic the topic choose to play.
+     */
+
     public void readFileTXT(int topic) {
         String path = "txt/gameData.txt";
         try (BufferedReader reader = new BufferedReader(new FileReader(path))) {

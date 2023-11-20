@@ -14,7 +14,7 @@ public class GGTranslateAPI {
     public static boolean isEnglish = true;
 
     /**
-     * Translate Vietnamese text to English or vice versa.
+     * Translates Vietnamese text to English or vice versa.
      * @param text the text to translate
      * @return the translated text
      */
