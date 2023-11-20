@@ -138,7 +138,7 @@
             </ImageView>
             <ImageView fx:id="minimize" fitHeight="150.0" fitWidth="30.0" layoutX="1042.0" layoutY="20.0" onMouseClicked="#minimizeStage" pickOnBounds="true" preserveRatio="true" style="-fx-cursor: hand;">
                <image>
-                  <Image url="@../../../../../Java/test/JavaFX_test/test/src/main/resources/Image/MenuIMG/minimize.png" />
+                  <Image url="@../Image/MenuIMG/minimize.png" />
                </image>
             </ImageView>
             <ImageView fitHeight="84.0" fitWidth="98.0" layoutX="30.0" layoutY="21.0" pickOnBounds="true" preserveRatio="true">

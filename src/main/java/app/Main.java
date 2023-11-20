@@ -3,7 +3,6 @@ package app;
 import app.API.GGTranslateAPI;
 import app.Controller.SaveController;
 import app.DB_Connection.DatabaseConnection;
-import app.Model.DictionaryManagement;
 import app.Model.*;
 import javafx.application.Application;
 import javafx.scene.Parent;

@@ -9,9 +9,6 @@
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" name="mysql-connector-java-8.0.12" level="project" />
-    <orderEntry type="library" name="lib" level="project" />
-    <orderEntry type="library" name="mysql-connector-j-8.1" level="project" />
-    <orderEntry type="library" name="lib1" level="project" />
     <orderEntry type="module-library">
       <library>
         <CLASSES>
@@ -21,9 +18,8 @@
         <SOURCES />
       </library>
     </orderEntry>
-    <orderEntry type="library" name="jfoenix-9.0.10" level="project" />
+    <orderEntry type="library" name="lib" level="project" />
     <orderEntry type="library" name="jlayer-1.0.1" level="project" />
-    <orderEntry type="library" name="jlayer-1.0.11" level="project" />
-    <orderEntry type="library" name="javafx.base-8.60.11" level="project" />
+    <orderEntry type="library" name="mysql-connector-java-8.0.30 (1)" level="project" />
   </component>
 </module>

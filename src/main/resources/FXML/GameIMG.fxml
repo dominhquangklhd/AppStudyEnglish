@@ -114,7 +114,7 @@
             </ImageView>
             <ImageView fitHeight="150.0" fitWidth="30.0" layoutX="1042.0" layoutY="20.0" onMouseClicked="#minimizeStage" pickOnBounds="true" preserveRatio="true" style="-fx-cursor: hand;">
                <image>
-                  <Image url="@../../../../../Java/test/JavaFX_test/test/src/main/resources/Image/MenuIMG/minimize.png" />
+                  <Image url="@../Image/MenuIMG/minimize.png" />
                </image>
             </ImageView>
             <Pane id="finishPane" fx:id="finishPane" layoutY="100.0" prefHeight="522.0" prefWidth="1200.0" style="-fx-background-color: #371436;" visible="false">

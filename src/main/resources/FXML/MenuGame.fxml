@@ -120,7 +120,7 @@
       </ImageView>
       <ImageView fx:id="minimize" fitHeight="150.0" fitWidth="30.0" layoutX="970.0" layoutY="21.0" onMouseClicked="#minimizeStage" pickOnBounds="true" preserveRatio="true" style="-fx-cursor: hand;">
          <image>
-            <Image url="@../../../../../Java/test/JavaFX_test/test/src/main/resources/Image/MenuIMG/minimize.png" />
+            <Image url="@../Image/MenuIMG/minimize.png" />
          </image>
       </ImageView>
       <ImageView fitHeight="278.0" fitWidth="180.0" layoutX="700.0" layoutY="262.0" onMouseClicked="#intoMCGame" pickOnBounds="true" preserveRatio="true" style="-fx-cursor: hand;">
