@@ -153,6 +153,7 @@ public class HistoryController extends BaseController implements Initializable {
 
     public void deleteAll() {
         Main.dictionaryManagement.wordHistoryList.clear();
+        Main.dictionaryManagement.number_of_Historypage = 0;
         StartHistory();
     }
 

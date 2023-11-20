@@ -354,5 +354,20 @@
             </ImageView>
          </children>
       </Pane>
+      <ImageView fitHeight="91.0" fitWidth="108.0" layoutX="74.0" layoutY="140.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../Image/SaveIMG/bowl.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="107.0" fitWidth="111.0" layoutX="1049.0" layoutY="136.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../Image/HistoryIMG/cherry.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="70.0" fitWidth="63.0" layoutX="9.0" layoutY="499.0" pickOnBounds="true" preserveRatio="true" rotate="-20.0">
+         <image>
+            <Image url="@../Image/SaveIMG/watermelon-icon.png" />
+         </image>
+      </ImageView>
     </children>
 </AnchorPane>

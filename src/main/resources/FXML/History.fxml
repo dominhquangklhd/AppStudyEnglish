@@ -42,6 +42,11 @@
                 <Image url="@../Image/MenuIMG/intoHistory.png" />
             </image>
         </ImageView>
+      <ImageView fitHeight="55.0" fitWidth="70.0" layoutX="1128.0" layoutY="189.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../Image/HistoryIMG/pla1.png" />
+         </image>
+      </ImageView>
         <Line endX="1200.0" layoutY="580.0" strokeWidth="3.0" />
         <TextField id="SearchingBar" fx:id="SearchingBar" layoutX="50.0" layoutY="23.0" onKeyPressed="#intoWord" prefHeight="55.0" prefWidth="500.0" promptText="Search">
             <font>
@@ -352,6 +357,11 @@
             <Image url="@../Image/SaveIMG/Pre.png" />
          </image>
       </ImageView>
+      <ImageView fitHeight="120.0" fitWidth="127.0" layoutX="40.0" layoutY="129.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../Image/HistoryIMG/pla2.png" />
+         </image>
+      </ImageView>
         <ListView fx:id="wordList" editable="true" fixedCellSize="0.0" layoutX="50.0" layoutY="78.0" prefHeight="250.0" prefWidth="500.0" visible="false">
             <cursor>
                 <Cursor fx:constant="HAND" />
@@ -446,5 +456,10 @@
             </ImageView>
          </children>
       </Pane>
+      <ImageView fitHeight="63.0" fitWidth="78.0" layoutX="855.0" layoutY="502.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../Image/HistoryIMG/pla3.png" />
+         </image>
+      </ImageView>
     </children>
 </AnchorPane>
