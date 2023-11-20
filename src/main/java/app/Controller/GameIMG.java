@@ -4,14 +4,12 @@ import app.DB_Connection.DatabaseConnection;
 import app.DB_Connection.DatabaseTXTGameIMG;
 import app.Main;
 import javafx.animation.TranslateTransition;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
@@ -26,11 +24,10 @@ import javafx.util.Duration;
 
 import java.io.IOException;
 import java.net.URL;
-import java.sql.SQLException;
 import java.util.*;
 
 public class GameIMG implements Initializable {
-
+    //FXML
     @FXML
     public AnchorPane scenePane;
     @FXML
@@ -49,16 +46,7 @@ public class GameIMG implements Initializable {
     private ImageView imageView = new ImageView();
 
     @FXML
-    private ImageView actionPerry;
-
-    @FXML
     private ImageView ansIMGView;
-
-    @FXML
-    private ImageView preAns;
-
-    @FXML
-    private ImageView nextAns;
 
     @FXML
     private Button buttonNext;
@@ -110,6 +98,10 @@ public class GameIMG implements Initializable {
     HashMap<Button, Boolean> buttonHashMap = new HashMap<>();
     private List<TranslateTransition> shakeList = new LinkedList<>();
 
+    //Control Handlers
+    /**
+     * Checks the answer after finishing a game.
+     */
     @FXML
     public void intoCheckAnsPane() {
         finishPane.setVisible(true);
@@ -120,20 +112,26 @@ public class GameIMG implements Initializable {
         setAnsPic();
     }
 
-    //in check ans pane.
+    /**
+     * Presents picture in the check answer pane.
+     */
     public void setAnsPic() {
         String prepareLink = "file:src/main/resources/Image/GameIMG/";
         Image tmpIMG = new Image(prepareLink + topicName + "/" + ansGame.get(numAns) + ".jpg");
         ansIMGView.setImage(tmpIMG);
     }
 
-    @FXML
+    /**
+     * Closes the check answer pane.
+     */
     public void backToFinishPane() {
         finishPane.setVisible(true);
         ansPane.setVisible(false);
     }
 
-    @FXML
+    /**
+     * Checks the next answer.
+     */
     public void goNextAns() {
         if (numAns < DatabaseConnection.NUmOfQuestionGameIMG - 1) {
             numAns++;
@@ -142,7 +140,9 @@ public class GameIMG implements Initializable {
         }
     }
 
-    @FXML
+    /**
+     * Checks the previous answer.
+     */
     public void goPreAns() {
         if (numAns > 0) {
             numAns--;
@@ -151,12 +151,19 @@ public class GameIMG implements Initializable {
         }
     }
 
-    @FXML
-    void intoSettingGame(MouseEvent event) {
+    /**
+     * Presents the Setting pane.
+     */
+    public void intoSettingGame() {
         mainPaneGame.setDisable(true);
         menuSettingPane.setVisible(true);
     }
 
+    /**
+     * Sets up the game with the chosen topic.
+     *
+     * @param topic the index of the topic that was chosen
+     */
     public void topicCommon(int topic) {
         databaseTXTGameIMG.readFileTXT(topic);
 
@@ -179,6 +186,9 @@ public class GameIMG implements Initializable {
         questionCommon();
     }
 
+    /**
+     * Gets into the chosen topic.
+     */
     @FXML
     void intoAnimalTopic() {
         topicCommon(DatabaseTXTGameIMG.ANIMAL);
@@ -229,28 +239,35 @@ public class GameIMG implements Initializable {
         topicCommon(DatabaseTXTGameIMG.SCHOOLS);
     }
 
+    /**
+     * Goes back to the Menu Game.
+     *
+     * @throws IOException when cannot load the FXMLLoader loader
+     */
     @FXML
-    void backToMenuGame(MouseEvent event) throws IOException {
+    void backToMenuGame() throws IOException {
         resetDataGame();
 
         ((Pane) Main.root).getChildren().clear();
         Main.root = loader.load();
 
-        //stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        //scene = new Scene(root);
         Main.scene.setRoot(Main.root);
-        //stage.setScene (scene);
-        //stage.show();
     }
 
+    /**
+     * Continues the game after pausing.
+     */
     @FXML
-    void continueGame(MouseEvent event) {
+    void continueGame() {
         mainPaneGame.setDisable(false);
         menuSettingPane.setVisible(false);
     }
 
+    /**
+     * Restarts the game.
+     */
     @FXML
-    void restartGame(MouseEvent event) {
+    void restartGame() {
         mainPaneGame.setVisible(false);
         topicPane.setVisible(true);
         finishPane.setVisible(false);
@@ -258,6 +275,9 @@ public class GameIMG implements Initializable {
         startGameIMG();
     }
 
+    /**
+     * Resets data game when starting a new game.
+     */
     public void resetDataGame() {
         mainPaneGame.setDisable(false);
         menuSettingPane.setVisible(false);
@@ -271,6 +291,12 @@ public class GameIMG implements Initializable {
         databaseTXTGameIMG = new DatabaseTXTGameIMG();
     }
 
+    /**
+     * Sets shake transition on the answer when it is not correct.
+     *
+     * @param shakeTransition the shake transition
+     * @param button the button which is set on shake transition
+     */
     public void setShakeTransition(TranslateTransition shakeTransition, Button button) {
         shakeTransition.setNode(button);
         shakeTransition.setDuration(Duration.millis(100));
@@ -279,6 +305,9 @@ public class GameIMG implements Initializable {
         shakeTransition.setAutoReverse(true);
     }
 
+    /**
+     * Checks the answer.
+     */
     public void checkAns() {
         if (dataChars.getChildren().isEmpty()) {
             String check = "";
@@ -309,8 +338,10 @@ public class GameIMG implements Initializable {
         }
     }
 
+    /**
+     * Handles event when user click on a word button ( Takes it to the answer box from the data box or vice versa ).
+     */
     public void clickMouse() {
-        // xử lý click chuột vào chữ cái.
         buttonClickHandler = new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
@@ -340,7 +371,7 @@ public class GameIMG implements Initializable {
         image = new Image(prepareLink + topicName + "/" + ansGame.get(curQ) + ".jpg");
         imageView.setImage(image);
 
-        // trộn chữ.
+        //Mix char.
         List<Character> charList = new ArrayList<>();
         for (char c : ansGame.get(curQ).toCharArray()) {
             charList.add(c);
@@ -349,7 +380,7 @@ public class GameIMG implements Initializable {
 
         clickMouse();
 
-        // add button chữ cái.
+        //Add button.
         answerChars.getChildren().clear();
         dataChars.getChildren().clear();
         for (char c : charList) {
@@ -358,9 +389,6 @@ public class GameIMG implements Initializable {
             button.setPrefSize(40, 40);
             button.setStyle("-fx-background-color: #F8DE22; " +
                     "-fx-background-radius: 5px; " +
-                    //"-fx-border-color: BLACK; " +
-                    //"-fx-border-radius: 5px; " +
-                    //"-fx-border-width: 1; " +
                     "-fx-cursor: hand;" +
                     "-fx-font-family: 'Arial Rounded MT Bold'; " +
                     "-fx-font-size: 16px;");
@@ -375,12 +403,18 @@ public class GameIMG implements Initializable {
         numQ.setText(curQ + 1 + "/" + DatabaseTXTGameIMG.NUmOfQuestionGameIMG);
     }
 
+    /**
+     * Starts the Game IMG.
+     */
     @FXML
     public void startGameIMG() {
         introducePane.setVisible(false);
         topicPane.setVisible(true);
     }
 
+    /**
+     * Goes to the next question.
+     */
     @FXML
     public void nextQuestion() {
         if (curQ < DatabaseConnection.NUmOfQuestionGameIMG - 1) {
@@ -391,6 +425,9 @@ public class GameIMG implements Initializable {
         }
     }
 
+    /**
+     * Presents the finish pane when finishing the game.
+     */
     public void showFinishGame() {
         finishPane.setVisible(true);
         scoreFinish.setText("Your score : " + String.valueOf(numScore));
@@ -409,11 +446,19 @@ public class GameIMG implements Initializable {
         }
     }
 
+    /**
+     * Minimize the window.
+     *
+     * @param event the event when user click the minimize button
+     */
     public void minimizeStage(MouseEvent event) {
         stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         stage.setIconified(true);
     }
 
+    /**
+     * Closes the window.
+     */
     public void intoOut() throws IOException {
         Main.dictionaryManagement.historyExportToFile();
         stage = (Stage) scenePane.getScene().getWindow();

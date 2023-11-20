@@ -11,7 +11,6 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
@@ -25,8 +24,6 @@ public class SettingController {
     //FXML
     @FXML
     public AnchorPane insertPane;
-    @FXML
-    public AnchorPane editPane;
     @FXML
     public AnchorPane deletePane;
     @FXML
@@ -96,6 +93,12 @@ public class SettingController {
     public int definitionIndex = 0;
 
     //Control methods
+
+    /**
+     * Inserts a new word to the dictionary.
+     *
+     * @throws SQLException when cannot invoke the method InsertIntoDatabase
+     */
     public void insert() throws SQLException {
         if (!wordInsert.getText().equals("")) {
             if (!wordInsert.getText().matches("^[a-z ]*$")) {
@@ -121,14 +124,6 @@ public class SettingController {
                 }
                 Main.databaseConnection.insertToDatabase(target, IPA, types, definitions);
                 Main.trie.insertWord(target);
-                /*System.out.println(target);
-                System.out.println(IPA);
-                for (int i = 0; i < types.size(); i++) {
-                    System.out.println(types.get(i));
-                    for (int j = 0; j < definitions.get(i).size(); j++) {
-                        System.out.println(definitions.get(i).get(j));
-                    }
-                }*/
                 InsertSuccessPane.setVisible(true);
             } else {
                 InsertwarningPane.setVisible(true);
@@ -136,11 +131,20 @@ public class SettingController {
         }
     }
 
+    /**
+     * Cancels inserting words when an error occurs.
+     */
     public void cancelInsert() {
         InsertwarningPane.setVisible(false);
         RegexWarningPane.setVisible(false);
     }
 
+    /**
+     * Looks up word when the word about to be inserted is already included in the dictionary.
+     *
+     * @param event the event when user click on look up button
+     * @throws IOException when cannot load the FXMLLoader loader
+     */
     public void lookUp(MouseEvent event) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/FXML/Search.fxml"));
         Parent root = loader.load();
@@ -154,7 +158,11 @@ public class SettingController {
         stage.show();
     }
 
-
+    /**
+     * Edits a word int the dictionary.
+     *
+     * @throws SQLException when cannot invoke the method InsertIntoDatabase
+     */
     public void edit() throws SQLException {
         if (!wordInsert.getText().equals("")) {
             if (!wordInsert.getText().matches("^[a-z ]*$")) {
@@ -188,10 +196,18 @@ public class SettingController {
         }
     }
 
+    /**
+     * Cancels editing when an error occurs.
+     */
     public void cancelEdit() {
         EditWarning.setVisible(false);
     }
 
+    /**
+     * Deletes a word from the dictionary.
+     *
+     * @throws SQLException when cannot invoke the method deleteWordInDatabase
+     */
     public void delete() throws SQLException {
         String target = wordDelete.getText().toLowerCase();
         if (!wordDelete.getText().equals("")) {
@@ -211,6 +227,9 @@ public class SettingController {
     }
 
     //Supporting methods
+    /**
+     * Sets up pane when starting insert.
+     */
     public void StartInsert() {
         insertPane.setVisible(true);
         insertTitle.setVisible(true);
@@ -241,6 +260,9 @@ public class SettingController {
         definitions.add(tmp);
     }
 
+    /**
+     * Sets up pane when starting edit.
+     */
     public void StartEdit() {
         insertPane.setVisible(true);
         insertTitle.setVisible(false);
@@ -271,6 +293,9 @@ public class SettingController {
         definitions.add(tmp);
     }
 
+    /**
+     * Sets up pane when starting delete.
+     */
     public  void StartDelete() {
         insertPane.setVisible(false);
         DeleteWarning.setVisible(false);
@@ -283,19 +308,27 @@ public class SettingController {
         definitions.clear();
     }
 
+    /**
+     * Adds new type of word or check the previous types.
+     *
+     * @param event the event when user click the next arrow
+     */
     public void toOtherType(MouseEvent event) {
+        //Start showing other type
         preDef.setVisible(false);
         defLabelinsert.setText("Definition 1");
 
         boolean deleteType = false;
 
         if (typeInsert.getText().equals("")) {
+            //Delete type of enter empty type
             if (typeIndex < types.size()) {
                 types.remove(typeIndex);
                 definitions.remove(typeIndex);
             }
             deleteType = true;
         } else {
+            //Insert new type
             if (!definitionInsert.getText().equals("") ) {
                 if (definitionIndex >= definitions.get(typeIndex).size()) {
                     definitions.get(typeIndex).add(definitionInsert.getText());
@@ -316,21 +349,25 @@ public class SettingController {
         definitionIndex = 0;
 
         if (event.getSource().equals(nextType)) {
+            //Goes to the next type
             if (!deleteType) typeIndex++;
             if (typeIndex > 0) {
                 preType.setVisible(true);
             }
             typeLabelinsert.setText("Type " + String.valueOf(typeIndex + 1));
             if (typeIndex > types.size() - 1) {
+                //Adds/ Edits type
                 typeInsert.clear();
                 definitionInsert.clear();
                 List<String> tmp = new ArrayList<>();
                 definitions.add(tmp);
             } else {
+                //Edits type
                 typeInsert.setText(types.get(typeIndex));
                 definitionInsert.setText(definitions.get(typeIndex).get(0));
             }
         } else {
+            //Checks previous type
             typeIndex--;
             nextType.setVisible(true);
             if (typeIndex == 0) {
@@ -344,15 +381,23 @@ public class SettingController {
         }
     }
 
+    /**
+     * Adds new definition of type or check the previous definitions.
+     *
+     * @param event when user click the next arrow or previous arrow.
+     */
     public void toOtherDef(MouseEvent event) {
+        //Start showing other definition
         boolean deleteDef = false;
 
         if (definitionInsert.getText().equals("")) {
+            //Deletes when enter empty definition
             if (definitionIndex < definitions.get(typeIndex).size()) {
                 definitions.get(typeIndex).remove(definitionIndex);
             }
             deleteDef = true;
         } else {
+            //Adds/ Edits definition.
             if (definitionIndex <= definitions.get(typeIndex).size() - 1) {
                 definitions.get(typeIndex).remove(definitionIndex);
                 definitions.get(typeIndex).add(definitionIndex, definitionInsert.getText());
@@ -360,6 +405,7 @@ public class SettingController {
         }
 
         if (event.getSource().equals(nextDef)) {
+            //Goes to next definition
             if (!deleteDef) definitionIndex++;
             if (definitionIndex > 0) {
                 preDef.setVisible(true);

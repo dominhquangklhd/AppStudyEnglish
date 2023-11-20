@@ -1,26 +1,13 @@
 package app.Controller;
 
 import app.Main;
-import app.Model.Word;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
-import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.ListView;
-import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.KeyCode;
-import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
-import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
@@ -70,17 +57,29 @@ public class SaveController extends BaseController implements Initializable {
 
 
     //Content Handler
+
+    /**
+     * Gets into the next Save page.
+     */
     public void toNextPage() {
         Main.dictionaryManagement.recentSavePage++;
         StartSave();
     }
 
+    /**
+     * Gets into the previous Save page.
+     */
     public void toPreviousPage() {
         Main.dictionaryManagement.recentSavePage--;
         StartSave();
     }
 
-
+    /**
+     * Researches a word in Save list.
+     *
+     * @param event the event when user click on a word to research
+     * @throws IOException when cannot load the FXMLLoader loader
+     */
     public void reSearchWord(MouseEvent event) throws  IOException {
         Label tmp = (Label) event.getSource();
         String w = "";
@@ -100,16 +99,17 @@ public class SaveController extends BaseController implements Initializable {
             ((SearchController) loader.getController()).StartSearching();
         }
 
-        //Switch scene to SearchScene
-        //stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        //scene = new Scene(root);
         Main.scene.setRoot(Main.root);
-        //stage.setScene (Main.scene);
-        //stage.show();
     }
 
 
     //Supporting methods
+
+    /**
+     * Prepares before start Save scene:
+     * 1/ Sets the number of Save page and the recent page.
+     * 2/ Sets words to its specified label.
+     */
     public void StartSave() {
         number_of_page = Main.dictionaryManagement.number_of_Savedpage;
         recentPage = Main.dictionaryManagement.recentSavePage;
@@ -142,6 +142,12 @@ public class SaveController extends BaseController implements Initializable {
         }
     }
 
+    /**
+     * Returns the label by index.
+     *
+     * @param i the index of the label
+     * @return the label that specified by index
+     */
     public Label label(int i) {
         return switch (i) {
             case 0 -> label_1;

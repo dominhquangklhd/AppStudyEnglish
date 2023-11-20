@@ -118,10 +118,6 @@
             <Font name="iCiel Nabila" size="24.0" />
          </font>
       </Label>
-        <ListView fx:id="wordList" editable="true" fixedCellSize="0.0" layoutX="50.0" layoutY="78.0" prefHeight="250.0" prefWidth="500.0" visible="false">
-            <cursor>
-                <Cursor fx:constant="HAND" />
-            </cursor></ListView>
       <TextArea fx:id="translationBar" layoutX="700.0" layoutY="240.0" onKeyTyped="#doNothing" prefHeight="250.0" prefWidth="400.0" promptText="Translation" wrapText="true">
          <font>
             <Font name="Times New Roman Bold" size="24.0" />
@@ -241,6 +237,10 @@
             <Image url="@../../../../../Java/test/JavaFX_test/test/src/main/resources/Image/MenuIMG/minimize.png" />
          </image>
       </ImageView>
+        <ListView fx:id="wordList" editable="true" fixedCellSize="0.0" layoutX="50.0" layoutY="78.0" prefHeight="250.0" prefWidth="500.0" visible="false">
+            <cursor>
+                <Cursor fx:constant="HAND" />
+            </cursor></ListView>
       <Pane fx:id="guidePane" prefHeight="700.0" prefWidth="1200.0" style="-fx-background-color: FFF8DC;" visible="false">
          <children>
             <ImageView fitHeight="700.0" fitWidth="1200.0" layoutX="41.0" pickOnBounds="true" preserveRatio="true">

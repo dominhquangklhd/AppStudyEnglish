@@ -1,18 +1,12 @@
 package app.Controller;
 
-import app.API.GGTranslateAPI;
 import app.Main;
-import app.Model.Trie;
-import app.Model.Word;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Group;
 import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
@@ -31,7 +25,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 public class BaseController implements Initializable {
-    // Common FXML elements
+    //FXML
     @FXML
     public ImageView minimize;
     @FXML
@@ -71,6 +65,7 @@ public class BaseController implements Initializable {
     @FXML
     public Label deleteWord;
 
+    //Nor
     public AnchorPane adjustPane;
     boolean settingLoaded = false;
 
@@ -84,16 +79,30 @@ public class BaseController implements Initializable {
 
     protected Stage stage;
 
+    /**
+     * Minimizes the window.
+     *
+     * @param event the event when user click the minimize button.
+     */
     public void minimizeStage(MouseEvent event) {
         stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         stage.setIconified(true);
     }
 
+    /**
+     * Presents a short guide to use this app.
+     */
     public void intoGuide() {
         guidePane.setVisible(true);
+        guidePane.toFront();
     }
 
-
+    /**
+     * Back to the main menu.
+     *
+     * @param event the event when user click the home button
+     * @throws IOException when cannot load the FXMLLoader homeLoader
+     */
     public void backHome(MouseEvent event) throws IOException {
         ((Pane) Main.root).getChildren().clear();
         Main.root = homeLoader.load();
@@ -105,6 +114,11 @@ public class BaseController implements Initializable {
         //stage.show();
     }
 
+    /**
+     * Closes the app.
+     *
+     * @throws IOException when cannot invoke the method historyExportToFile
+     */
     public void intoOut() throws IOException {
         // Common code for exiting
         Main.dictionaryManagement.historyExportToFile();
@@ -112,7 +126,12 @@ public class BaseController implements Initializable {
         stage.close();
     }
 
-    //Chuyển sang Game
+    /**
+     * Switches the scene to Menu Game.
+     *
+     * @param event the event when user click the Game button
+     * @throws IOException when cannot load the FXMLLoader gameLoader
+     */
     public void intoGame(MouseEvent event) throws IOException {
         ((Pane) Main.root).getChildren().clear();
         Main.root = gameLoader.load();
@@ -120,8 +139,14 @@ public class BaseController implements Initializable {
         Main.scene.setRoot(Main.root);
     }
 
-    // Chuyển sang history
-
+    /**
+     * Switches the scene to History.
+     * Supporting methods:
+     * 1/ Set the recent Page of History list to 1
+     *
+     * @param event the event when user click the History button
+     * @throws IOException when cannot load the FXMLLoader historyLoader
+     */
     public void intoHistory(MouseEvent event) throws IOException {
         Main.dictionaryManagement.recentHistoryPage = 1;
 
@@ -133,8 +158,12 @@ public class BaseController implements Initializable {
 
     }
 
-    // Chuyển sang translate
-
+    /**
+     * Switches the scene to Translate.
+     *
+     * @param event the event when user click the Translate button
+     * @throws IOException when cannot load the FXMLLoader transLoader
+     */
     public void intoTranslate(MouseEvent event) throws IOException {
         ((Pane) Main.root).getChildren().clear();
         Main.root = transLoader.load();
@@ -143,6 +172,14 @@ public class BaseController implements Initializable {
 
     }
 
+    /**
+     * Switches the scene to Search.
+     * Supporting methods:
+     * 1/ Check if the word exists in the dictionary.
+     *
+     * @param event the event when user click the Search button
+     * @throws IOException when cannot load the FXMLLoader searchLoader
+     */
     public void intoSearch(MouseEvent event) throws IOException {
         ((Pane) Main.root).getChildren().clear();
         Main.root = searchLoader.load();
@@ -156,28 +193,35 @@ public class BaseController implements Initializable {
         //stage.show();
     }
 
-    // Chuyển sang save
-
+    /**
+     * Switches the scene to Save List.
+     * Supporting methods:
+     * 1/ Set the recent page of Save list and set words to labels.
+     *
+     * @param event the event when user click the Save button
+     * @throws IOException when cannot load the FXMLLoader saveLoader
+     */
     public void intoSave(MouseEvent event) throws IOException {
         Main.dictionaryManagement.recentSavePage = 1;
         ((Pane) Main.root).getChildren().clear();
         Main.root = saveLoader.load();
         ((SaveController) saveLoader.getController()).StartSave();
 
-        //Switch scene to HistoryScene
-        //stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        //scene = new Scene(Main.root);
         Main.scene.setRoot(Main.root);
-        //stage.setScene (Main.scene);
-        //stage.show();
     }
 
-
-
+    /**
+     * Switches the scene to Search when user enter a word on searching bar.
+     * Words included in the dictionary will be displayed in the listview below Searching bar.
+     * If the dictionary does not have thar word, there will be a notification to user.
+     *
+     * @param event the event when user enter a word on searching bar
+     * @throws IOException when cannot load the FXMLLoader searchLoader
+     */
     public void intoWord(KeyEvent event) throws IOException {
         ObservableList<String> items = FXCollections.observableArrayList();
 
-        //lập ra danh sách các từ gợi ý mỗi khi từ trên SearchingBar(TestField) thay đổi.
+        //Creates list view when the text on searching bar changes.
         SearchingBar.textProperty().addListener((observable, oldValue, newValue) -> {
             wordList.getItems().clear();
             Main.trie.resetWordList();
@@ -191,16 +235,15 @@ public class BaseController implements Initializable {
             wordList.setItems(items);
         });
 
-        // lập ra sự kiện khi mình click chuột vào worldList(ListView).
+        //Creates event when click the worldList.
         wordList.setOnMouseClicked(MouseEvent -> {
             String selectedWord = (String) wordList.getSelectionModel().getSelectedItem();
             if (selectedWord != null) {
                 SearchingBar.setText(selectedWord);
             }
-
-            //wordList.setVisible(false);
         });
 
+        //Goes down the wordlist.
         if (event.getCode() == KeyCode.DOWN
                 && wordList.getSelectionModel().getSelectedIndex() < wordList.getItems().size() - 1) {
             // Move selection down
@@ -211,11 +254,13 @@ public class BaseController implements Initializable {
             }
         }
 
+        //Goes up the wordlist
         if (event.getCode() == KeyCode.UP && wordList.getSelectionModel().getSelectedIndex() > 0) {
             // Move selection up
             wordList.getSelectionModel().selectPrevious();
         }
 
+        //Changes to searching scene when entering the word to search.
         if (event.getCode() == KeyCode.ENTER) {
             if (!wordList.getSelectionModel().isEmpty()) {
                 SearchingBar.setText((String) wordList.getSelectionModel().getSelectedItem());
@@ -230,6 +275,11 @@ public class BaseController implements Initializable {
         }
     }
 
+    /**
+     * Get into Setting section where you can Insert/ Edit/ Delete words in the dictionary.
+     *
+     * @throws IOException when cannot load the FXMLLoader settingLoader
+     */
     public void intoSetting() throws IOException {
         if (settingPane.isVisible()) {
             scenePane.getChildren().remove(adjustPane);
@@ -247,6 +297,12 @@ public class BaseController implements Initializable {
         }
     }
 
+    /**
+     * Changes the method to adjust the dictionary among Insert, Edit and Delete.
+     *
+     * @param event the event when user click the method label
+     * @throws IOException when cannot load the FXMLLoader settingLoader
+     */
     public void adjustDictionary(MouseEvent event) throws IOException {
         if (event.getSource() == insertWord) {
             ((SettingController) settingLoader.getController()).StartInsert();
@@ -257,6 +313,9 @@ public class BaseController implements Initializable {
         }
     }
 
+    /**
+     * Unable the wordList ( a listview ) when user click other nodes.
+     */
     public void outSearch() {
         wordList.setVisible(false);
     }

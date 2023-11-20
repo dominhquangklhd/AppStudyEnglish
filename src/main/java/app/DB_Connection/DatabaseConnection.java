@@ -47,7 +47,6 @@ public class DatabaseConnection {
 
     public void createConnection() {
         try {
-            // mn chỉnh theo db sql của mn.
 
             url = "jdbc:mysql://localhost:3306/appenglish?autoReconnect=true&useSSL=false";
             username = "root";

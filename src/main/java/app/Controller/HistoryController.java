@@ -1,27 +1,13 @@
 package app.Controller;
 
 import app.Main;
-import app.Model.DictionaryManagement;
-import app.Model.Word;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
-import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.ListView;
-import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.KeyCode;
-import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
-import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
@@ -107,16 +93,28 @@ public class HistoryController extends BaseController implements Initializable {
 
 
     //Content Handlers
+
+    /**
+     * Get into next page of History list.
+     */
     public void toNextPage() {
         Main.dictionaryManagement.recentHistoryPage++;
         StartHistory();
     }
 
+    /**
+     * Get into previous page of History list.
+     */
     public void toPreviousPage() {
         Main.dictionaryManagement.recentHistoryPage--;
         StartHistory();
     }
 
+    /**
+     * Delete a word from the History.
+     *
+     * @param event the event when user click on a word to delete
+     */
     public void delete(MouseEvent event) {
         int i = getLabeldelete((ImageView) event.getSource());
         Main.dictionaryManagement.wordHistoryList.remove(label(i-1).getText());
@@ -124,6 +122,12 @@ public class HistoryController extends BaseController implements Initializable {
         StartHistory();
     }
 
+    /**
+     * Researches a word in History list.
+     *
+     * @param event the event when user click on a word to research
+     * @throws IOException when cannot load the FXMLLoader loader
+     */
     public void reSearchWord(MouseEvent event) throws IOException {
         Label tmp = (Label) event.getSource();
         String w = "";
@@ -151,6 +155,9 @@ public class HistoryController extends BaseController implements Initializable {
         //stage.show();
     }
 
+    /**
+     * Clear the History list.
+     */
     public void deleteAll() {
         Main.dictionaryManagement.wordHistoryList.clear();
         Main.dictionaryManagement.number_of_Historypage = 0;
@@ -165,6 +172,9 @@ public class HistoryController extends BaseController implements Initializable {
         //Nothing
     }
 
+    /**
+     * Start the History scene by setting up pages and labels of words.
+     */
     public void StartHistory() {
         if (Main.dictionaryManagement.recentHistoryPage > Main.dictionaryManagement.number_of_Historypage
                 && Main.dictionaryManagement.number_of_Historypage != 0) {
@@ -201,6 +211,12 @@ public class HistoryController extends BaseController implements Initializable {
         }
     }
 
+    /**
+     * Returns the label by index.
+     *
+     * @param i the index of the label
+     * @return the label that specified by index
+     */
     public Label label(int i) {
         return switch (i) {
             case 0 -> label_1;
@@ -222,6 +238,12 @@ public class HistoryController extends BaseController implements Initializable {
         };
     }
 
+    /**
+     * Returns the index of label with the word that will be deleted.
+     *
+     * @param source the source image that matches the label
+     * @return the index of label with the word that will be deleted
+     */
     public int getLabeldelete(ImageView source) {
         if (source == delete1) return 1;
         else if (source == delete2) return 2;
