@@ -362,10 +362,6 @@
             <Image url="@../Image/HistoryIMG/pla2.png" />
          </image>
       </ImageView>
-        <ListView fx:id="wordList" editable="true" fixedCellSize="0.0" layoutX="50.0" layoutY="78.0" prefHeight="250.0" prefWidth="500.0" visible="false">
-            <cursor>
-                <Cursor fx:constant="HAND" />
-            </cursor></ListView>
       <Label fx:id="deletaAll" layoutX="1020.0" layoutY="120.0" onMouseClicked="#deleteAll" prefHeight="45.0" prefWidth="180.0" style="-fx-cursor: hand;" text=" Delete all">
          <font>
             <Font name="Arial Rounded MT Bold" size="24.0" />
@@ -442,6 +438,10 @@
             <Image url="@../../../../../Java/test/JavaFX_test/test/src/main/resources/Image/MenuIMG/minimize.png" />
          </image>
       </ImageView>
+        <ListView fx:id="wordList" editable="true" fixedCellSize="0.0" layoutX="50.0" layoutY="78.0" prefHeight="250.0" prefWidth="500.0" visible="false">
+            <cursor>
+                <Cursor fx:constant="HAND" />
+            </cursor></ListView>
       <Pane fx:id="guidePane" prefHeight="700.0" prefWidth="1200.0" style="-fx-background-color: FFF8DC;" visible="false">
          <children>
             <ImageView fitHeight="700.0" fitWidth="1200.0" layoutX="41.0" pickOnBounds="true" preserveRatio="true">

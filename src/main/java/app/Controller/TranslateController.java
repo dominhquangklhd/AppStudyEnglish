@@ -2,28 +2,14 @@ package app.Controller;
 
 import app.API.GGTranslateAPI;
 import app.API.TextToSpeech;
-import app.Main;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
 import java.awt.Toolkit;
 import java.awt.datatransfer.Clipboard;
 import java.awt.datatransfer.StringSelection;
-import javafx.scene.input.KeyCode;
-import javafx.scene.input.KeyEvent;
-import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.AnchorPane;
-import javafx.stage.Stage;
-import org.w3c.dom.Text;
 
-import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -67,6 +53,9 @@ public class TranslateController extends BaseController implements Initializable
 
     //Content Handlers
 
+    /**
+     * Switches the language from "Vietnamese to English" and vice versa.
+     */
     public void switchLanguage() {
         GGTranslateAPI.isEnglish = !GGTranslateAPI.isEnglish;
         if (GGTranslateAPI.isEnglish) {
@@ -91,6 +80,9 @@ public class TranslateController extends BaseController implements Initializable
         translate();
     }
 
+    /**
+     * Copies the translated text to clipboard.
+     */
     public void copyTranslation() {
         Toolkit toolkit = Toolkit.getDefaultToolkit();
         Clipboard clipboard = toolkit.getSystemClipboard();
@@ -98,20 +90,32 @@ public class TranslateController extends BaseController implements Initializable
         clipboard.setContents(strSel, null);
     }
 
+    /**
+     * Presents the words count of the text target.
+     */
     public void countWord() {
         countWord.setText(Integer.toString(textBar.getText().length()) + "/2000");
     }
 
+    /**
+     * Translates text using API Translate.
+     */
     public void translate() {
         translationBar.setText(GGTranslateAPI.translate(textBar.getText()));
         translation = translationBar.getText();
     }
 
+    /**
+     * Uses API to speak the text.
+     */
     public void speakText() {
         TextToSpeech.SpeakEnglish = GGTranslateAPI.isEnglish;
         TextToSpeech.playVoice(textBar.getText());
     }
 
+    /**
+     * Uses API to speak the translation.
+     */
     public void speakTranslation() {
         TextToSpeech.SpeakEnglish = !GGTranslateAPI.isEnglish;
         TextToSpeech.playVoice(translationBar.getText());
@@ -123,6 +127,9 @@ public class TranslateController extends BaseController implements Initializable
         //Nothing
     }
 
+    /**
+     * Sets the translation to the translation bar ( to make sure that user cannot edit the translation bar ).
+     */
     public void doNothing() {
         translationBar.setText(translation);
     }

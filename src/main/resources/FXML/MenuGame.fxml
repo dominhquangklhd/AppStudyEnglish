@@ -49,11 +49,6 @@
             <Font name="Arial Rounded MT Bold" size="24.0" />
          </font>
       </TextField>
-      <ListView fx:id="wordList" editable="true" fixedCellSize="0.0" layoutX="50.0" layoutY="78.0" prefHeight="250.0" prefWidth="500.0" visible="false">
-         <cursor>
-            <Cursor fx:constant="HAND" />
-         </cursor>
-      </ListView>
       <ImageView fitHeight="162.0" fitWidth="166.0" layoutX="952.0" layoutY="181.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../Image/ItemsGame/heartplane.png" />
@@ -168,6 +163,11 @@
             <Image url="@../Image/ItemsGame/planet2.png" />
          </image>
       </ImageView>
+      <ListView fx:id="wordList" editable="true" fixedCellSize="0.0" layoutX="50.0" layoutY="78.0" prefHeight="250.0" prefWidth="500.0" visible="false">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </ListView>
       <Pane fx:id="guidePane" prefHeight="700.0" prefWidth="1200.0" style="-fx-background-color: FFF8DC;" visible="false">
          <children>
             <ImageView fitHeight="700.0" fitWidth="1200.0" layoutX="41.0" pickOnBounds="true" preserveRatio="true">

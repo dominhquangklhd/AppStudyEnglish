@@ -54,7 +54,7 @@
                   <Font name="Arial Rounded MT Bold" size="30.0" />
                </font>
             </Label>
-            <Label fx:id="changeToCam" layoutX="273.0" layoutY="96.0" onMouseClicked="#intoCambrigde" onMouseEntered="#DragInLink" onMouseExited="#DragOutLink" style="-fx-cursor: hand;" text="HERE" textFill="#116a7b">
+            <Label fx:id="changeToCam" layoutX="273.0" layoutY="96.0" onMouseClicked="#intoCambridge" onMouseEntered="#DragInLink" onMouseExited="#DragOutLink" style="-fx-cursor: hand;" text="HERE" textFill="#116a7b">
                <font>
                   <Font name="Arial Rounded MT Bold" size="30.0" />
                </font>

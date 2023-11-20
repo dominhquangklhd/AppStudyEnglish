@@ -70,13 +70,19 @@ public class SearchController extends BaseController implements Initializable {
 
 
     //Action handlers
+
+    /**
+     * Uses API to speak the word that user searched.
+     */
     public void speakWord() {
         TextToSpeech.SpeakEnglish = Main.databaseConnection.englishWord;
         TextToSpeech.playVoice(wordTarget.getText());
     }
 
-
-    public void saveOrUnsaved () throws IOException {
+    /**
+     * Sets word from unsaved to saved and vice versa.
+     */
+    public void saveOrUnsaved () {
         if (Main.databaseConnection.isSaved(wordTarget.getText())) {
             UNsavedIcon.setVisible(true);
             savedIcon.setVisible(false);
@@ -94,17 +100,22 @@ public class SearchController extends BaseController implements Initializable {
         }
     }
 
-
-
-
-    public void intoCambrigde() {
+    /**
+     * Opens Cambridge dictionary on the internet.
+     */
+    public void intoCambridge() {
         WebEngine webEngine = cambrigde.getEngine();
         webEngine.load("https://dictionary.cambridge.org/vi/dictionary/english/" + wordTarget.getText());
         cambrigde.setVisible(true);
     }
 
-
-
+    /**
+     * Sets up before searching
+     * 1/ Checks if the word is included in the dictionary
+     * 2/ Checks if the word is saved or not ( for design purposes )
+     * 3/ Sets the word and its meanings on scene
+     * 4/ Adds the word to History list
+     */
     //Supporting methods
     public void StartSearching() {
         wordTarget.setText(wordTarget.getText().toLowerCase());
@@ -114,10 +125,7 @@ public class SearchController extends BaseController implements Initializable {
         } else {
             WebEngine webEngine = wordExplain.getEngine();
             webEngine.loadContent(explainWord);
-            //VBox root = new VBox(wordExplain);
 
-            // Apply CSS to change the background color
-            //root.setStyle("-fx-background-color: lightblue;");
             int preSize = Main.dictionaryManagement.wordHistoryList.size();
             Main.dictionaryManagement.wordHistoryList.remove(wordTarget.getText());
             if (preSize != Main.dictionaryManagement.wordHistoryList.size()) {
@@ -136,6 +144,9 @@ public class SearchController extends BaseController implements Initializable {
         }
     }
 
+    /**
+     * Presents the Cannot Find Word pane when the words searched is not included in the dictionary.
+     */
     public void CryIfCannotFindWord() {
         scenePane1.setVisible(false);
         scenePane2.setVisible(false);
@@ -144,6 +155,9 @@ public class SearchController extends BaseController implements Initializable {
         Advice.setVisible(true);
     }
 
+    /**
+     * Presents the Word Found pane when the words searched is included in the dictionary.
+     */
     public void WordFoundSet() {
         scenePane1.setVisible(true);
         scenePane2.setVisible(true);
@@ -153,6 +167,9 @@ public class SearchController extends BaseController implements Initializable {
         Advice.setVisible(false);
     }
 
+    /**
+     * Sets the Go Search pane when starting Searching pane.
+     */
     public void GoSearch() {
         scenePane1.setVisible(false);
         scenePane2.setVisible(false);
