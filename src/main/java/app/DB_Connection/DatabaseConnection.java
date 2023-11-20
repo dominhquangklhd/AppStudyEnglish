@@ -53,9 +53,9 @@ public class DatabaseConnection {
             username = "root";
             password = "Boquoctrung10012004";
 
-            url = "jdbc:mysql://localhost:3306/appEnglish";
+            /*url = "jdbc:mysql://localhost:3306/appEnglish";
             username = "root";
-            password = "Minhquanadc@1";
+            password = "Minhquanadc@1";*/
 
             /*url = "jdbc:mysql://localhost:3306/dict_database";
             username = "root";
@@ -202,6 +202,13 @@ public class DatabaseConnection {
         }
         return false;
     }
+
+    /**
+     * Checks if the word present in the database or not.
+     * @param word the word to check
+     * @return true if the word is present in the database, false otherwise
+     * @throws SQLException if the word in wrong format
+     */
 
     public boolean hasInDatabase(String word) throws SQLException {
         try {

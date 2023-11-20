@@ -332,7 +332,9 @@ public class GameIMG implements Initializable {
         };
     }
 
-    // set up question.
+    /**
+     * Sets up questions.
+     */
     public void questionCommon() {
         String prepareLink = "file:src/main/resources/Image/GameIMG/";
         image = new Image(prepareLink + topicName + "/" + ansGame.get(curQ) + ".jpg");
@@ -420,11 +422,11 @@ public class GameIMG implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-         mainPaneGame.setVisible(false);
-         menuSettingPane.setVisible(false);
-         introducePane.setVisible(true);
-         finishPane.setVisible(false);
-         ansPane.setVisible(false);
-         topicPane.setVisible(false);
+        mainPaneGame.setVisible(false);
+        menuSettingPane.setVisible(false);
+        introducePane.setVisible(true);
+        finishPane.setVisible(false);
+        ansPane.setVisible(false);
+        topicPane.setVisible(false);
     }
 }

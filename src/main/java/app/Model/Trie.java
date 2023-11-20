@@ -31,6 +31,10 @@ public class Trie {
         return wordsBySearching;
     }
 
+    /**
+     * Inserts a word to the trie.
+     * @param word the word to insert
+     */
     public void insertWord(String word) {
         boolean checkString = word.matches("^[a-z ]*$");
         if (checkString) {
@@ -49,6 +53,12 @@ public class Trie {
             cur.isEnd = true;
         }
     }
+
+    /**
+     * Recursively finds all words having word as prefix, adding it to a list.
+     * @param cur the current end node of the word.
+     * @param word the word as prefix
+     */
 
     public void recursiveTrie(Node cur, String word) {
         if (numOfWord < limit) {
@@ -69,6 +79,11 @@ public class Trie {
             }
         }
     }
+
+    /**
+     * If a word presents in the trie, recursively search for words having this word as prefix.
+     * @param word the word to search
+     */
 
     public void search(String word) {
         String wordLC = word.toLowerCase();
@@ -107,6 +122,11 @@ public class Trie {
         return cur.count;
     }
 
+    /**
+     * Deletes a word from the trie.
+     * @param word the target to delete
+     */
+
     public void deleteWord(String word) {
         boolean checkString = word.matches("^[a-z ]*$");
         if (checkString) {
@@ -134,12 +154,18 @@ public class Trie {
 
         if (deleteWord(cur.next[idx], word, depth + 1)) {
             cur.next[idx] = null; // Remove the child node if it's unnecessary
-            return isLeafNode(cur) && !cur.isEnd;
+            return isLeafNode(cur) && !cur.isEnd; // If the node has no child and it's not the end of
+                                                    // another word, then can safely delete it
         }
 
         return false;
     }
 
+    /**
+     * Checks if a node is a leaf (has no child).
+     * @param node the node to check
+     * @return true if the node is a leaf, false otherwise
+     */
     private boolean isLeafNode(Node node) {
         for (int i = 0; i < Node.SizeNode; i++) {
             if (node.next[i] != null) {
